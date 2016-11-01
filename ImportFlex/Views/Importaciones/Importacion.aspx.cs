@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -17,9 +18,19 @@ namespace ImportFlex.Views.Importaciones
             if (!IsPostBack)
             {
                 CargarImportaciones();
+                CargarRegionOperacion();
                 cbStatus.DataSource = new List<string> {"BORRADOR", "ENPROCESO", "FINALIZADA" };
                 cbStatus.DataBind();
             }
+        }
+
+        private void CargarRegionOperacion()
+        {
+            cbRegion.DataSource = RegionPedimento.GetRegionPedimento();
+            cbRegion.DataBind();
+
+            cbTipoOPeracion.DataSource = TipoOperacion.GetTipoOperaciones();
+            cbTipoOPeracion.DataBind();
         }
 
         private void CargarImportaciones()
@@ -30,7 +41,7 @@ namespace ImportFlex.Views.Importaciones
             rgImportaciones.DataBind();
         }
 
-        protected void btnRegistrarOrdenVenta_OnClick(object sender, EventArgs e)
+        protected void btnGuardarImportacion_OnClick(object sender, EventArgs e)
         {
             RegistrarImportacion();
         }
@@ -45,18 +56,37 @@ namespace ImportFlex.Views.Importaciones
                 impTotalArticulos = 0,
                 impTotal = 0,
                 impStatus = StatusImportacion.BORRADOR.ToString(),
-                impClave = "",
+                impClave = "AR",
                 impCodigoImportador = "RME",
                 impTotalFlete = 0,
                 impTransporteEntradaSalida = 7,
                 impTransporteArribo = 7,
-                impTransporteSalidaAduana = 7
+                impTransporteSalidaAduana = 7,
+                impRegion = cbRegion.SelectedValue,
+                impTotalFacturas = 0,
+                impParte = 1,
+                impTipoOperacion = int.Parse(cbTipoOPeracion.SelectedValue)
             };
 
-            var response = data.InsertImportacion(importacion);
-            if (response.Success)
+
+            var existe = data.ValidarNumeroImportacion(importacion);
+            if (existe.Importacion == null)
             {
-                Response.Redirect($"~/Views/Importaciones/ImportacionDetalle?ID={response.Importacion.impIdImportacion}");
+                var response = data.InsertImportacion(importacion);
+
+                if (response.Success)
+                    Response.Redirect($"~/Views/Importaciones/ImportacionDetalle?ID={response.Importacion.impIdImportacion}");
+            }
+            else
+            {
+                //ScriptManager.RegisterStartupScript(this, this.GetType(), "alertSuccess", $"confirm('{existe.Message}');", true);
+                //ScriptManager.RegisterStartupScript(this, this.GetType(), "alertSuccess", "confirm('Cotizacion Guardada!');", true);
+
+                importacion.impParte = data.GetParteImportacion(importacion.impNumeroPedimento);
+                var response = data.InsertImportacion(importacion);
+
+                if (response.Success)
+                    Response.Redirect($"~/Views/Importaciones/ImportacionDetalle?ID={response.Importacion.impIdImportacion}");
             }
         }
 
@@ -64,7 +94,6 @@ namespace ImportFlex.Views.Importaciones
         {
             var data = new ImportacionController();
             var lst = data.GetImportacionByFiltro(cbStatus.SelectedValue.ToString(), rdpFecha.SelectedDate);
-
         }
     }
 }

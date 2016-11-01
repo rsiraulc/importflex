@@ -73,6 +73,9 @@ namespace ImportFlex.Controllers
                 var fac = db.imf_facturas_fac.Add(factura);
                 db.SaveChanges();
 
+                var imp = new ImportacionController();
+                imp.ActualizarTotalFacturas(factura.facIdFactura);
+
                 response.Factura = fac;
                 response.Success = true;
             }

@@ -16,6 +16,7 @@ namespace ImportFlex
             routes.EnableFriendlyUrls(settings);
 
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+            routes.IgnoreRoute("{*x}", new { x = @".*\.asmx(/.*)?" });
 
             routes.MapRoute(
                     name: "Default",

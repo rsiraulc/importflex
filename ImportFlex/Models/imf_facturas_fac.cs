@@ -22,19 +22,21 @@ namespace ImportFlex.Models
     
         public int facIdFactura { get; set; }
         public int facIdImportacion { get; set; }
-        public Nullable<int> facNumeroFactura { get; set; }
+        public string facNumeroFactura { get; set; }
         public string facMoneda { get; set; }
         public Nullable<decimal> facValorUsd { get; set; }
         public Nullable<decimal> facValorExtranjera { get; set; }
-        public string facFlete { get; set; }
+        public Nullable<decimal> facFlete { get; set; }
         public int facIdProveedor { get; set; }
         public string facTerminoFacturacion { get; set; }
         public Nullable<System.DateTime> facFechaFactura { get; set; }
         public Nullable<System.DateTime> facFechaRegistro { get; set; }
+        public string facNumeroEntrada { get; set; }
+        public string facNotas { get; set; }
     
-        public virtual imf_importaciones_imp imf_importaciones_imp { get; set; }
-        public virtual imf_proveedores_prv imf_proveedores_prv { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<imf_facturadetalle_fde> imf_facturadetalle_fde { get; set; }
+        public virtual imf_importaciones_imp imf_importaciones_imp { get; set; }
+        public virtual imf_proveedores_prv imf_proveedores_prv { get; set; }
     }
 }

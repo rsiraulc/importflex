@@ -94,6 +94,24 @@ namespace ImportFlex.Views.Importaciones {
         protected global::Telerik.Web.UI.RadTextBox tbxNumeroPedimento;
         
         /// <summary>
+        /// cbRegion control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Telerik.Web.UI.RadComboBox cbRegion;
+        
+        /// <summary>
+        /// cbTipoOPeracion control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Telerik.Web.UI.RadComboBox cbTipoOPeracion;
+        
+        /// <summary>
         /// btnCloseWindowNuevaVenta control.
         /// </summary>
         /// <remarks>
@@ -103,12 +121,21 @@ namespace ImportFlex.Views.Importaciones {
         protected global::System.Web.UI.WebControls.Button btnCloseWindowNuevaVenta;
         
         /// <summary>
-        /// btnRegistrarOrdenVenta control.
+        /// loadingPanel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnRegistrarOrdenVenta;
+        protected global::Telerik.Web.UI.RadAjaxLoadingPanel loadingPanel;
+        
+        /// <summary>
+        /// btnGuardarImportacion control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnGuardarImportacion;
     }
 }

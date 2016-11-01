@@ -60,42 +60,10 @@ namespace ImportFlex.Controllers
 
             try
             {
-                var detalles = GetFacturaDetalleByFacturaId(detalle.fdeIdFactura).lstFacturaDetalle;
-                var existe = false;
                 var importacionController = new ImportacionController();
 
-                if (detalles != null)
-                {
-                    foreach (var d in detalles)
-                    {
-                        if (d.fdeIdProducto == detalle.fdeIdProducto)
-                        {
-                            d.fdeCantidadUMC += detalle.fdeCantidadUMC;
-                            db.SaveChanges();
-                            response.FacturaDetalle = d;
-                            existe = true;
-                            break;
-                        }
-                    }
-
-                    if (!existe)
-                    {
-                        response.FacturaDetalle = db.imf_facturadetalle_fde.Add(detalle);
-                        db.SaveChanges();
-
-                        var imp = importacionController.GetImportacionByIdFactura(response.FacturaDetalle.fdeIdFactura);
-                        if (imp.Success)
-                        {
-                            importacionController.UpdateImportacionStatus(imp.Importacion.impIdImportacion, StatusImportacion.ENPROCESO);
-                        }
-                    }
-                }
-                else
-                {
-                    response.FacturaDetalle = db.imf_facturadetalle_fde.Add(detalle);
-                    db.SaveChanges();
-                }
-
+                response.FacturaDetalle = db.imf_facturadetalle_fde.Add(detalle);
+                db.SaveChanges();
                 
                 importacionController.ActualizarTotalesAdd(response.FacturaDetalle.fdeIdFactura);
                 response.Success = true;

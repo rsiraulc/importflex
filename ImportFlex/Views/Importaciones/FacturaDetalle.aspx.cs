@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using ImportFlex.Controllers;
@@ -12,11 +13,15 @@ namespace ImportFlex.Views.Importaciones
 {
     public partial class FacturaDetalle : System.Web.UI.Page
     {
+        private List<imf_productos_prod> lstProductos = new List<imf_productos_prod>();
+        public static int id;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                lblTitulo.Text = "Factura No. " + Request.Params["Id"];
+                id = int.Parse(Request.Params["Id"]);
+                CargarFactura(int.Parse(Request.Params["Id"]));
                 CargarProductos();
                 CargarUnidadesMedida();
                 CargarDetalleFactura(int.Parse(Request.Params["Id"]));
@@ -24,8 +29,17 @@ namespace ImportFlex.Views.Importaciones
                 LimpiarControles();
 
             }
+        }
 
+        private void CargarFactura(int id)
+        {
+            var data = new FacturaController();
+            var response = data.GetFacturaById(id);
 
+            if (response.Success)
+            {
+                lblTitulo.Text = $"Factura {response.Factura.imf_proveedores_prv.prvCodigo} No. {response.Factura.facNumeroFactura}";
+            }
         }
 
         private void SetearComboBoxs()
@@ -43,7 +57,6 @@ namespace ImportFlex.Views.Importaciones
         {
             cbUMC.SelectedIndex = -1;
             cbProducto.SelectedIndex = -1;
-            tbxCantidad.Text = "0";
             tbxNumeroSerie.Text = "";
             tbxValor.Text = "0";
             tbxFraccion.Text = "";
@@ -68,6 +81,7 @@ namespace ImportFlex.Views.Importaciones
 
             if (response.Success)
             {
+                lstProductos = response.Productos;
                 cbProducto.DataSource = response.Productos;
                 cbProducto.DataBind();
             }
@@ -77,9 +91,9 @@ namespace ImportFlex.Views.Importaciones
         {
             var data = new FacturaDetalleController();
             var response = data.GetFacturaDetalleByFacturaId(id);
-
             if (response.Success)
             {
+                
                 gvDetalleFactura.DataSource = response.lstFacturaDetalle;
                 gvDetalleFactura.DataBind();
             }
@@ -91,13 +105,12 @@ namespace ImportFlex.Views.Importaciones
             var detalle = new imf_facturadetalle_fde
             {
                 fdeIdFactura = int.Parse(Request.Params["Id"]),
-                fdeCantidadUMC = Convert.ToDecimal(tbxCantidad.Text),
+                fdeCantidadUMC = 1,
                 fdeIdUMC = Convert.ToInt32(cbUMC.SelectedValue),
                 fdeIdProducto = Convert.ToInt32(cbProducto.SelectedValue),
                 fdeNumeroSerieProducto = tbxNumeroSerie.Text,
                 fdeValor = Convert.ToDecimal(tbxValor.Text),
-                fdeFecha = DateTime.Now,
-                fdeFraccion = tbxFraccion.Text
+                fdeFecha = DateTime.Now
             };
 
             var response = fd.InsertFacturaDetalle(detalle);
@@ -105,11 +118,6 @@ namespace ImportFlex.Views.Importaciones
             {
                 Response.Redirect($"~/Views/Importaciones/FacturaDetalle?ID={response.FacturaDetalle.fdeIdFactura}");
             }
-        }
-
-        protected void imgBtnDetalle_OnClick(object sender, ImageClickEventArgs e)
-        {
-            
         }
 
         protected void btnIrImportacion_OnClick(object sender, EventArgs e)
@@ -133,6 +141,23 @@ namespace ImportFlex.Views.Importaciones
                         Response.Redirect($"~/Views/Importaciones/FacturaDetalle?ID={response.FacturaDetalle.fdeIdFactura}");
 
                 }
+            }
+        }
+
+        protected void cbProducto_OnSelectedIndexChanged(object sender, RadComboBoxSelectedIndexChangedEventArgs e)
+        {
+            var id = int.Parse(e.Value);
+            var data = new ProductoController();
+
+            var response = data.GetProductoById(id);
+            if (response.Success)
+            {
+                tbxProductoDescripcion.Text = response.Producto.prodDescripcionRSI;
+                tbxProductoTraduccion.Text = response.Producto.prodTraduccion;
+                tbxMarca.Text = response.Producto.prodMarca;
+                tbxModelo.Text = response.Producto.prodModelo;
+
+                cbUMC.Focus();
             }
         }
     }

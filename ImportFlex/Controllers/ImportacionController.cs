@@ -58,7 +58,6 @@ namespace ImportFlex.Controllers
                 var factura = facturaController.GetFacturaById(idFactura);
                 if (factura.Success)
                 {
-
                     var imp = GetImportacionById(factura.Factura.facIdImportacion);
                     if (imp.Success)
                     {
@@ -70,7 +69,6 @@ namespace ImportFlex.Controllers
                 }
                 else
                     response.Success = false;
-
             }
             catch (Exception ex)
             {
@@ -87,9 +85,11 @@ namespace ImportFlex.Controllers
 
             try
             {
-                if(status != "" && fecha != null)
+                if (status != "" && fecha != null)
                 {
-                    response.lstImportaciones = db.imf_importaciones_imp.Where(im => (im.impFecha == fecha.Value) && (im.impStatus == status)).ToList();
+                    response.lstImportaciones =
+                        db.imf_importaciones_imp.Where(im => (im.impFecha == fecha.Value) && (im.impStatus == status))
+                            .ToList();
                     response.Success = true;
                 }
                 else if (status != "" && fecha == null)
@@ -99,7 +99,8 @@ namespace ImportFlex.Controllers
                 }
                 else
                 {
-                    response.lstImportaciones = db.imf_importaciones_imp.Where(im => im.impFecha == fecha.Value).ToList();
+                    response.lstImportaciones =
+                        db.imf_importaciones_imp.Where(im => im.impFecha == fecha.Value).ToList();
                     response.Success = true;
                 }
             }
@@ -196,7 +197,7 @@ namespace ImportFlex.Controllers
 
         public void ActualizarTotalesAdd(int idFactura)
         {
-            
+
             var response = GetImportacionByIdFactura(idFactura);
             if (response.Success)
             {
@@ -211,6 +212,19 @@ namespace ImportFlex.Controllers
                         importacion.impTotal += d.fdeValor;
                     }
                 }
+                db.SaveChanges();
+            }
+        }
+
+        public void ActualizarTotalFacturas(int idFactura)
+        {
+            var response = GetImportacionByIdFactura(idFactura);
+            if (response.Success)
+            {
+                if (response.Importacion.impTotalFacturas == 0)
+                    response.Importacion.impStatus = StatusImportacion.ENPROCESO.ToString();
+
+                response.Importacion.impTotalFacturas++;
                 db.SaveChanges();
             }
         }
@@ -233,6 +247,58 @@ namespace ImportFlex.Controllers
                     }
                 }
                 db.SaveChanges();
+            }
+        }
+
+        public ImportacionResponse ValidarNumeroImportacion(imf_importaciones_imp importacion)
+        {
+            var response = new ImportacionResponse();
+
+            try
+            {
+                var imp =
+                    db.imf_importaciones_imp.FirstOrDefault(p => p.impNumeroPedimento == importacion.impNumeroPedimento);
+
+                if (imp != null)
+                {
+                    response.Importacion = imp;
+                    response.Success = true;
+                    response.Message =
+                        $"Ya hay un pedimento con este número, ¿deseas registrar la parte {response.Importacion.impParte + 1}?";
+                }
+                else
+                {
+                    response.Success = true;
+                    response.Message = "No hay importaciones previas";
+                    response.Importacion = null;
+                }
+            }
+            catch (Exception ex)
+            {
+                response.Success = false;
+                response.Message = ex.Message;
+            }
+
+            return response;
+        }
+
+        public int GetParteImportacion(string numeroPedimento)
+        {
+            try
+            {
+                var imp = db.imf_importaciones_imp.Where(p => p.impNumeroPedimento == numeroPedimento).ToList();
+
+                var max = from x in imp
+                          where x.impNumeroPedimento == numeroPedimento
+                          orderby x.impParte descending
+                          select x.impParte;
+
+                return max.First().Value + 1;
+            }
+            catch (Exception ex)
+            {
+
+                return 1;
             }
         }
     }

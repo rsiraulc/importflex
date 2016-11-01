@@ -9,6 +9,7 @@ namespace ImportFlex.Controllers.Enums
     {
         BORRADOR,
         ENPROCESO,
-        FINALIZADA
+        EXPORTADO,
+        FINALIZADO
     }
 }

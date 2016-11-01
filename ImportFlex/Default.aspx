@@ -4,6 +4,6 @@
 
     <div class="jumbotron">
         <h1>ImportFlex</h1>
-        <p><a href="Views/Importaciones/Importacion.aspx" class="btn btn-primary btn-lg">Ir a Importaciones &raquo;</a></p>
+        <p><a href="Views/Importaciones/Importacion.aspx" class="btn btn-primary btn-lg">Ir a Pedimentos &raquo;</a></p>
     </div>
 </asp:Content>

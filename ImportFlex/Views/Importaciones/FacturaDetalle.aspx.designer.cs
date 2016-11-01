@@ -31,13 +31,40 @@ namespace ImportFlex.Views.Importaciones {
         protected global::Telerik.Web.UI.RadComboBox cbProducto;
         
         /// <summary>
-        /// tbxCantidad control.
+        /// tbxProductoDescripcion control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadNumericTextBox tbxCantidad;
+        protected global::Telerik.Web.UI.RadTextBox tbxProductoDescripcion;
+        
+        /// <summary>
+        /// tbxProductoTraduccion control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Telerik.Web.UI.RadTextBox tbxProductoTraduccion;
+        
+        /// <summary>
+        /// tbxMarca control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Telerik.Web.UI.RadTextBox tbxMarca;
+        
+        /// <summary>
+        /// tbxModelo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Telerik.Web.UI.RadTextBox tbxModelo;
         
         /// <summary>
         /// cbUMC control.

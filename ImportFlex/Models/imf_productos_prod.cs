@@ -29,6 +29,7 @@ namespace ImportFlex.Models
         public string prodModelo { get; set; }
         public string prodSubModelo { get; set; }
         public Nullable<int> prodIdPaisOrigen { get; set; }
+        public string prodFraccionArancelaria { get; set; }
     
         public virtual imf_paises_pai imf_paises_pai { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

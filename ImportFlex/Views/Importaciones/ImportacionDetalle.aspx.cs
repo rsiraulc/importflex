@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using ImportFlex.Controllers;
+using ImportFlex.Controllers.Enums;
 using ImportFlex.Models;
 using Telerik.Web.UI;
 
@@ -16,7 +17,7 @@ namespace ImportFlex.Views.Importaciones
         {
             if (!IsPostBack)
             {
-                lblTitulo.Text = "Detalle de Importación No. " + Request.Params["Id"];
+                CargarImportacion(int.Parse(Request.Params["Id"]));
                 CargarFacturas(int.Parse(Request.Params["Id"]));
                 CargarProveedor();
                 dpFechaFacturacion.SelectedDate = DateTime.Now;
@@ -25,6 +26,34 @@ namespace ImportFlex.Views.Importaciones
             cbProveedor.AllowCustomText = true;
             cbProveedor.MarkFirstMatch = true;
             cbProveedor.Filter = RadComboBoxFilter.Contains;
+        }
+
+        private void CargarImportacion(int id)
+        {
+            var data = new ImportacionController();
+            var response = data.GetImportacionById(id);
+
+            if (response.Success)
+            {
+                lblTitulo.Text = "Facturas del Pedimento No." + response.Importacion.impNumeroPedimento;
+                if (response.Importacion.impParte > 1)
+                    lblTitulo.Text += $" Parte {response.Importacion.impParte}";
+
+                // MANEJO DE VISUALIZACION DE BOTONES
+                switch (response.Importacion.impStatus)
+                {
+                    case "BORRADOR":
+                        btnExportar.Visible = false;
+                        break;
+                    case "EXPORTADO":
+                        btnFinalizarPedimento.Visible = true;
+                        break;
+                    case "FINALIZADO":
+                        btnFinalizarPedimento.Visible = false;
+                        btnNuevaFactura.Visible = false;
+                        break;
+                }
+            }
         }
 
         private void CargarProveedor()
@@ -58,15 +87,17 @@ namespace ImportFlex.Views.Importaciones
             var factura = new imf_facturas_fac
             {
                 facIdImportacion = int.Parse(Request.Params["Id"]),
-                facNumeroFactura = Convert.ToInt32(txbNumeroFactura.Text),
-                facMoneda = "USD",
-                facValorExtranjera = Convert.ToDecimal(tbxValorME.Text),
+                facNumeroFactura = txbNumeroFactura.Text,
+                facMoneda = "USD",                
                 facValorUsd = Convert.ToDecimal(tbxValorUSD.Text),
-                facFlete = "",
+                facValorExtranjera = Convert.ToDecimal(tbxValorUSD.Text),
+                facFlete = Convert.ToDecimal(txbFlete.Text),
                 facIdProveedor = Convert.ToInt32(cbProveedor.SelectedValue),
                 facTerminoFacturacion = "",
                 facFechaFactura = dpFechaFacturacion.SelectedDate,
-                facFechaRegistro = DateTime.Now
+                facFechaRegistro = DateTime.Now,
+                facNumeroEntrada = tbxEntrada.Text,
+                facNotas = tbxNotas.Text
             };
 
             var response = data.InsertFactura(factura);
@@ -74,6 +105,18 @@ namespace ImportFlex.Views.Importaciones
             {
                 Response.Redirect($"~/Views/Importaciones/FacturaDetalle?ID={response.Factura.facIdFactura}");
             }
+        }
+
+        protected void btnExportar_OnClick(object sender, EventArgs e)
+        {
+            var data = new ImportacionController();
+            data.UpdateImportacionStatus(int.Parse(Request.Params["Id"]), StatusImportacion.EXPORTADO);
+        }
+
+        protected void btnFinalizarPedimento_OnClick(object sender, EventArgs e)
+        {
+            var data = new ImportacionController();
+            data.UpdateImportacionStatus(int.Parse(Request.Params["Id"]), StatusImportacion.FINALIZADO);
         }
     }
 }

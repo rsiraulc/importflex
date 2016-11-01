@@ -18,7 +18,7 @@
 </head>
 <body>
     <form runat="server">
-        <asp:ScriptManager runat="server">
+        <asp:ScriptManager runat="server" EnablePageMethods="True" EnableScriptLocalization="True">
             <Scripts>
                 <%--To learn more about bundling scripts in ScriptManager see http://go.microsoft.com/fwlink/?LinkID=301884 --%>
                 <%--Framework Scripts--%>
@@ -52,7 +52,7 @@
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
                         <li><a runat="server" href="~/">Inicio</a></li>
-                        <li><a runat="server" href="~/Views/Importaciones/Importacion.aspx">Importaciones</a></li>
+                        <li><a runat="server" href="~/Views/Importaciones/Importacion.aspx">Pedimentos</a></li>
                         <li><a runat="server" href="#">Configuraci&oacute;n</a></li>
                     </ul>
                 </div>

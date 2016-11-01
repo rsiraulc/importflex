@@ -122,6 +122,9 @@
       <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
     </Reference>
     <Reference Include="Telerik.Web.UI, Version=2016.2.504.45, Culture=neutral, PublicKeyToken=121fae78165ba3d4, processorArchitecture=MSIL" />
+    <Reference Include="Telerik.Web.UI.Skins">
+      <HintPath>..\..\..\..\..\Source\Workspaces\DialsaWMS\DialsaWMS\DialsaWMS\Bin\Telerik.Web.UI.Skins.dll</HintPath>
+    </Reference>
     <Reference Include="WebGrease">
       <Private>True</Private>
       <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
@@ -258,7 +261,9 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\CatalogosController.cs" />
-    <Compile Include="Controllers\Enums\StatusImportacion.cs" />
+    <Compile Include="Controllers\Catalogos\RegionPedimento.cs" />
+    <Compile Include="Controllers\Catalogos\StatusImportacion.cs" />
+    <Compile Include="Controllers\Catalogos\TipoOperacion.cs" />
     <Compile Include="Controllers\FacturaController.cs" />
     <Compile Include="Controllers\FacturaDetalleController.cs" />
     <Compile Include="Controllers\ImportacionController.cs" />
@@ -381,6 +386,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Controllers\Mappers\" />
+    <Folder Include="Controllers\Views\" />
     <Folder Include="Views\Configuracion\" />
   </ItemGroup>
   <ItemGroup>
