@@ -43,10 +43,10 @@ namespace ImportFlex.Views.Importaciones
 
         protected void btnGuardarImportacion_OnClick(object sender, EventArgs e)
         {
-            RegistrarImportacion();
+            ValidarImportacion();
         }
 
-        private void RegistrarImportacion()
+        private void RegistrarImportacion(int? parte)
         {
             var data = new ImportacionController();
             var importacion = new imf_importaciones_imp
@@ -64,36 +64,50 @@ namespace ImportFlex.Views.Importaciones
                 impTransporteSalidaAduana = 7,
                 impRegion = cbRegion.SelectedValue,
                 impTotalFacturas = 0,
-                impParte = 1,
+                impParte = parte ?? 1,
                 impTipoOperacion = int.Parse(cbTipoOPeracion.SelectedValue)
             };
 
+            var response = data.InsertImportacion(importacion);
 
-            var existe = data.ValidarNumeroImportacion(importacion);
-            if (existe.Importacion == null)
-            {
-                var response = data.InsertImportacion(importacion);
-
-                if (response.Success)
-                    Response.Redirect($"~/Views/Importaciones/ImportacionDetalle?ID={response.Importacion.impIdImportacion}");
-            }
+            if (response.Success)
+                Response.Redirect($"~/Views/Importaciones/ImportacionDetalle?ID={response.Importacion.impIdImportacion}");
             else
-            {
-                //ScriptManager.RegisterStartupScript(this, this.GetType(), "alertSuccess", $"confirm('{existe.Message}');", true);
-                //ScriptManager.RegisterStartupScript(this, this.GetType(), "alertSuccess", "confirm('Cotizacion Guardada!');", true);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "alertSuccess",
+                    $"alert('Ha ocurrido un error al registrar el pedimento. {response.Message}');", true);
 
-                importacion.impParte = data.GetParteImportacion(importacion.impNumeroPedimento);
-                var response = data.InsertImportacion(importacion);
-
-                if (response.Success)
-                    Response.Redirect($"~/Views/Importaciones/ImportacionDetalle?ID={response.Importacion.impIdImportacion}");
-            }
         }
 
         protected void btnFiltrar_OnClick(object sender, EventArgs e)
         {
             var data = new ImportacionController();
             var lst = data.GetImportacionByFiltro(cbStatus.SelectedValue.ToString(), rdpFecha.SelectedDate);
+        }
+
+        public void ValidarImportacion()
+        {
+            var data = new ImportacionController();
+            var existe = data.ValidarNumeroImportacion(tbxNumeroPedimento.Text);
+
+            // SI NO HAY PEDIMENTOS CON ESE NO.
+            if (existe.Importacion == null)
+            {
+                RegistrarImportacion(1);
+            }
+            // SI SI HAY
+            else
+            {
+                radwindowImportacionDuplicada.Visible = true;
+                radwindowImportacionDuplicada.VisibleOnPageLoad = true;
+                lblMensaje.Text =  $"El Pedimento con el número {tbxNumeroPedimento.Text} ya fue creado, ¿Deseas crear la parte {data.GetParteImportacion(tbxNumeroPedimento.Text)} de este pedimento o crear uno nuevo?";
+
+            }
+        }
+
+        protected void btnCrearDuplicado_OnClick(object sender, EventArgs e)
+        {
+            var data = new ImportacionController();
+            RegistrarImportacion(data.GetParteImportacion(tbxNumeroPedimento.Text));
         }
     }
 }

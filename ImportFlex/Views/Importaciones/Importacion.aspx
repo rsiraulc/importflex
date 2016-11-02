@@ -3,6 +3,8 @@
 <%@ Register Assembly="Telerik.Web.UI" Namespace="Telerik.Web.UI" TagPrefix="telerik" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+
+
     <div class="col-sm-12" style="margin-top: 20px;">
         <div class="row">
             <div class="col-sm-10">
@@ -60,7 +62,7 @@
     </div>
 
     <!-- MODAL PARA CAPTURA DE NUEVA IMPORTACION -->
-    <telerik:RadWindowManager runat="server" ID="radWindowManager" DestroyOnClose="True" Skin="Bootstrap" EnableShadow="True" Title="Nuevo Registro de Pedimento">
+    <telerik:RadWindowManager runat="server" ID="radWindowManager" DestroyOnClose="True" Skin="Bootstrap" EnableShadow="True" Title="ImportFlex">
         <Windows>
             <telerik:RadWindow ID="radWindowNuevaImportacion" Style="z-index: 2001;" AutoSize="True" MinWidth="400px" MaxHeight="350px" Width="400" MinHeight="300px" AutoSizeBehaviors="Width, Default" DestroyOnClose="True" Modal="True" Animation="Fade" runat="server" Behaviors="Close">
                 <ContentTemplate>
@@ -80,7 +82,6 @@
                                 </div>
                             </div>
                             <div class="col-sm-6">
-
                                 <div class="col-lg-4 col-md-12 col-xs-12">
                                     <span class="text-formulario">Región</span>
                                 </div>
@@ -105,9 +106,39 @@
                             </div>
                             <div class="col-lg-4 col-md-4 col-xs-4"></div>
                             <div class="col-lg-4 col-md-4 col-xs-4">
-                                <telerik:RadAjaxLoadingPanel ID="loadingPanel" runat="server" Skin="Default"></telerik:RadAjaxLoadingPanel>
-                                <asp:Button runat="server" CssClass="btn btn-block btn-primary" Text="Guardar" OnClick="btnGuardarImportacion_OnClick" ID="btnGuardarImportacion" />
 
+                                <asp:Button runat="server" CssClass="btn btn-block btn-primary" Text="Guardar" OnClick="btnGuardarImportacion_OnClick" ID="btnGuardarImportacion" />
+                            </div>
+                        </div>
+                </ContentTemplate>
+            </telerik:RadWindow>
+        </Windows>
+    </telerik:RadWindowManager>
+
+
+    <!-- MODAL PARA DUPLICADO DE NUMERO DE PEDIMENTO -->
+    <telerik:RadWindowManager runat="server" ID="radwindowmanagerDuplicado" DestroyOnClose="True" Skin="Bootstrap" EnableShadow="True" Title="ImportFlex">
+        <Windows>
+            <telerik:RadWindow ID="radwindowImportacionDuplicada" Style="z-index: 2001;" AutoSize="True" MinWidth="400px" MaxHeight="350px" Width="400" MinHeight="300px" AutoSizeBehaviors="Width, Default" DestroyOnClose="True" Modal="True" Animation="Fade" runat="server" Behaviors="Close">
+                <ContentTemplate>
+                    <div class="container" style="width: 700px; z-index: 5002">
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-xs-12">
+                                <h3>Nuevo Pedimento</h3>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top: 10px">
+                            <div class="col-sm-12">
+                                <telerik:RadLabel ID="lblMensaje" runat="server" Width="100%"></telerik:RadLabel>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top: 20px; margin-bottom: 10px;">
+                            <div class="col-lg-4 col-md-4 col-xs-4 ">
+                                <asp:Button runat="server" CssClass="btn btn-block btn-danger" Text="Nuevo Pedimento" OnClientClick="CloseWindow1();OpenWindow();return false;" ID="Button1" />
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-xs-4"></div>
+                            <div class="col-lg-4 col-md-4 col-xs-4">
+                                <asp:Button runat="server" CssClass="btn btn-block btn-primary" Text="Nueva Parte" OnClick="btnCrearDuplicado_OnClick" ID="btnCrearDuplicado" />
                             </div>
                         </div>
                 </ContentTemplate>
@@ -122,6 +153,12 @@
             }
             function CloseWindow() {
                 var window = $find('<%=radWindowNuevaImportacion.ClientID%>');
+                window.close();
+                return false;
+            }
+
+            function CloseWindow1() {
+                var window = $find('<%=radwindowImportacionDuplicada.ClientID%>');
                 window.close();
                 return false;
             }

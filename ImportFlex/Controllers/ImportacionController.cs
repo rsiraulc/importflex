@@ -250,21 +250,21 @@ namespace ImportFlex.Controllers
             }
         }
 
-        public ImportacionResponse ValidarNumeroImportacion(imf_importaciones_imp importacion)
+        public ImportacionResponse ValidarNumeroImportacion(string numeropedimento)
         {
             var response = new ImportacionResponse();
 
             try
             {
                 var imp =
-                    db.imf_importaciones_imp.FirstOrDefault(p => p.impNumeroPedimento == importacion.impNumeroPedimento);
+                    db.imf_importaciones_imp.FirstOrDefault(p => p.impNumeroPedimento == numeropedimento);
 
                 if (imp != null)
                 {
                     response.Importacion = imp;
                     response.Success = true;
                     response.Message =
-                        $"Ya hay un pedimento con este número, ¿deseas registrar la parte {response.Importacion.impParte + 1}?";
+                        $"Ya hay un pedimento con este número, ¿deseas registrar la parte {GetParteImportacion(imp.impNumeroPedimento)}?";
                 }
                 else
                 {

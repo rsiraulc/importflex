@@ -22,6 +22,15 @@ namespace ImportFlex.Views.Importaciones {
         protected global::Telerik.Web.UI.RadLabel lblTitulo;
         
         /// <summary>
+        /// updateProducto control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updateProducto;
+        
+        /// <summary>
         /// cbProducto control.
         /// </summary>
         /// <remarks>

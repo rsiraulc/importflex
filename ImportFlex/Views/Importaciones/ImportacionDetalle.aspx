@@ -47,7 +47,7 @@
 
 
     <!-- MODAL PARA AGREGAR FACTURAS  -->
-    <telerik:RadWindowManager runat="server" ID="radWindowManager" DestroyOnClose="True" EnableShadow="True" Skin="Bootstrap" Title="Nueva Factura">
+    <telerik:RadWindowManager runat="server" ID="radWindowManager" DestroyOnClose="True" EnableShadow="True" Skin="Bootstrap" Title="ImportFlex">
         <Windows>
             <telerik:RadWindow ID="radWindowNuevaFactura" Style="z-index: 2001;" AutoSize="True" MinWidth="800px" MaxHeight="450px" Width="850" MinHeight="250px" AutoSizeBehaviors="Width, Default" DestroyOnClose="True" Modal="True" Animation="Fade" runat="server" Behaviors="Close">
                 <ContentTemplate>
