@@ -53,7 +53,17 @@
                     <ul class="nav navbar-nav">
                         <li><a runat="server" href="~/">Inicio</a></li>
                         <li><a runat="server" href="~/Views/Importaciones/Importacion.aspx">Pedimentos</a></li>
+                        <li class="dropdown"><a runat="server" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Cat&aacute;logos <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a runat="server" href="~/Views/Productos/Default.aspx">Productos</a></li>
+                                <li><a runat="server" href="~/Views/Proveedores/Default.aspx">Proveedores</a></li>
+<%--                                <li><a runat="server" href="#">Unidad de Medida Comercial</a></li>
+                                <li><a runat="server" href="#">Unidad de Medida de Factura</a></li>
+                                <li><a runat="server" href="#">Paises</a></li>--%>
+                            </ul>
+                        </li>
                         <li><a runat="server" href="#">Configuraci&oacute;n</a></li>
+                        
                     </ul>
                 </div>
             </div>

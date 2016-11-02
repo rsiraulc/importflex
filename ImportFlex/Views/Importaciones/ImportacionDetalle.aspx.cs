@@ -105,6 +105,10 @@ namespace ImportFlex.Views.Importaciones
             {
                 Response.Redirect($"~/Views/Importaciones/FacturaDetalle?ID={response.Factura.facIdFactura}");
             }
+            else
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "alertSuccess", $"alert('{response.Message}');", true);
+            }
         }
 
         protected void btnExportar_OnClick(object sender, EventArgs e)

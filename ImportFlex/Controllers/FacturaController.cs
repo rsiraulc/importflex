@@ -70,14 +70,24 @@ namespace ImportFlex.Controllers
 
             try
             {
-                var fac = db.imf_facturas_fac.Add(factura);
-                db.SaveChanges();
+                var validacion = ValidarFactura(factura);
+                if (validacion.Success)
+                {
 
-                var imp = new ImportacionController();
-                imp.ActualizarTotalFacturas(factura.facIdFactura);
+                    var fac = db.imf_facturas_fac.Add(factura);
+                    db.SaveChanges();
 
-                response.Factura = fac;
-                response.Success = true;
+                    var imp = new ImportacionController();
+                    imp.ActualizarTotalFacturas(factura.facIdFactura);
+
+                    response.Factura = fac;
+                    response.Success = true;
+                }
+                else
+                {
+                    response.Success = false;
+                    response.Message = validacion.Message;
+                }
             }
             catch (Exception ex)
             {
@@ -85,6 +95,46 @@ namespace ImportFlex.Controllers
                 response.Message = ex.Message;
             }
 
+            return response;
+        }
+
+        private ResponseBase ValidarFactura(imf_facturas_fac factura)
+        {
+            var response = new ResponseBase();
+            response.Success = true;
+            var importacion = db.imf_importaciones_imp.Find(factura.facIdImportacion);
+            var lstImportaciones =
+                db.imf_importaciones_imp.Where(p => p.impNumeroPedimento == importacion.impNumeroPedimento);
+
+            try
+            {
+                foreach (var imp in lstImportaciones)
+                {
+                    if (response.Success)
+                    {
+                        foreach (var f in imp.imf_facturas_fac)
+                        {
+                            if (factura.facNumeroFactura == f.facNumeroFactura &&
+                                factura.facIdProveedor == f.facIdProveedor)
+                            {
+                                response.Success = false;
+                                response.Message =
+                                    $"Ya existe esta factura en el Pedimento No. {imp.impNumeroPedimento} Parte {imp.impParte}.";
+                                break;
+                            }
+                            else
+                                response.Success = true;
+                        }
+                    }
+                    else
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                response.Success = false;
+                response.Message = ex.Message;
+            }
             return response;
         }
 
