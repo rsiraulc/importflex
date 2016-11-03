@@ -120,7 +120,21 @@ namespace ImportFlex.Views.Importaciones
             if (response.Success)
             {
                 var archivo = new ArchivoPedimento();
-                archivo.CrearArchivo(response.Importacion);
+                var respuesta = archivo.CrearArchivo(response.Importacion);
+
+                if (respuesta.Success)
+                {
+                    Response.Clear();
+                    Response.ClearHeaders();
+                    Response.ClearContent();
+                    Response.AddHeader("Content-Disposition", "attachment; filename=" + respuesta.NombreArchivo);
+                    //Response.AddHeader("Content-Length", respuesta.RutaArchivo.Length.ToString());
+                    Response.ContentType = "application/zip";
+                    Response.Flush();
+                    Response.TransmitFile(respuesta.RutaArchivo);
+                    Response.End();
+
+                }
             }
         }
 

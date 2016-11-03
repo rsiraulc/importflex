@@ -13,9 +13,9 @@ namespace ImportFlex.Controllers.Export
     {
         public List<string> lstArchivos = new List<string>();
 
-        public ResponseBase CrearArchivo(imf_importaciones_imp p) // p = pedimento, duh
+        public ArchivoResponse CrearArchivo(imf_importaciones_imp p) // p = pedimento, duh
         {
-            var response = new ResponseBase();
+            var response = new ArchivoResponse();
             var catalogosController = new CatalogosController();
             var dir = Server.MapPath("~/Controllers/Archivos/");
 
@@ -44,7 +44,6 @@ namespace ImportFlex.Controllers.Export
 
                     // NOMBRE DEL ARCHIVO NO DEBE EXCEDER 8 DIGITOS
                     var file = Path.Combine(dir, $"{f.facNumeroFactura}.txt");
-
                     Directory.CreateDirectory(dir);
                     File.WriteAllText(file, texto);
 
@@ -53,8 +52,9 @@ namespace ImportFlex.Controllers.Export
                 }
 
                 // AGRUPAR ARCHIVOS EN ZIP
-                ExportarZip(dir, p.impNumeroPedimento, p.impParte.Value);
 
+                response.RutaArchivo = ExportarZip(dir, p.impNumeroPedimento, p.impParte.Value);
+                response.NombreArchivo = $"Pedimento_{p.impNumeroPedimento}_{p.impParte}.zip";
                 response.Success = true;
             }
             catch (Exception ex)
@@ -66,7 +66,7 @@ namespace ImportFlex.Controllers.Export
             return response;
         }
 
-        private void ExportarZip(string dir, string numeroPedimento, int parte)
+        private string ExportarZip(string dir, string numeroPedimento, int parte)
         {
             dir = Path.Combine(dir, $"Pedimento_{numeroPedimento}_{parte}.zip");
 
@@ -74,12 +74,14 @@ namespace ImportFlex.Controllers.Export
             {
                 foreach (var file in lstArchivos)
                 {
-                    zip.AddFile(file, $"FacturasPedimento_{numeroPedimento}");
+                    zip.AddFile(file, $"FacturasPedimento_{numeroPedimento}_{parte}");
                 }
                 zip.Save(dir);
 
                 // ELIMINAR ARCHIVOS TXT GENERADOS PARA EVITAR QUE HAYA MUCHOS
                 EliminarArchivosTxt();
+
+                return dir;
             }
         }
 

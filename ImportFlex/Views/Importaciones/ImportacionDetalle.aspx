@@ -11,14 +11,14 @@
                 <telerik:RadLabel ID="lblTitulo" CssClass="h2" runat="server" Skin="Bootstrap"></telerik:RadLabel>
             </div>
             <div class="col-sm-3">
-                <asp:Button ID="btnNuevaFactura" OnClientClick="OpenWindow();return false;" CssClass="btn btn-block btn-primary btn-md" Style="margin-top: 20px;" runat="server" Text="Registrar Factura" />
+                <asp:Button ID="btnNuevaFactura" OnClientClick="OpenWindow();return false;" CssClass="btn btn-block btn-primary btn-md" Style="margin-top: 20px;" runat="server" Text="Agregar Factura" />
             </div>
             <div class="col-sm-3"></div>
             <div class="col-sm-3">
-                <asp:Button ID="btnFinalizarPedimento" CssClass="btn btn-block btn-primary btn-md" Style="margin-top: 20px;" runat="server" Text="Finalizar Pedimento" OnClick="btnFinalizarPedimento_OnClick" Visible="False"/>
+                <asp:Button ID="btnFinalizarPedimento" CssClass="btn btn-block btn-primary btn-md" Style="margin-top: 20px;" runat="server" Text="Cerrar Pedimento" OnClick="btnFinalizarPedimento_OnClick" Visible="False"/>
             </div>
             <div class="col-sm-3">
-                <asp:Button ID="btnExportar" CssClass="btn btn-block btn-primary btn-md" Style="margin-top: 20px;" runat="server" Text="Exportar Formatos" OnClick="btnExportar_OnClick"/>
+                <asp:Button ID="btnExportar" CssClass="btn btn-block btn-primary btn-md" Style="margin-top: 20px;" runat="server" Text="Exportar" OnClick="btnExportar_OnClick"/>
             </div>
         </div>
         <div class="row">

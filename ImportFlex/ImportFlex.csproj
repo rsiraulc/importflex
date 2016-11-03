@@ -290,6 +290,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Messages\ArchivoResponse.cs" />
     <Compile Include="Messages\Catalogos\PaisesResponse.cs" />
     <Compile Include="Messages\Catalogos\PaisResponse.cs" />
     <Compile Include="Messages\Catalogos\UMCResponse.cs" />
