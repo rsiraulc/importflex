@@ -1,13 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using System.IO;
+using System.Text;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 using ImportFlex.Controllers;
 using ImportFlex.Controllers.Enums;
+using ImportFlex.Controllers.Export;
 using ImportFlex.Models;
 using Telerik.Web.UI;
+
 
 namespace ImportFlex.Views.Importaciones
 {
@@ -114,13 +114,20 @@ namespace ImportFlex.Views.Importaciones
         protected void btnExportar_OnClick(object sender, EventArgs e)
         {
             var data = new ImportacionController();
-            data.UpdateImportacionStatus(int.Parse(Request.Params["Id"]), StatusImportacion.EXPORTADO);
+            //data.UpdateImportacionStatus(int.Parse(Request.Params["Id"]), StatusImportacion.EXPORTADO);
+
+            var response = data.GetImportacionById(int.Parse(Request.Params["Id"]));
+            if (response.Success)
+            {
+                var archivo = new ArchivoPedimento();
+                archivo.CrearArchivo(response.Importacion);
+            }
         }
 
         protected void btnFinalizarPedimento_OnClick(object sender, EventArgs e)
         {
-            var data = new ImportacionController();
-            data.UpdateImportacionStatus(int.Parse(Request.Params["Id"]), StatusImportacion.FINALIZADO);
+            //var data = new ImportacionController();
+            //data.UpdateImportacionStatus(int.Parse(Request.Params["Id"]), StatusImportacion.FINALIZADO);
         }
     }
 }

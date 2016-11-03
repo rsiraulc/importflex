@@ -36,6 +36,7 @@ namespace ImportFlex.Models
         public Nullable<int> impTotalFacturas { get; set; }
         public Nullable<int> impParte { get; set; }
         public Nullable<int> impTipoOperacion { get; set; }
+        public Nullable<int> impTipoRegistro { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<imf_facturas_fac> imf_facturas_fac { get; set; }

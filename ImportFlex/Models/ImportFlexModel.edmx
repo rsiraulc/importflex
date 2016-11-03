@@ -62,6 +62,7 @@
           <Property Name="impTotalFacturas" Type="int" />
           <Property Name="impParte" Type="int" />
           <Property Name="impTipoOperacion" Type="int" />
+          <Property Name="impTipoRegistro" Type="int" />
         </EntityType>
         <EntityType Name="imf_paises_pai">
           <Key>
@@ -303,6 +304,7 @@
           <Property Name="impParte" Type="Int32" />
           <NavigationProperty Name="imf_facturas_fac" Relationship="ImportFlexModel.FK_imf_facturas_fac_imf_importaciones_imp" FromRole="imf_importaciones_imp" ToRole="imf_facturas_fac" />
           <Property Name="impTipoOperacion" Type="Int32" />
+          <Property Name="impTipoRegistro" Type="Int32" />
         </EntityType>
         <EntityType Name="imf_paises_pai">
           <Key>
@@ -582,6 +584,7 @@
           <EntitySetMapping Name="imf_importaciones_imp">
             <EntityTypeMapping TypeName="ImportFlexModel.imf_importaciones_imp">
               <MappingFragment StoreEntitySet="imf_importaciones_imp">
+                <ScalarProperty Name="impTipoRegistro" ColumnName="impTipoRegistro" />
                 <ScalarProperty Name="impTipoOperacion" ColumnName="impTipoOperacion" />
                 <ScalarProperty Name="impParte" ColumnName="impParte" />
                 <ScalarProperty Name="impTotalFacturas" ColumnName="impTotalFacturas" />

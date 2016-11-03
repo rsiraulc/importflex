@@ -110,7 +110,14 @@ namespace ImportFlex.Views.Importaciones
                 fdeIdProducto = Convert.ToInt32(cbProducto.SelectedValue),
                 fdeNumeroSerieProducto = tbxNumeroSerie.Text,
                 fdeValor = Convert.ToDecimal(tbxValor.Text),
-                fdeFecha = DateTime.Now
+                fdeFecha = DateTime.Now,
+                fdeCantidadUMF = 1,
+                fdeIdUMF = 456,
+                //VER QUE SHOW
+                fdeVinculacion = "0",
+                fdeMetodoValoracion = "0",
+                fdeIdPaisVendedorComprador = 72,
+                fdIdPaisOrigenDestino = 72
             };
 
             var response = fd.InsertFacturaDetalle(detalle);

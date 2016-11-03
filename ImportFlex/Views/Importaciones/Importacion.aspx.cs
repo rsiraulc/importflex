@@ -65,7 +65,8 @@ namespace ImportFlex.Views.Importaciones
                 impRegion = cbRegion.SelectedValue,
                 impTotalFacturas = 0,
                 impParte = parte ?? 1,
-                impTipoOperacion = int.Parse(cbTipoOPeracion.SelectedValue)
+                impTipoOperacion = int.Parse(cbTipoOPeracion.SelectedValue),
+                impTipoRegistro = 501
             };
 
             var response = data.InsertImportacion(importacion);

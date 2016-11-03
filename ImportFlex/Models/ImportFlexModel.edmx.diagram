@@ -13,7 +13,7 @@
         <AssociationConnector Association="ImportFlexModel.FK_imf_productos_prod_imf_paises_pai" ManuallyRouted="false" />
         <EntityTypeShape EntityType="ImportFlexModel.imf_unidadmedidacomercial_umc" Width="1.5" PointX="7.375" PointY="6.875" />
         <EntityTypeShape EntityType="ImportFlexModel.imf_unidadmedidafactura_umf" Width="1.5" PointX="7.375" PointY="10" />
-        <EntityTypeShape EntityType="ImportFlexModel.imf_facturadetalle_fde" Width="1.5" PointX="9.625" PointY="3.875" />
+        <EntityTypeShape EntityType="ImportFlexModel.imf_facturadetalle_fde" Width="3.125" PointX="9.625" PointY="3.875" />
         <AssociationConnector Association="ImportFlexModel.FK_imf_facturadetalle_fde_imf_paises_pai" />
         <AssociationConnector Association="ImportFlexModel.FK_imf_facturadetalle_fde_imf_paises_pai1" />
         <AssociationConnector Association="ImportFlexModel.FK_imf_facturadetalle_fde_imf_productos_prod" />
