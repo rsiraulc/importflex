@@ -118,6 +118,9 @@ namespace ImportFlex.Views.Importaciones
             {
                 Response.Redirect($"~/Views/Importaciones/FacturaDetalle?ID={response.FacturaDetalle.fdeIdFactura}");
             }
+            else
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "alertSuccess",
+                    $"alert('Ha ocurrido un error al agregar el producto. {response.Message}');", true);
         }
 
         protected void btnIrImportacion_OnClick(object sender, EventArgs e)
@@ -146,6 +149,7 @@ namespace ImportFlex.Views.Importaciones
 
         protected void cbProducto_OnSelectedIndexChanged(object sender, RadComboBoxSelectedIndexChangedEventArgs e)
         {
+            if (e.Value == "") return;
             var id = int.Parse(e.Value);
             var data = new ProductoController();
 

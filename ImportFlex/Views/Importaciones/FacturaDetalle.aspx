@@ -98,7 +98,7 @@
                         <div class="col-sm-12">
                             <div class="col-lg-10 col-md-10 col-xs-10"></div>
                             <div class="col-lg-2 col-md-2 col-xs-2">
-                                <asp:Button ID="btnAgregarProducto" runat="server" CssClass="btn btn-block btn-primary" Text="Agregar" OnClick="btnAgregarProducto_OnClick" Width="100%" />
+                                <asp:Button ID="btnAgregarProducto" runat="server" CssClass="btn btn-block btn-primary" Text="Agregar" OnClientClick="ValidarControles" OnClick="btnAgregarProducto_OnClick" Width="100%" />
                             </div>
                         </div>
                     </div>
@@ -131,6 +131,7 @@
                 </telerik:RadGrid>
             </div>
         </div>
+
         <div class="row" style="margin-top: 20px">
             <div class="col-lg-10 col-md-10 col-xs-10"></div>
             <div class="col-lg-2 col-md-2 col-xs-2">
@@ -141,6 +142,19 @@
 
     <telerik:RadCodeBlock runat="server">
         <script>
+            function ValidarControles() {
+                var cbProducto = $find('<%=cbProducto.ClientID%>');
+                var txtNumeroSerie = $find('<%=tbxNumeroSerie.ClientID%>');
+
+                if (txtNumeroSerie.val() != '') {
+                    alert('sup');
+                    return true;
+                } else {
+                    alert('No');
+                    return false;
+                }
+
+            }
         </script>
     </telerik:RadCodeBlock>
 </asp:Content>

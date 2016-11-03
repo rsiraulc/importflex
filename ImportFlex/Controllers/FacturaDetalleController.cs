@@ -56,17 +56,25 @@ namespace ImportFlex.Controllers
         public FacturaDetalleResponse InsertFacturaDetalle(imf_facturadetalle_fde detalle)
         {
             var response = new FacturaDetalleResponse();
-            
 
             try
             {
                 var importacionController = new ImportacionController();
+                var facturacontroller = new FacturaController();
+                var factura = facturacontroller.GetFacturaById(detalle.fdeIdFactura);
 
-                response.FacturaDetalle = db.imf_facturadetalle_fde.Add(detalle);
-                db.SaveChanges();
-                
-                importacionController.ActualizarTotalesAdd(response.FacturaDetalle.fdeIdFactura);
-                response.Success = true;
+                if (factura.Factura.imf_facturadetalle_fde.Any(d => d.fdeIdProducto == detalle.fdeIdProducto && d.fdeNumeroSerieProducto == detalle.fdeNumeroSerieProducto))
+                {
+                    response.Success = false;
+                    response.Message = "Ya está registrado un producto con el mismo número de serie";
+                }
+                else
+                {
+                    response.FacturaDetalle = db.imf_facturadetalle_fde.Add(detalle);
+                    db.SaveChanges();
+                    importacionController.ActualizarTotalesAdd(response.FacturaDetalle.fdeIdFactura);
+                    response.Success = true;
+                }
             }
             catch (Exception ex)
             {
