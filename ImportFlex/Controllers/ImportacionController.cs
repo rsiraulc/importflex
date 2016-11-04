@@ -242,7 +242,8 @@ namespace ImportFlex.Controllers
                 {
                     foreach (var d in f.imf_facturadetalle_fde)
                     {
-                        importacion.impTotalArticulos -= Convert.ToInt32(d.fdeCantidadUMC);
+
+                        importacion.impTotalArticulos--;
                         importacion.impTotal -= d.fdeValor;
                     }
                 }

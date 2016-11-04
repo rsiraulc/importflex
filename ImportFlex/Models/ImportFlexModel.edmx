@@ -96,6 +96,14 @@
           <Property Name="prvDescripcion" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="prvIdTax" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <EntityType Name="imf_traducciones_trad">
+          <Key>
+            <PropertyRef Name="tradTraduccion" />
+          </Key>
+          <Property Name="tradIdTraduccion" Type="int" />
+          <Property Name="tradTipo" Type="nvarchar" MaxLength="50" />
+          <Property Name="tradTraduccion" Type="nvarchar" MaxLength="250" Nullable="false" />
+        </EntityType>
         <EntityType Name="imf_unidadmedidacomercial_umc">
           <Key>
             <PropertyRef Name="umcIdClave" />
@@ -239,6 +247,7 @@
           <EntitySet Name="imf_paises_pai" EntityType="Self.imf_paises_pai" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="imf_productos_prod" EntityType="Self.imf_productos_prod" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="imf_proveedores_prv" EntityType="Self.imf_proveedores_prv" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="imf_traducciones_trad" EntityType="Self.imf_traducciones_trad" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="imf_unidadmedidacomercial_umc" EntityType="Self.imf_unidadmedidacomercial_umc" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="imf_unidadmedidafactura_umf" EntityType="Self.imf_unidadmedidafactura_umf" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="imf_usuarios_usr" EntityType="Self.imf_usuarios_usr" Schema="dbo" store:Type="Tables" />
@@ -415,6 +424,7 @@
             <End Role="imf_proveedores_prv" EntitySet="imf_proveedores_prv" />
             <End Role="imf_facturas_fac" EntitySet="imf_facturas_fac" />
           </AssociationSet>
+          <EntitySet Name="imf_traducciones_trad" EntityType="ImportFlexModel.imf_traducciones_trad" />
           </EntityContainer>
         <EntityType Name="imf_unidadmedidacomercial_umc">
           <Key>
@@ -575,6 +585,14 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="imf_traducciones_trad">
+          <Key>
+            <PropertyRef Name="tradTraduccion" />
+          </Key>
+          <Property Name="tradIdTraduccion" Type="Int32" />
+          <Property Name="tradTipo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="tradTraduccion" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -706,6 +724,15 @@
                 <ScalarProperty Name="facNumeroFactura" ColumnName="facNumeroFactura" />
                 <ScalarProperty Name="facIdImportacion" ColumnName="facIdImportacion" />
                 <ScalarProperty Name="facIdFactura" ColumnName="facIdFactura" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="imf_traducciones_trad">
+            <EntityTypeMapping TypeName="ImportFlexModel.imf_traducciones_trad">
+              <MappingFragment StoreEntitySet="imf_traducciones_trad">
+                <ScalarProperty Name="tradTraduccion" ColumnName="tradTraduccion" />
+                <ScalarProperty Name="tradTipo" ColumnName="tradTipo" />
+                <ScalarProperty Name="tradIdTraduccion" ColumnName="tradIdTraduccion" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

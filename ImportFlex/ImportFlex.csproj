@@ -327,6 +327,9 @@
     <Compile Include="Models\imf_proveedores_prv.cs">
       <DependentUpon>ImportFlexModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\imf_traducciones_trad.cs">
+      <DependentUpon>ImportFlexModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\imf_unidadmedidacomercial_umc.cs">
       <DependentUpon>ImportFlexModel.tt</DependentUpon>
     </Compile>
@@ -459,7 +462,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="False" />
+      <UserProperties UseJQuerySupport="False" UseAjaxifiedTemplates="False" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

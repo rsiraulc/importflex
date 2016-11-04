@@ -15,7 +15,7 @@
             </div>
             <div class="col-sm-3"></div>
             <div class="col-sm-3">
-                <asp:Button ID="btnFinalizarPedimento" CssClass="btn btn-block btn-primary btn-md" Style="margin-top: 20px;" runat="server" Text="Cerrar Pedimento" OnClick="btnFinalizarPedimento_OnClick" Visible="False"/>
+                <asp:Button ID="btnFinalizarPedimento" CssClass="btn btn-block btn-success btn-md" Style="margin-top: 20px;" runat="server" Text="Cerrar Pedimento" OnClick="btnFinalizarPedimento_OnClick" Visible="False"/>
             </div>
             <div class="col-sm-3">
                 <asp:Button ID="btnExportar" CssClass="btn btn-block btn-primary btn-md" Style="margin-top: 20px;" runat="server" Text="Exportar" OnClick="btnExportar_OnClick"/>

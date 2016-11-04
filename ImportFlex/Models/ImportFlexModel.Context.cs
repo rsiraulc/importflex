@@ -34,5 +34,6 @@ namespace ImportFlex.Models
         public virtual DbSet<imf_unidadmedidafactura_umf> imf_unidadmedidafactura_umf { get; set; }
         public virtual DbSet<imf_facturadetalle_fde> imf_facturadetalle_fde { get; set; }
         public virtual DbSet<imf_facturas_fac> imf_facturas_fac { get; set; }
+        public virtual DbSet<imf_traducciones_trad> imf_traducciones_trad { get; set; }
     }
 }

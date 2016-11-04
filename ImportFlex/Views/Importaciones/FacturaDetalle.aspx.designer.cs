@@ -58,6 +58,15 @@ namespace ImportFlex.Views.Importaciones {
         protected global::Telerik.Web.UI.RadTextBox tbxProductoTraduccion;
         
         /// <summary>
+        /// cbTraduccion control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Telerik.Web.UI.RadComboBox cbTraduccion;
+        
+        /// <summary>
         /// tbxMarca control.
         /// </summary>
         /// <remarks>

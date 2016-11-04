@@ -114,7 +114,7 @@ namespace ImportFlex.Views.Importaciones
         protected void btnExportar_OnClick(object sender, EventArgs e)
         {
             var data = new ImportacionController();
-            //data.UpdateImportacionStatus(int.Parse(Request.Params["Id"]), StatusImportacion.EXPORTADO);
+            data.UpdateImportacionStatus(int.Parse(Request.Params["Id"]), StatusImportacion.EXPORTADO);
 
             var response = data.GetImportacionById(int.Parse(Request.Params["Id"]));
             if (response.Success)
@@ -140,8 +140,10 @@ namespace ImportFlex.Views.Importaciones
 
         protected void btnFinalizarPedimento_OnClick(object sender, EventArgs e)
         {
-            //var data = new ImportacionController();
-            //data.UpdateImportacionStatus(int.Parse(Request.Params["Id"]), StatusImportacion.FINALIZADO);
+            var data = new ImportacionController();
+            data.UpdateImportacionStatus(int.Parse(Request.Params["Id"]), StatusImportacion.FINALIZADO);
+
+            Response.Redirect("~/Views/Importaciones/ImportacionDetalle.aspx?ID=" + int.Parse(Request.Params["Id"]));
         }
     }
 }

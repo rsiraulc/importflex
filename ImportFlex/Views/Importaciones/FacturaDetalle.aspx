@@ -36,19 +36,18 @@
                                 <span class="text-formulario">Traducción</span>
                             </div>
                             <div class="col-lg-8 col-md-12 col-xs-12">
-                                <telerik:RadTextBox ID="tbxProductoTraduccion" ReadOnly="True" runat="server" Skin="Bootstrap" Width="100%"></telerik:RadTextBox>
+                                <telerik:RadTextBox ID="tbxProductoTraduccion" ReadOnly="True" runat="server" Visible="True" Skin="Bootstrap" Width="100%"></telerik:RadTextBox>
+                                <telerik:RadComboBox ID="cbTraduccion" runat="server" Visible="False" Skin="Bootstrap" Width="100%"></telerik:RadComboBox>
                             </div>
                         </div>
                     </div>
-
-
                     <div class="row" style="margin-top: 20px;">
                         <div class="col-sm-4">
                             <div class="col-lg-4 col-md-12 col-xs-12">
                                 <span class="text-formulario">Marca</span>
                             </div>
                             <div class="col-lg-8 col-md-12 col-xs-12">
-                                <telerik:RadTextBox ID="tbxMarca" Skin="Bootstrap" ReadOnly="True" runat="server" Width="100%"></telerik:RadTextBox>
+                                <telerik:RadTextBox ID="tbxMarca" Skin="Bootstrap" ReadOnly="False" runat="server" Width="100%"></telerik:RadTextBox>
                             </div>
                         </div>
                         <div class="col-sm-4">
@@ -56,7 +55,7 @@
                                 <span class="text-formulario">Modelo</span>
                             </div>
                             <div class="col-lg-8 col-md-12 col-xs-12">
-                                <telerik:RadTextBox ID="tbxModelo" ReadOnly="True" runat="server" Skin="Bootstrap" Width="100%"></telerik:RadTextBox>
+                                <telerik:RadTextBox ID="tbxModelo" ReadOnly="False" runat="server" Skin="Bootstrap" Width="100%"></telerik:RadTextBox>
                             </div>
                         </div>
                         <div class="col-sm-4">
@@ -116,6 +115,7 @@
                             <telerik:GridBoundColumn HeaderText="Unidad de Medida" UniqueName="UMC" DataField="imf_unidadmedidacomercial_umc.umcDescripcion"></telerik:GridBoundColumn>
                             <telerik:GridBoundColumn HeaderText="No. Parte" UniqueName="NumeroParte" DataField="imf_productos_prod.prodNumeroParte"></telerik:GridBoundColumn>
                             <telerik:GridBoundColumn HeaderText="Producto" UniqueName="ProductoDescripcion" DataField="imf_productos_prod.prodDescripcionRSI"></telerik:GridBoundColumn>
+                            <telerik:GridBoundColumn HeaderText="Traducción" UniqueName="ProductoTraduccion" DataField="imf_productos_prod.prodTraduccion"></telerik:GridBoundColumn>
                             <telerik:GridBoundColumn HeaderText="Marca" UniqueName="ProductoMarca" DataField="imf_productos_prod.prodMarca"></telerik:GridBoundColumn>
                             <telerik:GridBoundColumn HeaderText="Modelo" UniqueName="ProductoMarca" DataField="imf_productos_prod.prodModelo"></telerik:GridBoundColumn>
                             <telerik:GridBoundColumn HeaderText="No.Serie" UniqueName="ProductoNumeroSerie" DataField="fdeNumeroSerieProducto"></telerik:GridBoundColumn>

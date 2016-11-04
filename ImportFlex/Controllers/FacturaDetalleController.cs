@@ -92,11 +92,12 @@ namespace ImportFlex.Controllers
             try
             {
                 var idFactura = detalle.fdeIdFactura;
+                var fac = db.imf_facturas_fac.Find(detalle.fdeIdFactura);
+                var imp = db.imf_importaciones_imp.Find(fac.facIdImportacion);
                 db.imf_facturadetalle_fde.Remove(detalle);
+                imp.impTotalArticulos--;
                 db.SaveChanges();
 
-                var importacionController = new ImportacionController();
-                //importacionController.ActualizarTotalesRemove(idFactura);
                 response.Success = true;
             }
             catch (Exception ex)

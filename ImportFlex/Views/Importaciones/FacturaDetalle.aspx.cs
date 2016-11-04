@@ -25,10 +25,18 @@ namespace ImportFlex.Views.Importaciones
                 CargarProductos();
                 CargarUnidadesMedida();
                 CargarDetalleFactura(int.Parse(Request.Params["Id"]));
+                CargarTraducciones();
                 SetearComboBoxs();
                 LimpiarControles();
 
             }
+        }
+
+        private void CargarTraducciones()
+        {
+            var data = new CatalogosController();
+            cbTraduccion.DataSource = data.GetListaTraducciones();
+            cbTraduccion.DataBind();
         }
 
         private void CargarFactura(int id)
@@ -51,6 +59,11 @@ namespace ImportFlex.Views.Importaciones
             cbUMC.AllowCustomText = true;
             cbUMC.MarkFirstMatch = true;
             cbUMC.Filter = RadComboBoxFilter.Contains;
+
+
+            cbTraduccion.AllowCustomText = true;
+            cbTraduccion.MarkFirstMatch = true;
+            cbTraduccion.Filter = RadComboBoxFilter.Contains;
         }
 
         private void LimpiarControles()
@@ -123,11 +136,30 @@ namespace ImportFlex.Views.Importaciones
             var response = fd.InsertFacturaDetalle(detalle);
             if (response.Success)
             {
+                //OPCION PROVISIONAL PARA LLENADO DE DATOS DE PRODUCTO
+                ActualizarProducto();
+
                 Response.Redirect($"~/Views/Importaciones/FacturaDetalle?ID={response.FacturaDetalle.fdeIdFactura}");
             }
             else
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "alertSuccess",
                     $"alert('Ha ocurrido un error al agregar el producto. {response.Message}');", true);
+        }
+
+        private void ActualizarProducto()
+        {
+            var data = new ProductoController();
+            var response = data.GetProductoById(Convert.ToInt32(cbProducto.SelectedValue));
+            if (response.Success)
+            {
+                var p = response.Producto;
+                p.prodTraduccion = cbTraduccion.SelectedValue.Replace("- ", "");
+                p.prodMarca = tbxMarca.Text;
+                p.prodModelo = tbxModelo.Text;
+                p.prodFraccionArancelaria = tbxFraccion.Text;
+
+                data.UpdateProducto(p);
+            }
         }
 
         protected void btnIrImportacion_OnClick(object sender, EventArgs e)
@@ -164,7 +196,18 @@ namespace ImportFlex.Views.Importaciones
             if (response.Success)
             {
                 tbxProductoDescripcion.Text = response.Producto.prodDescripcionRSI;
-                tbxProductoTraduccion.Text = response.Producto.prodTraduccion;
+                if (response.Producto.prodTraduccion != "")
+                {
+                    cbTraduccion.Visible = false;
+                    tbxProductoTraduccion.Visible = true;
+                    tbxProductoTraduccion.Text = response.Producto.prodTraduccion;
+                }
+                else
+                {
+                    cbTraduccion.Visible = true;
+                    tbxProductoTraduccion.Visible = false;
+                }
+                //tbxProductoTraduccion.Text = response.Producto.prodTraduccion;
                 tbxMarca.Text = response.Producto.prodMarca;
                 tbxModelo.Text = response.Producto.prodModelo;
 
