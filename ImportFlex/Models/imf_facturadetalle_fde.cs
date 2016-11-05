@@ -28,6 +28,7 @@ namespace ImportFlex.Models
         public Nullable<int> fdIdPaisOrigenDestino { get; set; }
         public Nullable<int> fdeIdPaisVendedorComprador { get; set; }
         public string fdeNumeroSerieProducto { get; set; }
+        public int fdeIdUsuarioRegistro { get; set; }
     
         public virtual imf_paises_pai imf_paises_pai { get; set; }
         public virtual imf_paises_pai imf_paises_pai1 { get; set; }
@@ -35,5 +36,6 @@ namespace ImportFlex.Models
         public virtual imf_unidadmedidacomercial_umc imf_unidadmedidacomercial_umc { get; set; }
         public virtual imf_unidadmedidafactura_umf imf_unidadmedidafactura_umf { get; set; }
         public virtual imf_facturas_fac imf_facturas_fac { get; set; }
+        public virtual imf_usuarios_usr imf_usuarios_usr { get; set; }
     }
 }

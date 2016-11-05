@@ -14,6 +14,16 @@ namespace ImportFlex.Models
     
     public partial class imf_usuarios_usr
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public imf_usuarios_usr()
+        {
+            this.imf_facturadetalle_fde = new HashSet<imf_facturadetalle_fde>();
+            this.imf_facturas_fac = new HashSet<imf_facturas_fac>();
+            this.imf_importaciones_imp_exporto = new HashSet<imf_importaciones_imp>();
+            this.imf_importaciones_imp_finalizo = new HashSet<imf_importaciones_imp>();
+            this.imf_importaciones_imp_registro = new HashSet<imf_importaciones_imp>();
+        }
+    
         public int usrIdUsuario { get; set; }
         public string usrUserName { get; set; }
         public string usrPassword { get; set; }
@@ -22,5 +32,18 @@ namespace ImportFlex.Models
         public string usrApellidoMaterno { get; set; }
         public string usrEmail { get; set; }
         public Nullable<System.DateTime> usrFechaRegistro { get; set; }
+        public Nullable<int> usrIdRol { get; set; }
+    
+        public virtual imf_roles_rls imf_roles_rls { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<imf_facturadetalle_fde> imf_facturadetalle_fde { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<imf_facturas_fac> imf_facturas_fac { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<imf_importaciones_imp> imf_importaciones_imp_exporto { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<imf_importaciones_imp> imf_importaciones_imp_finalizo { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<imf_importaciones_imp> imf_importaciones_imp_registro { get; set; }
     }
 }

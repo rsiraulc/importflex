@@ -13,12 +13,12 @@
             <div class="col-sm-3">
                 <asp:Button ID="btnNuevaFactura" OnClientClick="OpenWindow();return false;" CssClass="btn btn-block btn-primary btn-md" Style="margin-top: 20px;" runat="server" Text="Agregar Factura" />
             </div>
-            <div class="col-sm-3"></div>
+            <div class="col-sm-3"><asp:Button ID="btnExportarHT" CssClass="btn btn-block btn-primary btn-md" Style="margin-top: 20px;" runat="server" Text="Descargar Hoja Traducción" OnClick="btnExportarHT_OnClick" Visible="False"/></div>
             <div class="col-sm-3">
                 <asp:Button ID="btnFinalizarPedimento" CssClass="btn btn-block btn-success btn-md" Style="margin-top: 20px;" runat="server" Text="Cerrar Pedimento" OnClick="btnFinalizarPedimento_OnClick" Visible="False"/>
             </div>
             <div class="col-sm-3">
-                <asp:Button ID="btnExportar" CssClass="btn btn-block btn-primary btn-md" Style="margin-top: 20px;" runat="server" Text="Exportar" OnClick="btnExportar_OnClick"/>
+                <asp:Button ID="btnExportar" CssClass="btn btn-block btn-primary btn-md" Style="margin-top: 20px;" runat="server" Text="Exportar Formatos" OnClick="btnExportar_OnClick"/>
             </div>
         </div>
         <div class="row">
@@ -30,9 +30,10 @@
                             <telerik:GridBoundColumn HeaderText="No. Factura" UniqueName="NoFactura" DataField="facNumeroFactura"></telerik:GridBoundColumn>
                             <telerik:GridBoundColumn HeaderText="No. Entrada" UniqueName="NoEntrada" DataField="facNumeroEntrada"></telerik:GridBoundColumn>
                             <telerik:GridBoundColumn HeaderText="Proveedor" UniqueName="ProveedorNombre" DataField="imf_proveedores_prv.prvCodigo"></telerik:GridBoundColumn>
+                            <telerik:GridBoundColumn HeaderText="Proveedor" UniqueName="ProveedorNombre" DataField="imf_proveedores_prv.prvCodigo"></telerik:GridBoundColumn>
                             <telerik:GridBoundColumn HeaderText="Fecha Factura" UniqueName="fechaFacturacion" DataField="facFechaFactura"></telerik:GridBoundColumn>
                             <telerik:GridBoundColumn HeaderText="Valor USD" UniqueName="ValorUSD" DataField="facValorUsd" DataFormatString="{0:C}"></telerik:GridBoundColumn>
-                            <telerik:GridBoundColumn HeaderText="Flete" UniqueName="Flete" DataField="facFlete"></telerik:GridBoundColumn>
+                            <telerik:GridBoundColumn HeaderText="Flete" UniqueName="Flete" DataField="facFlete" DataFormatString="{0:C}"></telerik:GridBoundColumn>
                             <telerik:GridTemplateColumn UniqueName="Detalle">
                                 <ItemTemplate>
                                     <asp:ImageButton runat="server" ToolTip="Ver Detalle" ID="imgBtnDetalle" Width="32px" ImageUrl="~/Images/iconDetails.png" PostBackUrl='<%# ResolveUrl("~/Views/Importaciones/FacturaDetalle?ID="+Eval("facIdFactura")) %>' />
@@ -59,7 +60,7 @@
                         </div>
                         <!-- FILA 1 -->
                         <div class="row" style="margin-top: 20px">
-                            <div class="col-sm-6">
+                            <div class="col-sm-6"> 
                                 <div class="col-lg-4 col-md-12 col-xs-12">
                                     <span class="text-formulario">Proveedor</span>
                                 </div>

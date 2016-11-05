@@ -145,5 +145,17 @@ namespace ImportFlex.Views.Importaciones
 
             Response.Redirect("~/Views/Importaciones/ImportacionDetalle.aspx?ID=" + int.Parse(Request.Params["Id"]));
         }
+
+        protected void btnExportarHT_OnClick(object sender, EventArgs e)
+        {
+            var data = new ImportacionController();
+            var response = data.GetImportacionById(int.Parse(Request.Params["Id"]));
+
+            if (response.Success)
+            {
+                var ht = new HojaTraduccion();
+                ht.CrearHojaTraduccion(response.Importacion);
+            }
+        }
     }
 }

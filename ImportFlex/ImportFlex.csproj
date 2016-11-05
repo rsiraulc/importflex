@@ -54,6 +54,9 @@
     <Reference Include="Ionic.Zip">
       <HintPath>..\..\..\..\..\Downloads\DotNetZipLib-DevKit-v1.9\zip-v1.9\Release\Ionic.Zip.dll</HintPath>
     </Reference>
+    <Reference Include="itextsharp">
+      <HintPath>..\..\..\..\..\Downloads\itextsharp-all-5.5.10\itextsharp-dll-core\itextsharp.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=1.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.1.2.1\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
       <Private>True</Private>
@@ -172,6 +175,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Account\Login.aspx" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
@@ -265,6 +269,13 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Account\Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\CatalogosController.cs" />
@@ -274,6 +285,7 @@
     <Compile Include="Controllers\Export\ArchivoPedimento.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Controllers\Export\HojaTraduccion.cs" />
     <Compile Include="Controllers\FacturaController.cs" />
     <Compile Include="Controllers\FacturaDetalleController.cs" />
     <Compile Include="Controllers\ImportacionController.cs" />
@@ -327,7 +339,7 @@
     <Compile Include="Models\imf_proveedores_prv.cs">
       <DependentUpon>ImportFlexModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\imf_traducciones_trad.cs">
+    <Compile Include="Models\imf_roles_rls.cs">
       <DependentUpon>ImportFlexModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\imf_unidadmedidacomercial_umc.cs">

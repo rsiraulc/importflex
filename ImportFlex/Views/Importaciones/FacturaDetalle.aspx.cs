@@ -157,6 +157,7 @@ namespace ImportFlex.Views.Importaciones
                 p.prodMarca = tbxMarca.Text;
                 p.prodModelo = tbxModelo.Text;
                 p.prodFraccionArancelaria = tbxFraccion.Text;
+                p.prodUltimoCosto = Convert.ToDecimal(tbxValor.Text);
 
                 data.UpdateProducto(p);
             }
@@ -210,6 +211,7 @@ namespace ImportFlex.Views.Importaciones
                 //tbxProductoTraduccion.Text = response.Producto.prodTraduccion;
                 tbxMarca.Text = response.Producto.prodMarca;
                 tbxModelo.Text = response.Producto.prodModelo;
+                tbxValor.Text = response.Producto.prodUltimoCosto.HasValue ? response.Producto.prodUltimoCosto.Value.ToString() : "0";
 
                 cbUMC.Focus();
             }
