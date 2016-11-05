@@ -65,7 +65,13 @@
                         <li><a runat="server" href="#">Configuraci&oacute;n</a></li>
                         
                     </ul>
-                </div>
+                    <div class="pull-right">
+                        <ul class="nav navbar-nav">
+                            <li><telerik:RadLabel ID="lblNombre" CssClass="navbar-text" runat="server"></telerik:RadLabel></li>
+                            <li><asp:LinkButton ID="linkCerrarSesion" runat="server" OnClick="linkCerrarSesion_OnClick">Cerrar Sesión</asp:LinkButton></li>
+                        </ul>
+                    </div>
+                </div>                
             </div>
         </div>
         <div class="container body-content">

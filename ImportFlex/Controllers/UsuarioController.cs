@@ -17,17 +17,15 @@ namespace ImportFlex.Controllers
 
             try
             {
-                foreach (var usr in db.imf_usuarios_usr)
-                {
-                    if (usr.usrUserName == username && usr.usrPassword == password)
-                    {
-                        response.Usuario = usr;
-                        response.Success = true;
-                        break;
-                    }
-                }
+                var usr = db.imf_usuarios_usr.FirstOrDefault(u => u.usrUserName == username && u.usrPassword == password);
 
-                if (!response.Success)
+                if (usr != null)
+                {
+                    response.Usuario = usr;
+                    response.Success = true;
+                    response.Message = usr.userNombre + " " + usr.usrApellidoPaterno;
+                }
+                else
                 {
                     response.Success = false;
                     response.Message = "Usuario no encontrado";

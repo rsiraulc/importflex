@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using ImportFlex.Account;
 using ImportFlex.Controllers;
 using ImportFlex.Controllers.Enums;
 using ImportFlex.Models;
@@ -66,7 +67,8 @@ namespace ImportFlex.Views.Importaciones
                 impTotalFacturas = 0,
                 impParte = parte ?? 1,
                 impTipoOperacion = int.Parse(cbTipoOPeracion.SelectedValue),
-                impTipoRegistro = 501
+                impTipoRegistro = 501,
+                impIdUsuarioRegistro = Sesiones.UsuarioID.Value
             };
 
             var response = data.InsertImportacion(importacion);

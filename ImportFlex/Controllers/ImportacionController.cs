@@ -184,13 +184,27 @@ namespace ImportFlex.Controllers
             return response;
         }
 
-        public void UpdateImportacionStatus(int idImportacion, StatusImportacion status)
+        public void UpdateImportacionStatus(int idImportacion, StatusImportacion status, int idUsuario)
         {
             var response = GetImportacionById(idImportacion);
 
             if (response.Success)
             {
                 response.Importacion.impStatus = status.ToString();
+
+                switch (status)
+                {
+                    case StatusImportacion.EXPORTADO:
+                        response.Importacion.impIdUsuarioExporto = idUsuario;
+                        response.Importacion.impFechaUltimaExportacion = DateTime.Now;
+                        break;
+
+                        case StatusImportacion.FINALIZADO:
+                        response.Importacion.impIdUsuarioFinalizo = idUsuario;
+                        response.Importacion.impFechaFinalizacion = DateTime.Now;
+                        break;
+                }
+
                 db.SaveChanges();
             }
         }

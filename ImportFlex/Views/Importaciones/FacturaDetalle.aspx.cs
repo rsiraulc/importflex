@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using ImportFlex.Account;
 using ImportFlex.Controllers;
 using ImportFlex.Models;
 using Telerik.Web.UI;
@@ -130,7 +131,8 @@ namespace ImportFlex.Views.Importaciones
                 fdeVinculacion = "0",
                 fdeMetodoValoracion = "0",
                 fdeIdPaisVendedorComprador = 72,
-                fdIdPaisOrigenDestino = 72
+                fdIdPaisOrigenDestino = 72,
+                fdeIdUsuarioRegistro = Sesiones.UsuarioID.Value
             };
 
             var response = fd.InsertFacturaDetalle(detalle);

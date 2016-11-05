@@ -2,6 +2,7 @@
 using System.IO;
 using System.Text;
 using System.Web.UI;
+using ImportFlex.Account;
 using ImportFlex.Controllers;
 using ImportFlex.Controllers.Enums;
 using ImportFlex.Controllers.Export;
@@ -97,7 +98,8 @@ namespace ImportFlex.Views.Importaciones
                 facFechaFactura = dpFechaFacturacion.SelectedDate,
                 facFechaRegistro = DateTime.Now,
                 facNumeroEntrada = tbxEntrada.Text,
-                facNotas = tbxNotas.Text
+                facNotas = tbxNotas.Text,
+                facIdUsuarioRegistro = Sesiones.UsuarioID.Value
             };
 
             var response = data.InsertFactura(factura);
@@ -114,7 +116,7 @@ namespace ImportFlex.Views.Importaciones
         protected void btnExportar_OnClick(object sender, EventArgs e)
         {
             var data = new ImportacionController();
-            data.UpdateImportacionStatus(int.Parse(Request.Params["Id"]), StatusImportacion.EXPORTADO);
+            data.UpdateImportacionStatus(int.Parse(Request.Params["Id"]), StatusImportacion.EXPORTADO, Sesiones.UsuarioID.Value);
 
             var response = data.GetImportacionById(int.Parse(Request.Params["Id"]));
             if (response.Success)
@@ -128,7 +130,6 @@ namespace ImportFlex.Views.Importaciones
                     Response.ClearHeaders();
                     Response.ClearContent();
                     Response.AddHeader("Content-Disposition", "attachment; filename=" + respuesta.NombreArchivo);
-                    //Response.AddHeader("Content-Length", respuesta.RutaArchivo.Length.ToString());
                     Response.ContentType = "application/zip";
                     Response.Flush();
                     Response.TransmitFile(respuesta.RutaArchivo);
@@ -141,7 +142,7 @@ namespace ImportFlex.Views.Importaciones
         protected void btnFinalizarPedimento_OnClick(object sender, EventArgs e)
         {
             var data = new ImportacionController();
-            data.UpdateImportacionStatus(int.Parse(Request.Params["Id"]), StatusImportacion.FINALIZADO);
+            data.UpdateImportacionStatus(int.Parse(Request.Params["Id"]), StatusImportacion.FINALIZADO, Sesiones.UsuarioID.Value);
 
             Response.Redirect("~/Views/Importaciones/ImportacionDetalle.aspx?ID=" + int.Parse(Request.Params["Id"]));
         }
