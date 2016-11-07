@@ -31,15 +31,6 @@ namespace ImportFlex.Views.Importaciones {
         protected global::System.Web.UI.WebControls.Button btnNuevaFactura;
         
         /// <summary>
-        /// btnExportarHT control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnExportarHT;
-        
-        /// <summary>
         /// btnFinalizarPedimento control.
         /// </summary>
         /// <remarks>
@@ -49,13 +40,22 @@ namespace ImportFlex.Views.Importaciones {
         protected global::System.Web.UI.WebControls.Button btnFinalizarPedimento;
         
         /// <summary>
-        /// btnExportar control.
+        /// lnkDescargarFormatos control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnExportar;
+        protected global::System.Web.UI.WebControls.LinkButton lnkDescargarFormatos;
+        
+        /// <summary>
+        /// lnkDescargarHT control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lnkDescargarHT;
         
         /// <summary>
         /// gvFactura control.

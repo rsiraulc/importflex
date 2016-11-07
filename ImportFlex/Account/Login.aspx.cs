@@ -12,7 +12,8 @@ namespace ImportFlex.Account
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            tbxUserName.Text = "raul";
+            tbxPassword.Text = "12345";
         }
 
         protected void OnClick(object sender, EventArgs e)

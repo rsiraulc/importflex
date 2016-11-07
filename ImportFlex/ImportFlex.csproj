@@ -199,6 +199,7 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>ImportFlexModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <Content Include="Images\firma_enriquecohen.png" />
     <Content Include="Images\Flexolution.png" />
     <Content Include="Images\iconAdd.png" />
     <Content Include="Images\iconDetails.png" />

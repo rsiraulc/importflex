@@ -11,14 +11,28 @@
                 <telerik:RadLabel ID="lblTitulo" CssClass="h2" runat="server" Skin="Bootstrap"></telerik:RadLabel>
             </div>
             <div class="col-sm-3">
-                <asp:Button ID="btnNuevaFactura" OnClientClick="OpenWindow();return false;" CssClass="btn btn-block btn-primary btn-md" Style="margin-top: 20px;" runat="server" Text="Agregar Factura" />
-            </div>
-            <div class="col-sm-3"><asp:Button ID="btnExportarHT" CssClass="btn btn-block btn-primary btn-md" Style="margin-top: 20px;" runat="server" Text="Descargar Hoja Traducción" OnClick="btnExportarHT_OnClick" Visible="False"/></div>
-            <div class="col-sm-3">
-                <asp:Button ID="btnFinalizarPedimento" CssClass="btn btn-block btn-success btn-md" Style="margin-top: 20px;" runat="server" Text="Cerrar Pedimento" OnClick="btnFinalizarPedimento_OnClick" Visible="False"/>
+                <asp:Button ID="btnNuevaFactura" OnClientClick="OpenWindow();return false;" CssClass="btn btn-block btn-success btn-md" Style="margin-top: 20px;" runat="server" Text="Agregar Factura" />
             </div>
             <div class="col-sm-3">
-                <asp:Button ID="btnExportar" CssClass="btn btn-block btn-primary btn-md" Style="margin-top: 20px;" runat="server" Text="Exportar Formatos" OnClick="btnExportar_OnClick"/>
+                <asp:Button ID="btnFinalizarPedimento" CssClass="btn btn-block btn-success btn-md" Style="margin-top: 20px;" runat="server" Text="Cerrar Pedimento" OnClick="btnFinalizarPedimento_OnClick" Visible="False" />
+            </div>
+            <div class="col-sm-3">
+                <%--<asp:Button ID="btnExportarHT" CssClass="btn btn-block btn-primary btn-md" Style="margin-top: 20px;" runat="server" Text="Descargar Hoja Traducción" OnClick="btnExportarHT_OnClick" Visible="True" />--%>
+            </div>
+            <div class="col-sm-3">
+                    <div class="btn-group" style="width: 100%">
+                        <button type="button" class="btn btn-block btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="width: 100%; margin-top: 20px;">
+                            Descargar <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" style="width: 100%">
+                            <li>
+                                <asp:LinkButton ID="lnkDescargarFormatos" runat="server" OnClick="lnkDescargarFormatos_OnClick" Width="100%">Formatos Aduana (.zip)</asp:LinkButton>
+                            </li>
+                            <li>
+                                <asp:LinkButton ID="lnkDescargarHT" runat="server" OnClick="lnkDescargarHT_OnClick" Width="100%">Hoja Traducción (.pdf)</asp:LinkButton></li>
+                        </ul>
+                    </div>
+                <%--<asp:Button ID="btnExportar" CssClass="btn btn-block btn-primary btn-md" Style="margin-top: 20px;" runat="server" Text="Descargar Formatos" OnClick="btnExportar_OnClick" />--%>
             </div>
         </div>
         <div class="row">
@@ -60,7 +74,7 @@
                         </div>
                         <!-- FILA 1 -->
                         <div class="row" style="margin-top: 20px">
-                            <div class="col-sm-6"> 
+                            <div class="col-sm-6">
                                 <div class="col-lg-4 col-md-12 col-xs-12">
                                     <span class="text-formulario">Proveedor</span>
                                 </div>
@@ -125,7 +139,7 @@
                                     <span class="text-formulario">Notas</span>
                                 </div>
                                 <div class="col-lg-8 col-md-12 col-xs-12">
-                                    <telerik:RadTextBox ID="tbxNotas" EmptyMessage="Notas (Opcional)" MaxLength="200" Height="45px"  runat="server" Skin="Bootstrap"   Width="100%"></telerik:RadTextBox>
+                                    <telerik:RadTextBox ID="tbxNotas" EmptyMessage="Notas (Opcional)" MaxLength="200" Height="45px" runat="server" Skin="Bootstrap" Width="100%"></telerik:RadTextBox>
                                 </div>
                             </div>
                         </div>

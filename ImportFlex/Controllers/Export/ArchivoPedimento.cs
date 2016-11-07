@@ -23,11 +23,15 @@ namespace ImportFlex.Controllers.Export
             {
                 foreach (var f in p.imf_facturas_fac) //f = facturas, duh x 2
                 {
-                    var dia = f.facFechaFactura.Value.Day < 10 ? $"0{f.facFechaFactura.Value.Day}" : f.facFechaFactura.Value.Day.ToString();
+                    var dia = f.facFechaFactura.Value.Day < 10
+                        ? $"0{f.facFechaFactura.Value.Day}"
+                        : f.facFechaFactura.Value.Day.ToString();
                     var fechaFactura = $"{f.facFechaFactura.Value.Year}{f.facFechaFactura.Value.Month}{dia}";
 
-                    string texto = $"{p.impTipoRegistro}|{p.impTipoOperacion}|C1|{p.impNumeroPedimento}|{p.impCodigoImportador}|0|0|0|0|0|0|0|7|7|7|{p.impRegion}|\r\n";
-                    texto += $"505|{f.facNumeroFactura}|{fechaFactura}|DAP|USD|{f.facValorExtranjera}|{f.facValorUsd}|{f.imf_proveedores_prv.prvCodigo}||||||||||||||||||||||||||||||||||||\r\n";
+                    string texto =
+                        $"{p.impTipoRegistro}|{p.impTipoOperacion}|C1|{p.impNumeroPedimento}|{p.impCodigoImportador}|0|0|0|0|0|0|0|7|7|7|{p.impRegion}|\r\n";
+                    texto +=
+                        $"505|{f.facNumeroFactura}|{fechaFactura}|DAP|USD|{f.facValorExtranjera}|{f.facValorUsd}|{f.imf_proveedores_prv.prvCodigo}||||||||||||||||||||||||||||||||||||\r\n";
 
                     foreach (var df in f.imf_facturadetalle_fde)
                     {
@@ -38,7 +42,8 @@ namespace ImportFlex.Controllers.Export
 
                     foreach (var df in f.imf_facturadetalle_fde)
                     {
-                        texto += $"559|{df.imf_productos_prod.prodMarca}|{df.imf_productos_prod.prodModelo}|{df.imf_productos_prod.prodSubModelo}|{df.fdeNumeroSerieProducto}|\r\n";
+                        texto +=
+                            $"559|{df.imf_productos_prod.prodMarca}|{df.imf_productos_prod.prodModelo}|{df.imf_productos_prod.prodSubModelo}|{df.fdeNumeroSerieProducto}|\r\n";
                     }
 
                     texto += "999|\r\n";
@@ -93,6 +98,11 @@ namespace ImportFlex.Controllers.Export
             {
                 File.Delete(file);
             }
+        }
+
+        public void EliminarArchivo(string path)
+        {
+            File.Delete(path);
         }
     }
 }

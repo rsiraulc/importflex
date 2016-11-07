@@ -44,7 +44,7 @@ namespace ImportFlex.Views.Importaciones
                 switch (response.Importacion.impStatus)
                 {
                     case "BORRADOR":
-                        btnExportar.Visible = false;
+                        //btnExportar.Visible = false;
                         break;
                     case "EXPORTADO":
                         btnFinalizarPedimento.Visible = true;
@@ -74,8 +74,8 @@ namespace ImportFlex.Views.Importaciones
             var response = data.GetFacturasByIdImportacion(id);
             if (response.Success)
             {
-                if (response.lstFacturas.Count == 0)
-                    btnExportar.Visible = false;
+                //if (response.lstFacturas.Count == 0)
+                //    Visible = false;
 
                 gvFactura.DataSource = response.lstFacturas;
                 gvFactura.DataBind();
@@ -113,7 +113,16 @@ namespace ImportFlex.Views.Importaciones
             }
         }
 
-        protected void btnExportar_OnClick(object sender, EventArgs e)
+        
+        protected void btnFinalizarPedimento_OnClick(object sender, EventArgs e)
+        {
+            var data = new ImportacionController();
+            data.UpdateImportacionStatus(int.Parse(Request.Params["Id"]), StatusImportacion.FINALIZADO, Sesiones.UsuarioID.Value);
+
+            Response.Redirect("~/Views/Importaciones/ImportacionDetalle.aspx?ID=" + int.Parse(Request.Params["Id"]));
+        }
+
+        protected void lnkDescargarFormatos_OnClick(object sender, EventArgs e)
         {
             var data = new ImportacionController();
             data.UpdateImportacionStatus(int.Parse(Request.Params["Id"]), StatusImportacion.EXPORTADO, Sesiones.UsuarioID.Value);
@@ -136,18 +145,13 @@ namespace ImportFlex.Views.Importaciones
                     Response.End();
 
                 }
+
+                // ELIMINA ARCHIVO DEL SERVIDOR
+                archivo.EliminarArchivo(respuesta.RutaArchivo);
             }
         }
 
-        protected void btnFinalizarPedimento_OnClick(object sender, EventArgs e)
-        {
-            var data = new ImportacionController();
-            data.UpdateImportacionStatus(int.Parse(Request.Params["Id"]), StatusImportacion.FINALIZADO, Sesiones.UsuarioID.Value);
-
-            Response.Redirect("~/Views/Importaciones/ImportacionDetalle.aspx?ID=" + int.Parse(Request.Params["Id"]));
-        }
-
-        protected void btnExportarHT_OnClick(object sender, EventArgs e)
+        protected void lnkDescargarHT_OnClick(object sender, EventArgs e)
         {
             var data = new ImportacionController();
             var response = data.GetImportacionById(int.Parse(Request.Params["Id"]));
@@ -155,7 +159,21 @@ namespace ImportFlex.Views.Importaciones
             if (response.Success)
             {
                 var ht = new HojaTraduccion();
-                ht.CrearHojaTraduccion(response.Importacion);
+                var respuesta = ht.CrearHojaTraduccion(response.Importacion);
+                if (respuesta.Success)
+                {
+                    Response.Clear();
+                    Response.ClearHeaders();
+                    Response.ClearContent();
+                    Response.AddHeader("Content-Disposition", "attachment; filename=" + respuesta.NombreArchivo);
+                    Response.ContentType = "application/pdf";
+                    Response.Flush();
+                    Response.TransmitFile(respuesta.RutaArchivo);
+                    Response.End();
+                }
+
+                // ELIMINA ARCHIVO DEL SERVIDOR
+                ht.EliminarArchivo(respuesta.RutaArchivo);
             }
         }
     }
