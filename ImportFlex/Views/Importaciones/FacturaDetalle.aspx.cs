@@ -33,6 +33,7 @@ namespace ImportFlex.Views.Importaciones
             }
         }
 
+        #region Cargar Configuraciones
         private void CargarTraducciones()
         {
             var data = new CatalogosController();
@@ -113,16 +114,33 @@ namespace ImportFlex.Views.Importaciones
             }
         }
 
+#endregion
+
         protected void btnAgregarProducto_OnClick(object sender, EventArgs e)
         {
             var fd = new FacturaDetalleController();
+            decimal cantidad = 0;
+            string NoSerie = "";
+
+            if (tbxNumeroSerie.Visible)
+            {
+                cantidad = 1;
+                NoSerie = tbxNumeroSerie.Text;
+            }
+            else
+            {
+                cantidad = Convert.ToDecimal(tbxCantidad.Text);
+                NoSerie = "NA";
+            }
+
+
             var detalle = new imf_facturadetalle_fde
             {
                 fdeIdFactura = int.Parse(Request.Params["Id"]),
-                fdeCantidadUMC = 1,
+                fdeCantidadUMC = cantidad,
                 fdeIdUMC = Convert.ToInt32(cbUMC.SelectedValue),
                 fdeIdProducto = Convert.ToInt32(cbProducto.SelectedValue),
-                fdeNumeroSerieProducto = tbxNumeroSerie.Text,
+                fdeNumeroSerieProducto = NoSerie,
                 fdeValor = Convert.ToDecimal(tbxValor.Text),
                 fdeFecha = DateTime.Now,
                 fdeCantidadUMF = 1,
@@ -160,7 +178,7 @@ namespace ImportFlex.Views.Importaciones
                 p.prodModelo = tbxModelo.Text;
                 p.prodFraccionArancelaria = tbxFraccion.Text;
                 p.prodUltimoCosto = Convert.ToDecimal(tbxValor.Text);
-
+                p.prodIdUltimaUMC = Convert.ToInt16(cbUMC.SelectedValue);
                 data.UpdateProducto(p);
             }
         }
@@ -193,12 +211,20 @@ namespace ImportFlex.Views.Importaciones
         {
             if (e.Value == "") return;
             var id = int.Parse(e.Value);
+            CargarDatosProducto(id);
+        }
+
+        private void CargarDatosProducto(int id)
+        {
+            
             var data = new ProductoController();
 
             var response = data.GetProductoById(id);
             if (response.Success)
             {
                 tbxProductoDescripcion.Text = response.Producto.prodDescripcionRSI;
+                cbUMC.SelectedIndex = response.Producto.prodIdUltimaUMC == null ? 0 : response.Producto.prodIdUltimaUMC.Value - 1;
+
                 if (response.Producto.prodTraduccion != "")
                 {
                     cbTraduccion.Visible = false;
@@ -210,12 +236,31 @@ namespace ImportFlex.Views.Importaciones
                     cbTraduccion.Visible = true;
                     tbxProductoTraduccion.Visible = false;
                 }
+
+                //VALIDA SI REQUIERE NUMERO DE SERIE O QUE INGRESE CANTIDAD
+                if (response.Producto.prodRequiereNoSerie)
+                {
+                    tbxNumeroSerie.Visible = true;
+                    tbxCantidad.Visible = false;
+                    lblSerieCantidad.Text = "No. Serie";
+                }
+                else
+                {
+                    tbxNumeroSerie.Visible = false;
+                    tbxCantidad.Visible = true;
+                    lblSerieCantidad.Text = "Cantidad";
+                }
+
                 //tbxProductoTraduccion.Text = response.Producto.prodTraduccion;
                 tbxMarca.Text = response.Producto.prodMarca;
                 tbxModelo.Text = response.Producto.prodModelo;
-                tbxValor.Text = response.Producto.prodUltimoCosto.HasValue ? response.Producto.prodUltimoCosto.Value.ToString() : "0";
+                tbxValor.Text = response.Producto.prodUltimoCosto.HasValue
+                    ? response.Producto.prodUltimoCosto.Value.ToString()
+                    : "0";
 
                 cbUMC.Focus();
+                tbxProductoDescripcion.ToolTip = tbxProductoDescripcion.Text;
+                tbxProductoTraduccion.ToolTip = tbxProductoTraduccion.Text;
             }
         }
     }

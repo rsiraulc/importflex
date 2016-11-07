@@ -70,10 +70,11 @@
                     <div class="row" style="margin-top: 20px;">
                         <div class="col-sm-4">
                             <div class="col-lg-4 col-md-12 col-xs-12">
-                                <span class="text-formulario">No. Serie</span>
+                                <telerik:RadLabel ID="lblSerieCantidad" runat="server" CssClass="text-formulario" Text="No.Serie"></telerik:RadLabel>
                             </div>
                             <div class="col-lg-8 col-md-12 col-xs-12">
                                 <telerik:RadTextBox ID="tbxNumeroSerie" runat="server" MaxLength="50" Skin="Bootstrap" Width="100%"></telerik:RadTextBox>
+                                <telerik:RadNumericTextBox ID="tbxCantidad" Type="Number" MaxLength="8" ShowSpinButtons="False" runat="server" Skin="Bootstrap" Width="100%" Visible="False"></telerik:RadNumericTextBox>
                             </div>
                         </div>
                         <div class="col-sm-4">

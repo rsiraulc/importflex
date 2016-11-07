@@ -18,6 +18,7 @@ namespace ImportFlex.Models
         public imf_unidadmedidafactura_umf()
         {
             this.imf_facturadetalle_fde = new HashSet<imf_facturadetalle_fde>();
+            this.imf_productos_prod = new HashSet<imf_productos_prod>();
         }
     
         public int umfId { get; set; }
@@ -26,5 +27,7 @@ namespace ImportFlex.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<imf_facturadetalle_fde> imf_facturadetalle_fde { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<imf_productos_prod> imf_productos_prod { get; set; }
     }
 }

@@ -34,7 +34,7 @@ namespace ImportFlex.Account
                     Sesiones.Rol = u.imf_roles_rls.rlsClave;
 
 
-                    Response.Redirect("~/Default.aspx");
+                    Response.Redirect("~/Views/Importaciones/Importacion.aspx");
 
                 }
             }

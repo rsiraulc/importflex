@@ -15,7 +15,8 @@ namespace ImportFlex.Controllers.Enums
             return new List<TipoOperacion>
             {
                 new TipoOperacion {Clave = 1, Descripcion = "Importación"},
-                new TipoOperacion {Clave = 2, Descripcion = "Exportación"}
+                new TipoOperacion {Clave = 2, Descripcion = "Exportación"},
+                new TipoOperacion {Clave = 3, Descripcion = "Reexpedición"}
             };
         }
     }

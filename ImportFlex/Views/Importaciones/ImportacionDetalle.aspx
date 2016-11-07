@@ -73,7 +73,7 @@
                                     <span class="text-formulario">No. Factura</span>
                                 </div>
                                 <div class="col-lg-8 col-md-12 col-xs-12">
-                                    <telerik:RadTextBox ID="txbNumeroFactura" runat="server" Skin="Bootstrap" Width="100%"></telerik:RadTextBox>
+                                    <telerik:RadTextBox ID="txbNumeroFactura" runat="server" Skin="Bootstrap" MaxLength="15" Width="100%"></telerik:RadTextBox>
                                 </div>
                             </div>
                         </div>
@@ -93,7 +93,7 @@
                                     <span class="text-formulario">Valor USD</span>
                                 </div>
                                 <div class="col-lg-8 col-md-12 col-xs-12">
-                                    <telerik:RadNumericTextBox ID="tbxValorUSD" NumberFormat-DecimalDigits="2" Type="Currency" runat="server" ShowSpinButtons="False" Skin="Bootstrap" Width="100%"></telerik:RadNumericTextBox>
+                                    <telerik:RadNumericTextBox ID="tbxValorUSD" NumberFormat-DecimalDigits="2" Type="Currency" runat="server" ShowSpinButtons="False" Skin="Bootstrap" MaxLength="14" Width="100%"></telerik:RadNumericTextBox>
                                 </div>
                             </div>
                         </div>

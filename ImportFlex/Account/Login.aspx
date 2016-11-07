@@ -3,14 +3,14 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div class="row">
         <div class="col-sm-12">
-            <h1>Bienvenido a FlexImport</h1>
+            <h1 style="font-size: 45px">Bienvenido a FlexImport</h1>
         </div>
     </div>
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-7">
             <section id="loginForm">
                 <div class="form-horizontal">
-                    <h4>Iniciar Sesión</h4>
+                    <h4 >Iniciar Sesión</h4>
                     <hr />
                     <asp:PlaceHolder runat="server" ID="PlaceHolder1" Visible="false">
                         <p class="text-danger">

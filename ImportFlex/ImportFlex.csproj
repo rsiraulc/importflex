@@ -256,6 +256,7 @@
     <Content Include="Global.asax" />
     <Content Include="Site.Master" />
     <Content Include="ViewSwitcher.ascx" />
+    <Content Include="Views\Error\404.aspx" />
     <Content Include="Views\Importaciones\FacturaDetalle.aspx" />
     <Content Include="Views\Importaciones\Importacion.aspx" />
     <Content Include="Views\Importaciones\ImportacionDetalle.aspx" />
@@ -398,6 +399,13 @@
     </Compile>
     <Compile Include="ViewSwitcher.ascx.designer.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Error\404.aspx.cs">
+      <DependentUpon>404.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Error\404.aspx.designer.cs">
+      <DependentUpon>404.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\Importaciones\FacturaDetalle.aspx.cs">
       <DependentUpon>FacturaDetalle.aspx</DependentUpon>

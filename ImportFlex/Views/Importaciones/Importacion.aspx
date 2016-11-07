@@ -78,7 +78,7 @@
                                     <span class="text-formulario">No. de Pedimento</span>
                                 </div>
                                 <div class="col-lg-8 col-md-12 col-xs-12">
-                                    <telerik:RadTextBox ID="tbxNumeroPedimento" runat="server" Skin="Bootstrap" Width="100%"></telerik:RadTextBox>
+                                    <telerik:RadTextBox ID="tbxNumeroPedimento" runat="server" MaxLength="7" Skin="Bootstrap" Width="100%"></telerik:RadTextBox>
                                 </div>
                             </div>
                             <div class="col-sm-6">

@@ -96,6 +96,9 @@
           <Property Name="prodPeso" Type="decimal" Precision="10" Scale="2" />
           <Property Name="prodPiezasPorBulto" Type="decimal" Precision="10" Scale="2" />
           <Property Name="prodUltimoCosto" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="prodRequiereNoSerie" Type="bit" Nullable="false" />
+          <Property Name="prodIdUltimaUMC" Type="int" />
+          <Property Name="prodIdUltimaUMF" Type="int" />
         </EntityType>
         <EntityType Name="imf_proveedores_prv">
           <Key>
@@ -311,6 +314,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_imf_productos_prod_imf_unidadmedidacomercial_umc">
+          <End Role="imf_unidadmedidacomercial_umc" Type="Self.imf_unidadmedidacomercial_umc" Multiplicity="0..1" />
+          <End Role="imf_productos_prod" Type="Self.imf_productos_prod" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="imf_unidadmedidacomercial_umc">
+              <PropertyRef Name="umcIdClave" />
+            </Principal>
+            <Dependent Role="imf_productos_prod">
+              <PropertyRef Name="prodIdUltimaUMC" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_imf_productos_prod_imf_unidadmedidafactura_umf">
+          <End Role="imf_unidadmedidafactura_umf" Type="Self.imf_unidadmedidafactura_umf" Multiplicity="0..1" />
+          <End Role="imf_productos_prod" Type="Self.imf_productos_prod" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="imf_unidadmedidafactura_umf">
+              <PropertyRef Name="umfId" />
+            </Principal>
+            <Dependent Role="imf_productos_prod">
+              <PropertyRef Name="prodIdUltimaUMF" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_imf_usuarios_usr_imf_roles_rls">
           <End Role="imf_roles_rls" Type="Self.imf_roles_rls" Multiplicity="0..1" />
           <End Role="imf_usuarios_usr" Type="Self.imf_usuarios_usr" Multiplicity="*" />
@@ -390,6 +417,14 @@
             <End Role="imf_paises_pai" EntitySet="imf_paises_pai" />
             <End Role="imf_productos_prod" EntitySet="imf_productos_prod" />
           </AssociationSet>
+          <AssociationSet Name="FK_imf_productos_prod_imf_unidadmedidacomercial_umc" Association="Self.FK_imf_productos_prod_imf_unidadmedidacomercial_umc">
+            <End Role="imf_unidadmedidacomercial_umc" EntitySet="imf_unidadmedidacomercial_umc" />
+            <End Role="imf_productos_prod" EntitySet="imf_productos_prod" />
+          </AssociationSet>
+          <AssociationSet Name="FK_imf_productos_prod_imf_unidadmedidafactura_umf" Association="Self.FK_imf_productos_prod_imf_unidadmedidafactura_umf">
+            <End Role="imf_unidadmedidafactura_umf" EntitySet="imf_unidadmedidafactura_umf" />
+            <End Role="imf_productos_prod" EntitySet="imf_productos_prod" />
+          </AssociationSet>
           <AssociationSet Name="FK_imf_usuarios_usr_imf_roles_rls" Association="Self.FK_imf_usuarios_usr_imf_roles_rls">
             <End Role="imf_roles_rls" EntitySet="imf_roles_rls" />
             <End Role="imf_usuarios_usr" EntitySet="imf_usuarios_usr" />
@@ -406,29 +441,9 @@
           <Property Name="paiIdPais" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="paiClavePais" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
           <Property Name="paiDescripcion" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="imf_productos_prod" Relationship="Self.FK_imf_productos_prod_imf_paises_pai" FromRole="imf_paises_pai" ToRole="imf_productos_prod" />
           <NavigationProperty Name="imf_facturadetalle_fde" Relationship="ImportFlexModel.FK_imf_facturadetalle_fde_imf_paises_pai" FromRole="imf_paises_pai" ToRole="imf_facturadetalle_fde" />
           <NavigationProperty Name="imf_facturadetalle_fde1" Relationship="ImportFlexModel.FK_imf_facturadetalle_fde_imf_paises_pai1" FromRole="imf_paises_pai" ToRole="imf_facturadetalle_fde" />
-        </EntityType>
-        <EntityType Name="imf_productos_prod">
-          <Key>
-            <PropertyRef Name="prodIdProducto" />
-          </Key>
-          <Property Name="prodIdProducto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="prodDescripcionRSI" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="prodTraduccion" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="prodNumeroParte" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="prodStatus" Type="Boolean" />
-          <Property Name="prodMarca" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
-          <Property Name="prodModelo" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
-          <Property Name="prodSubModelo" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
-          <Property Name="prodIdPaisOrigen" Type="Int32" />
-          <NavigationProperty Name="imf_paises_pai" Relationship="Self.FK_imf_productos_prod_imf_paises_pai" FromRole="imf_productos_prod" ToRole="imf_paises_pai" />
-          <Property Name="prodFraccionArancelaria" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="imf_facturadetalle_fde" Relationship="ImportFlexModel.FK_imf_facturadetalle_fde_imf_productos_prod" FromRole="imf_productos_prod" ToRole="imf_facturadetalle_fde" />
-          <Property Name="prodPeso" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="prodPiezasPorBulto" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="prodUltimoCosto" Type="Decimal" Precision="10" Scale="2" />
+          <NavigationProperty Name="imf_productos_prod" Relationship="ImportFlexModel.FK_imf_productos_prod_imf_paises_pai" FromRole="imf_paises_pai" ToRole="imf_productos_prod" />
         </EntityType>
         <EntityType Name="imf_proveedores_prv">
           <Key>
@@ -460,27 +475,10 @@
           <NavigationProperty Name="imf_importaciones_imp_finalizo" Relationship="ImportFlexModel.FK_imf_importaciones_imp_imf_usuarios_usr_finalizo" FromRole="imf_usuarios_usr" ToRole="imf_importaciones_imp" />
           <NavigationProperty Name="imf_importaciones_imp_registro" Relationship="ImportFlexModel.FK_imf_importaciones_imp_imf_usuarios_usr_registro" FromRole="imf_usuarios_usr" ToRole="imf_importaciones_imp" />
         </EntityType>
-        <Association Name="FK_imf_productos_prod_imf_paises_pai">
-          <End Role="imf_paises_pai" Type="Self.imf_paises_pai" Multiplicity="0..1" />
-          <End Role="imf_productos_prod" Type="Self.imf_productos_prod" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="imf_paises_pai">
-              <PropertyRef Name="paiIdPais" />
-            </Principal>
-            <Dependent Role="imf_productos_prod">
-              <PropertyRef Name="prodIdPaisOrigen" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="ImportFlexEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="imf_paises_pai" EntityType="Self.imf_paises_pai" />
-          <EntitySet Name="imf_productos_prod" EntityType="Self.imf_productos_prod" />
           <EntitySet Name="imf_proveedores_prv" EntityType="Self.imf_proveedores_prv" />
           <EntitySet Name="imf_usuarios_usr" EntityType="Self.imf_usuarios_usr" />
-          <AssociationSet Name="FK_imf_productos_prod_imf_paises_pai" Association="Self.FK_imf_productos_prod_imf_paises_pai">
-            <End Role="imf_paises_pai" EntitySet="imf_paises_pai" />
-            <End Role="imf_productos_prod" EntitySet="imf_productos_prod" />
-          </AssociationSet>
           <EntitySet Name="imf_unidadmedidacomercial_umc" EntityType="ImportFlexModel.imf_unidadmedidacomercial_umc" />
           <EntitySet Name="imf_unidadmedidafactura_umf" EntityType="ImportFlexModel.imf_unidadmedidafactura_umf" />
           <EntitySet Name="imf_facturadetalle_fde" EntityType="ImportFlexModel.imf_facturadetalle_fde" />
@@ -490,10 +488,6 @@
           </AssociationSet>
           <AssociationSet Name="FK_imf_facturadetalle_fde_imf_paises_pai1" Association="ImportFlexModel.FK_imf_facturadetalle_fde_imf_paises_pai1">
             <End Role="imf_paises_pai" EntitySet="imf_paises_pai" />
-            <End Role="imf_facturadetalle_fde" EntitySet="imf_facturadetalle_fde" />
-          </AssociationSet>
-          <AssociationSet Name="FK_imf_facturadetalle_fde_imf_productos_prod" Association="ImportFlexModel.FK_imf_facturadetalle_fde_imf_productos_prod">
-            <End Role="imf_productos_prod" EntitySet="imf_productos_prod" />
             <End Role="imf_facturadetalle_fde" EntitySet="imf_facturadetalle_fde" />
           </AssociationSet>
           <AssociationSet Name="FK_imf_facturadetalle_fde_imf_unidadmedidacomercial_umc" Association="ImportFlexModel.FK_imf_facturadetalle_fde_imf_unidadmedidacomercial_umc">
@@ -543,6 +537,23 @@
             <End Role="imf_usuarios_usr" EntitySet="imf_usuarios_usr" />
             <End Role="imf_importaciones_imp" EntitySet="imf_importaciones_imp" />
           </AssociationSet>
+          <EntitySet Name="imf_productos_prod" EntityType="ImportFlexModel.imf_productos_prod" />
+          <AssociationSet Name="FK_imf_facturadetalle_fde_imf_productos_prod" Association="ImportFlexModel.FK_imf_facturadetalle_fde_imf_productos_prod">
+            <End Role="imf_productos_prod" EntitySet="imf_productos_prod" />
+            <End Role="imf_facturadetalle_fde" EntitySet="imf_facturadetalle_fde" />
+          </AssociationSet>
+          <AssociationSet Name="FK_imf_productos_prod_imf_paises_pai" Association="ImportFlexModel.FK_imf_productos_prod_imf_paises_pai">
+            <End Role="imf_paises_pai" EntitySet="imf_paises_pai" />
+            <End Role="imf_productos_prod" EntitySet="imf_productos_prod" />
+          </AssociationSet>
+          <AssociationSet Name="FK_imf_productos_prod_imf_unidadmedidacomercial_umc" Association="ImportFlexModel.FK_imf_productos_prod_imf_unidadmedidacomercial_umc">
+            <End Role="imf_unidadmedidacomercial_umc" EntitySet="imf_unidadmedidacomercial_umc" />
+            <End Role="imf_productos_prod" EntitySet="imf_productos_prod" />
+          </AssociationSet>
+          <AssociationSet Name="FK_imf_productos_prod_imf_unidadmedidafactura_umf" Association="ImportFlexModel.FK_imf_productos_prod_imf_unidadmedidafactura_umf">
+            <End Role="imf_unidadmedidafactura_umf" EntitySet="imf_unidadmedidafactura_umf" />
+            <End Role="imf_productos_prod" EntitySet="imf_productos_prod" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="imf_unidadmedidacomercial_umc">
           <Key>
@@ -551,6 +562,7 @@
           <Property Name="umcIdClave" Type="Int32" Nullable="false" />
           <Property Name="umcDescripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="imf_facturadetalle_fde" Relationship="ImportFlexModel.FK_imf_facturadetalle_fde_imf_unidadmedidacomercial_umc" FromRole="imf_unidadmedidacomercial_umc" ToRole="imf_facturadetalle_fde" />
+          <NavigationProperty Name="imf_productos_prod" Relationship="ImportFlexModel.FK_imf_productos_prod_imf_unidadmedidacomercial_umc" FromRole="imf_unidadmedidacomercial_umc" ToRole="imf_productos_prod" />
         </EntityType>
         <EntityType Name="imf_unidadmedidafactura_umf">
           <Key>
@@ -560,6 +572,7 @@
           <Property Name="umfClave" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="umfDescripcion" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="imf_facturadetalle_fde" Relationship="ImportFlexModel.FK_imf_facturadetalle_fde_imf_unidadmedidafactura_umf" FromRole="imf_unidadmedidafactura_umf" ToRole="imf_facturadetalle_fde" />
+          <NavigationProperty Name="imf_productos_prod" Relationship="ImportFlexModel.FK_imf_productos_prod_imf_unidadmedidafactura_umf" FromRole="imf_unidadmedidafactura_umf" ToRole="imf_productos_prod" />
         </EntityType>
         <EntityType Name="imf_facturadetalle_fde">
           <Key>
@@ -581,12 +594,12 @@
           <Property Name="fdeNumeroSerieProducto" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="imf_paises_pai" Relationship="ImportFlexModel.FK_imf_facturadetalle_fde_imf_paises_pai" FromRole="imf_facturadetalle_fde" ToRole="imf_paises_pai" />
           <NavigationProperty Name="imf_paises_pai1" Relationship="ImportFlexModel.FK_imf_facturadetalle_fde_imf_paises_pai1" FromRole="imf_facturadetalle_fde" ToRole="imf_paises_pai" />
-          <NavigationProperty Name="imf_productos_prod" Relationship="ImportFlexModel.FK_imf_facturadetalle_fde_imf_productos_prod" FromRole="imf_facturadetalle_fde" ToRole="imf_productos_prod" />
           <NavigationProperty Name="imf_unidadmedidacomercial_umc" Relationship="ImportFlexModel.FK_imf_facturadetalle_fde_imf_unidadmedidacomercial_umc" FromRole="imf_facturadetalle_fde" ToRole="imf_unidadmedidacomercial_umc" />
           <NavigationProperty Name="imf_unidadmedidafactura_umf" Relationship="ImportFlexModel.FK_imf_facturadetalle_fde_imf_unidadmedidafactura_umf" FromRole="imf_facturadetalle_fde" ToRole="imf_unidadmedidafactura_umf" />
           <NavigationProperty Name="imf_facturas_fac" Relationship="ImportFlexModel.FK_imf_facturadetalle_fde_imf_facturas_fac" FromRole="imf_facturadetalle_fde" ToRole="imf_facturas_fac" />
           <Property Name="fdeIdUsuarioRegistro" Type="Int32" Nullable="false" />
           <NavigationProperty Name="imf_usuarios_usr" Relationship="ImportFlexModel.FK_imf_facturadetalle_fde_imf_usuarios_usr" FromRole="imf_facturadetalle_fde" ToRole="imf_usuarios_usr" />
+          <NavigationProperty Name="imf_productos_prod" Relationship="ImportFlexModel.FK_imf_facturadetalle_fde_imf_productos_prod" FromRole="imf_facturadetalle_fde" ToRole="imf_productos_prod" />
         </EntityType>
         <Association Name="FK_imf_facturadetalle_fde_imf_paises_pai">
           <End Type="ImportFlexModel.imf_paises_pai" Role="imf_paises_pai" Multiplicity="0..1" />
@@ -609,18 +622,6 @@
             </Principal>
             <Dependent Role="imf_facturadetalle_fde">
               <PropertyRef Name="fdeIdPaisVendedorComprador" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_imf_facturadetalle_fde_imf_productos_prod">
-          <End Type="ImportFlexModel.imf_productos_prod" Role="imf_productos_prod" Multiplicity="1" />
-          <End Type="ImportFlexModel.imf_facturadetalle_fde" Role="imf_facturadetalle_fde" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="imf_productos_prod">
-              <PropertyRef Name="prodIdProducto" />
-            </Principal>
-            <Dependent Role="imf_facturadetalle_fde">
-              <PropertyRef Name="fdeIdProducto" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -819,6 +820,79 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="imf_productos_prod">
+          <Key>
+            <PropertyRef Name="prodIdProducto" />
+          </Key>
+          <Property Name="prodIdProducto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="prodDescripcionRSI" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="prodTraduccion" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="prodNumeroParte" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="prodStatus" Type="Boolean" />
+          <Property Name="prodMarca" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="prodModelo" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="prodSubModelo" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="prodIdPaisOrigen" Type="Int32" />
+          <Property Name="prodFraccionArancelaria" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="prodPeso" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="prodPiezasPorBulto" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="prodUltimoCosto" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="prodRequiereNoSerie" Type="Boolean" Nullable="false" />
+          <Property Name="prodIdUltimaUMC" Type="Int32" />
+          <Property Name="prodIdUltimaUMF" Type="Int32" />
+          <NavigationProperty Name="imf_facturadetalle_fde" Relationship="ImportFlexModel.FK_imf_facturadetalle_fde_imf_productos_prod" FromRole="imf_productos_prod" ToRole="imf_facturadetalle_fde" />
+          <NavigationProperty Name="imf_paises_pai" Relationship="ImportFlexModel.FK_imf_productos_prod_imf_paises_pai" FromRole="imf_productos_prod" ToRole="imf_paises_pai" />
+          <NavigationProperty Name="imf_unidadmedidacomercial_umc" Relationship="ImportFlexModel.FK_imf_productos_prod_imf_unidadmedidacomercial_umc" FromRole="imf_productos_prod" ToRole="imf_unidadmedidacomercial_umc" />
+          <NavigationProperty Name="imf_unidadmedidafactura_umf" Relationship="ImportFlexModel.FK_imf_productos_prod_imf_unidadmedidafactura_umf" FromRole="imf_productos_prod" ToRole="imf_unidadmedidafactura_umf" />
+        </EntityType>
+        <Association Name="FK_imf_facturadetalle_fde_imf_productos_prod">
+          <End Type="ImportFlexModel.imf_productos_prod" Role="imf_productos_prod" Multiplicity="1" />
+          <End Type="ImportFlexModel.imf_facturadetalle_fde" Role="imf_facturadetalle_fde" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="imf_productos_prod">
+              <PropertyRef Name="prodIdProducto" />
+            </Principal>
+            <Dependent Role="imf_facturadetalle_fde">
+              <PropertyRef Name="fdeIdProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_imf_productos_prod_imf_paises_pai">
+          <End Type="ImportFlexModel.imf_paises_pai" Role="imf_paises_pai" Multiplicity="0..1" />
+          <End Type="ImportFlexModel.imf_productos_prod" Role="imf_productos_prod" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="imf_paises_pai">
+              <PropertyRef Name="paiIdPais" />
+            </Principal>
+            <Dependent Role="imf_productos_prod">
+              <PropertyRef Name="prodIdPaisOrigen" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_imf_productos_prod_imf_unidadmedidacomercial_umc">
+          <End Type="ImportFlexModel.imf_unidadmedidacomercial_umc" Role="imf_unidadmedidacomercial_umc" Multiplicity="0..1" />
+          <End Type="ImportFlexModel.imf_productos_prod" Role="imf_productos_prod" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="imf_unidadmedidacomercial_umc">
+              <PropertyRef Name="umcIdClave" />
+            </Principal>
+            <Dependent Role="imf_productos_prod">
+              <PropertyRef Name="prodIdUltimaUMC" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_imf_productos_prod_imf_unidadmedidafactura_umf">
+          <End Type="ImportFlexModel.imf_unidadmedidafactura_umf" Role="imf_unidadmedidafactura_umf" Multiplicity="0..1" />
+          <End Type="ImportFlexModel.imf_productos_prod" Role="imf_productos_prod" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="imf_unidadmedidafactura_umf">
+              <PropertyRef Name="umfId" />
+            </Principal>
+            <Dependent Role="imf_productos_prod">
+              <PropertyRef Name="prodIdUltimaUMF" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -831,25 +905,6 @@
                 <ScalarProperty Name="paiIdPais" ColumnName="paiIdPais" />
                 <ScalarProperty Name="paiClavePais" ColumnName="paiClavePais" />
                 <ScalarProperty Name="paiDescripcion" ColumnName="paiDescripcion" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="imf_productos_prod">
-            <EntityTypeMapping TypeName="ImportFlexModel.imf_productos_prod">
-              <MappingFragment StoreEntitySet="imf_productos_prod">
-                <ScalarProperty Name="prodUltimoCosto" ColumnName="prodUltimoCosto" />
-                <ScalarProperty Name="prodPiezasPorBulto" ColumnName="prodPiezasPorBulto" />
-                <ScalarProperty Name="prodPeso" ColumnName="prodPeso" />
-                <ScalarProperty Name="prodFraccionArancelaria" ColumnName="prodFraccionArancelaria" />
-                <ScalarProperty Name="prodIdProducto" ColumnName="prodIdProducto" />
-                <ScalarProperty Name="prodDescripcionRSI" ColumnName="prodDescripcionRSI" />
-                <ScalarProperty Name="prodTraduccion" ColumnName="prodTraduccion" />
-                <ScalarProperty Name="prodNumeroParte" ColumnName="prodNumeroParte" />
-                <ScalarProperty Name="prodStatus" ColumnName="prodStatus" />
-                <ScalarProperty Name="prodMarca" ColumnName="prodMarca" />
-                <ScalarProperty Name="prodModelo" ColumnName="prodModelo" />
-                <ScalarProperty Name="prodSubModelo" ColumnName="prodSubModelo" />
-                <ScalarProperty Name="prodIdPaisOrigen" ColumnName="prodIdPaisOrigen" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -970,6 +1025,28 @@
                 <ScalarProperty Name="impFecha" ColumnName="impFecha" />
                 <ScalarProperty Name="impNumeroPedimento" ColumnName="impNumeroPedimento" />
                 <ScalarProperty Name="impIdImportacion" ColumnName="impIdImportacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="imf_productos_prod">
+            <EntityTypeMapping TypeName="ImportFlexModel.imf_productos_prod">
+              <MappingFragment StoreEntitySet="imf_productos_prod">
+                <ScalarProperty Name="prodIdUltimaUMF" ColumnName="prodIdUltimaUMF" />
+                <ScalarProperty Name="prodIdUltimaUMC" ColumnName="prodIdUltimaUMC" />
+                <ScalarProperty Name="prodRequiereNoSerie" ColumnName="prodRequiereNoSerie" />
+                <ScalarProperty Name="prodUltimoCosto" ColumnName="prodUltimoCosto" />
+                <ScalarProperty Name="prodPiezasPorBulto" ColumnName="prodPiezasPorBulto" />
+                <ScalarProperty Name="prodPeso" ColumnName="prodPeso" />
+                <ScalarProperty Name="prodFraccionArancelaria" ColumnName="prodFraccionArancelaria" />
+                <ScalarProperty Name="prodIdPaisOrigen" ColumnName="prodIdPaisOrigen" />
+                <ScalarProperty Name="prodSubModelo" ColumnName="prodSubModelo" />
+                <ScalarProperty Name="prodModelo" ColumnName="prodModelo" />
+                <ScalarProperty Name="prodMarca" ColumnName="prodMarca" />
+                <ScalarProperty Name="prodStatus" ColumnName="prodStatus" />
+                <ScalarProperty Name="prodNumeroParte" ColumnName="prodNumeroParte" />
+                <ScalarProperty Name="prodTraduccion" ColumnName="prodTraduccion" />
+                <ScalarProperty Name="prodDescripcionRSI" ColumnName="prodDescripcionRSI" />
+                <ScalarProperty Name="prodIdProducto" ColumnName="prodIdProducto" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
