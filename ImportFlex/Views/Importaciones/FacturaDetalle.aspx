@@ -20,7 +20,7 @@
                                 <span class="text-formulario">Producto</span>
                             </div>
                             <div class="col-lg-8 col-md-12 col-xs-12">
-                                <telerik:RadComboBox ID="cbProducto"  RenderMode="Lightweight" EmptyMessage="No. Parte" DataValueField="prodIdProducto" DataTextField="prodNumeroParte" runat="server" Width="100%" AutoPostBack="True" OnSelectedIndexChanged="cbProducto_OnSelectedIndexChanged"></telerik:RadComboBox>
+                                <telerik:RadComboBox ID="cbProducto" RenderMode="Lightweight" EmptyMessage="No. Parte" DataValueField="prodIdProducto" DataTextField="prodNumeroParte" runat="server" Width="100%" AutoPostBack="True" OnSelectedIndexChanged="cbProducto_OnSelectedIndexChanged"></telerik:RadComboBox>
                             </div>
                         </div>
                         <div class="col-sm-4">
@@ -60,16 +60,6 @@
                         </div>
                         <div class="col-sm-4">
                             <div class="col-lg-4 col-md-12 col-xs-12">
-                                <span class="text-formulario">Unidad</span>
-                            </div>
-                            <div class="col-lg-8 col-md-12 col-xs-12">
-                                <telerik:RadComboBox ID="cbUMC" RenderMode="Lightweight" DataValueField="umcIdClave" DataTextField="umcDescripcion" runat="server" Skin="Bootstrap" Width="100%"></telerik:RadComboBox>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row" style="margin-top: 20px;">
-                        <div class="col-sm-4">
-                            <div class="col-lg-4 col-md-12 col-xs-12">
                                 <telerik:RadLabel ID="lblSerieCantidad" runat="server" CssClass="text-formulario" Text="No.Serie"></telerik:RadLabel>
                             </div>
                             <div class="col-lg-8 col-md-12 col-xs-12">
@@ -77,6 +67,35 @@
                                 <telerik:RadNumericTextBox ID="tbxCantidad" Type="Number" MaxLength="8" ShowSpinButtons="False" runat="server" Skin="Bootstrap" Width="100%" Visible="False"></telerik:RadNumericTextBox>
                             </div>
                         </div>
+
+                    </div>
+                    <div class="row" style="margin-top: 20px;">
+                        <div class="col-sm-4">
+                            <div class="col-lg-4 col-md-12 col-xs-12">
+                                <span class="text-formulario">Unidad Aduana</span>
+                            </div>
+                            <div class="col-lg-8 col-md-12 col-xs-12">
+                                <telerik:RadComboBox ID="cbUMC" RenderMode="Lightweight" DataValueField="umcIdClave" DataTextField="umcDescripcion" runat="server" Skin="Bootstrap" Width="100%"></telerik:RadComboBox>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="col-lg-4 col-md-12 col-xs-12">
+                                <span class="text-formulario">Unidad Factura</span>
+                            </div>
+                            <div class="col-lg-8 col-md-12 col-xs-12">
+                                <telerik:RadComboBox ID="cbUMF" RenderMode="Lightweight" DataValueField="umfId" DataTextField="umfDescripcion" runat="server" Skin="Bootstrap" Width="100%"></telerik:RadComboBox>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="col-lg-4 col-md-12 col-xs-12">
+                                <span class="text-formulario">Origen</span>
+                            </div>
+                            <div class="col-lg-8 col-md-12 col-xs-12">
+                                <telerik:RadComboBox ID="cbPaisOrigen" RenderMode="Lightweight" DataValueField="paiIdPais" DataTextField="paiDescripcion" runat="server" Skin="Bootstrap" Width="100%"></telerik:RadComboBox>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 20px;">
                         <div class="col-sm-4">
                             <div class="col-lg-4 col-md-12 col-xs-12">
                                 <span class="text-formulario">Valor USD</span>
@@ -93,13 +112,9 @@
                                 <telerik:RadTextBox ID="tbxFraccion" runat="server" MaxLength="50" Skin="Bootstrap" Width="100%"></telerik:RadTextBox>
                             </div>
                         </div>
-                    </div>
-                    <div class="row" style="margin-top: 20px;">
-                        <div class="col-sm-12">
-                            <div class="col-lg-10 col-md-10 col-xs-10"></div>
-                            <div class="col-lg-2 col-md-2 col-xs-2">
-                                <asp:Button ID="btnAgregarProducto" runat="server" CssClass="btn btn-block btn-primary" Text="Agregar" OnClientClick="ValidarControles" OnClick="btnAgregarProducto_OnClick" Width="100%" />
-                            </div>
+                        <div class="col-lg-2 col-md-2 col-xs-2"></div>
+                        <div class="col-lg-2 col-md-2 col-xs-2">
+                            <asp:Button ID="btnAgregarProducto" runat="server" CssClass="btn btn-block btn-primary" Text="Agregar" OnClientClick="ValidarControles" OnClick="btnAgregarProducto_OnClick" Width="100%" />
                         </div>
                     </div>
                 </div>

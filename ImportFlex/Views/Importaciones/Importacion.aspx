@@ -21,7 +21,7 @@
                         <div class="col-sm-5">
                             <label class="col-sm-4 control-label">Fecha</label>
                             <div class="col-sm-8">
-                                <telerik:RadDatePicker ID="rdpFecha" runat="server" Skin="Bootstrap" Width="100%"></telerik:RadDatePicker>
+                                <telerik:RadMonthYearPicker ID="rmypFechaFiltro" runat="server" Skin="Bootstrap" Width="100%" ></telerik:RadMonthYearPicker>
                             </div>
                         </div>
                         <div class="col-sm-5">
@@ -38,7 +38,7 @@
             </div>
         </div>
         <div class="row">
-            <telerik:RadGrid ID="rgImportaciones" runat="server" Width="100%" Skin="Bootstrap" AutoGenerateColumns="False">
+            <telerik:RadGrid ID="gvImportaciones" runat="server" Width="100%" Skin="Bootstrap" AutoGenerateColumns="False">
                 <MasterTableView DataKeyNames="impIdImportacion">
                     <Columns>
                         <telerik:GridBoundColumn HeaderText="Id" UniqueName="Id" DataField="impIdImportacion"></telerik:GridBoundColumn>

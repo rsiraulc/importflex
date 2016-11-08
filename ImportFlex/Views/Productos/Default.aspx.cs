@@ -31,7 +31,13 @@ namespace ImportFlex.Views.Productos
 
         protected void btnFiltrar_OnClick(object sender, EventArgs e)
         {
-            
+            var data = new ProductoController();
+            var response = data.GetProductosByFiltro(tbxNumeroParte.Text, tbxDescripcion.Text);
+            if (response.Success)
+            {
+                gvProductos.DataSource = response.Productos;
+                gvProductos.DataBind();
+            }
         }
     }
 }

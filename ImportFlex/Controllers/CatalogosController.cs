@@ -111,6 +111,24 @@ namespace ImportFlex.Controllers
             return response;
         }
 
+        public UMFsResponse GetUMFEnUso()
+        {
+            var response = new UMFsResponse();
+
+            try
+            {
+                response.lstUMF = db.imf_unidadmedidafactura_umf.Where(u => u.umfEnUso.Value).ToList();
+                response.Success = true;
+            }
+            catch (Exception ex)
+            {
+                response.Success = false;
+                response.Message = ex.Message;
+            }
+
+            return response;
+        }
+
         public UMFResponse GetUMFById(int id)
         {
             var response = new UMFResponse();

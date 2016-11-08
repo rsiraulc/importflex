@@ -20,7 +20,7 @@ namespace ImportFlex.Views.Importaciones
             {
                 CargarImportaciones();
                 CargarRegionOperacion();
-                cbStatus.DataSource = new List<string> {"BORRADOR", "ENPROCESO", "FINALIZADA" };
+                cbStatus.DataSource = new List<string> {"TODOS","BORRADOR", "ENPROCESO", "EXPORTADO", "FINALIZADA" };
                 cbStatus.DataBind();
             }
         }
@@ -38,8 +38,8 @@ namespace ImportFlex.Views.Importaciones
         {
             var db = new ImportacionController();
             var x = db.GetAllImportaciones();
-            rgImportaciones.DataSource = x.lstImportaciones;
-            rgImportaciones.DataBind();
+            gvImportaciones.DataSource = x.lstImportaciones;
+            gvImportaciones.DataBind();
         }
 
         protected void btnGuardarImportacion_OnClick(object sender, EventArgs e)
@@ -84,7 +84,26 @@ namespace ImportFlex.Views.Importaciones
         protected void btnFiltrar_OnClick(object sender, EventArgs e)
         {
             var data = new ImportacionController();
-            var lst = data.GetImportacionByFiltro(cbStatus.SelectedValue.ToString(), rdpFecha.SelectedDate);
+            FechaFiltro fechas;
+
+            if (rmypFechaFiltro.SelectedDate != null)
+            {
+                fechas = new FechaFiltro
+                {
+                    FechaInicio = rmypFechaFiltro.SelectedDate.Value,
+                    FechaFinal = rmypFechaFiltro.SelectedDate.Value.AddMonths(1)
+                };
+            }
+            else
+                fechas = null;
+
+            var response = data.GetImportacionByFiltro(cbStatus.SelectedValue, fechas);
+
+            if (response.Success)
+            {
+                gvImportaciones.DataSource = response.lstImportaciones;
+                gvImportaciones.DataBind();
+            }
         }
 
         public void ValidarImportacion()

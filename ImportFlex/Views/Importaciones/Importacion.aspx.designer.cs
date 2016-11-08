@@ -31,13 +31,13 @@ namespace ImportFlex.Views.Importaciones {
         protected global::System.Web.UI.WebControls.Button btnNuevaImportacion;
         
         /// <summary>
-        /// rdpFecha control.
+        /// rmypFechaFiltro control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadDatePicker rdpFecha;
+        protected global::Telerik.Web.UI.RadMonthYearPicker rmypFechaFiltro;
         
         /// <summary>
         /// cbStatus control.
@@ -58,13 +58,13 @@ namespace ImportFlex.Views.Importaciones {
         protected global::System.Web.UI.WebControls.Button btnFiltrar;
         
         /// <summary>
-        /// rgImportaciones control.
+        /// gvImportaciones control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadGrid rgImportaciones;
+        protected global::Telerik.Web.UI.RadGrid gvImportaciones;
         
         /// <summary>
         /// radWindowManager control.

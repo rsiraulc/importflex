@@ -24,6 +24,7 @@ namespace ImportFlex.Models
         public int umfId { get; set; }
         public string umfClave { get; set; }
         public string umfDescripcion { get; set; }
+        public Nullable<bool> umfEnUso { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<imf_facturadetalle_fde> imf_facturadetalle_fde { get; set; }

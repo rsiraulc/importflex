@@ -22,6 +22,24 @@ namespace ImportFlex.Views.Productos {
         protected global::System.Web.UI.WebControls.Button btnNuevoProducto;
         
         /// <summary>
+        /// tbxNumeroParte control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Telerik.Web.UI.RadTextBox tbxNumeroParte;
+        
+        /// <summary>
+        /// tbxDescripcion control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Telerik.Web.UI.RadTextBox tbxDescripcion;
+        
+        /// <summary>
         /// btnFiltrar control.
         /// </summary>
         /// <remarks>

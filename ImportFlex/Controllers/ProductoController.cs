@@ -2,6 +2,7 @@
 using System.Linq;
 using ImportFlex.Messages;
 using ImportFlex.Models;
+using Microsoft.Ajax.Utilities;
 
 namespace ImportFlex.Controllers
 {
@@ -26,6 +27,23 @@ namespace ImportFlex.Controllers
             return response;
         }
 
+        public ProductosResponse GetProductosActivos()
+        {
+            var response = new ProductosResponse();
+
+            try
+            {
+                response.Productos = db.imf_productos_prod.Where(p => p.prodStatus.Value == true).ToList();
+            }
+            catch (Exception ex)
+            {
+                response.Message = ex.Message;
+                response.Success = false;
+            }
+
+            return response;
+        }
+
         public ProductoResponse GetProductoById(int id)
         {
             var response = new ProductoResponse();
@@ -39,6 +57,47 @@ namespace ImportFlex.Controllers
                 response.Success = false;
                 response.Message = ex.Message;
             }
+            return response;
+        }
+
+        public ProductosResponse GetProductosByFiltro(string noParte, string descripcion)
+        {
+            var response = new ProductosResponse();
+
+            try
+            {
+                // VIENEN LOS DOS CAMPOS
+                if (!noParte.IsNullOrWhiteSpace() && !descripcion.IsNullOrWhiteSpace())
+                {
+                    response.Productos =
+                        db.imf_productos_prod.Where(
+                                p => p.prodNumeroParte.Contains(noParte) && p.prodDescripcionRSI.Contains(descripcion))
+                            .ToList();
+                    response.Success = true;
+                }// SOLO VIENE NUMERO PARTE
+                else if (!noParte.IsNullOrWhiteSpace() && descripcion.IsNullOrWhiteSpace())
+                {
+                    response.Productos = db.imf_productos_prod.Where(p => p.prodNumeroParte.Contains(noParte)).ToList();
+                    response.Success = true;
+                } // SOLO VIENE DESCRIPCION
+                else if (noParte.IsNullOrWhiteSpace() && !descripcion.IsNullOrWhiteSpace())
+                {
+                    response.Productos =
+                        db.imf_productos_prod.Where(p => p.prodDescripcionRSI.Contains(descripcion)).ToList();
+                    response.Success = true;
+                } // SI NO VIENE NINGUNO MANDA TODOS ALV
+                else
+                {
+                    response.Productos = db.imf_productos_prod.ToList();
+                    response.Success = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                response.Message = ex.Message;
+                response.Success = false;
+            }
+
             return response;
         }
 

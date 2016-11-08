@@ -5,9 +5,16 @@ using System.Web;
 using ImportFlex.Controllers.Enums;
 using ImportFlex.Messages;
 using ImportFlex.Models;
+using Microsoft.Ajax.Utilities;
 
 namespace ImportFlex.Controllers
 {
+    public class FechaFiltro
+    {
+        public DateTime FechaInicio { get; set; }
+        public DateTime FechaFinal { get; set; }
+    }
+
     public class ImportacionController
     {
         private ImportFlexEntities db = new ImportFlexEntities();
@@ -79,28 +86,34 @@ namespace ImportFlex.Controllers
             return response;
         }
 
-        public ImportacionesResponse GetImportacionByFiltro(string status, DateTime? fecha)
+        public ImportacionesResponse GetImportacionByFiltro(string status, FechaFiltro fechas)
         {
             var response = new ImportacionesResponse();
 
             try
             {
-                if (status != "" && fecha != null)
+                if (status == "TODOS")
+                    status = null;
+
+                if (!status.IsNullOrWhiteSpace() && fechas != null)
                 {
-                    response.lstImportaciones =
-                        db.imf_importaciones_imp.Where(im => (im.impFecha == fecha.Value) && (im.impStatus == status))
-                            .ToList();
+                    response.lstImportaciones = db.imf_importaciones_imp.Where(p => (p.impFecha >= fechas.FechaInicio && p.impFecha < fechas.FechaFinal) && status == p.impStatus).ToList();
                     response.Success = true;
                 }
-                else if (status != "" && fecha == null)
+                else if (!status.IsNullOrWhiteSpace() && fechas == null)
                 {
-                    response.lstImportaciones = db.imf_importaciones_imp.Where(im => im.impStatus == status).ToList();
+                    response.lstImportaciones = db.imf_importaciones_imp.Where(p => p.impStatus == status).ToList();
+                    response.Success = true;
+                }
+                else if (status.IsNullOrWhiteSpace() && fechas != null)
+                {
+                    response.lstImportaciones =
+                        db.imf_importaciones_imp.Where(p => p.impFecha >= fechas.FechaInicio && p.impFecha < fechas.FechaFinal).ToList();
                     response.Success = true;
                 }
                 else
                 {
-                    response.lstImportaciones =
-                        db.imf_importaciones_imp.Where(im => im.impFecha == fecha.Value).ToList();
+                    response.lstImportaciones = db.imf_importaciones_imp.ToList();
                     response.Success = true;
                 }
             }

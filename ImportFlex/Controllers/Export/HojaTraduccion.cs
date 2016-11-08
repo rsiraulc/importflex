@@ -124,6 +124,7 @@ namespace ImportFlex.Controllers.Export
                     foreach (var d in f.imf_facturadetalle_fde)
                     {
                         num++;
+                        var total = d.fdeValor + p.impTotalFlete;
                         tableDetalle.AddCell(new PdfPCell(new Phrase(num.ToString(), LetraCeldaSmall)) {HorizontalAlignment = 1 });
                         tableDetalle.AddCell(new PdfPCell(new Phrase(f.facNumeroEntrada, LetraCeldaSmall)) { HorizontalAlignment = 1 });
                         tableDetalle.AddCell(new PdfPCell(new Phrase(f.facNumeroFactura, LetraCeldaSmall)) { HorizontalAlignment = 1 });
@@ -136,8 +137,7 @@ namespace ImportFlex.Controllers.Export
                         tableDetalle.AddCell(new PdfPCell(new Phrase(d.fdeValor.ToString(), LetraCeldaSmall)) { HorizontalAlignment = 1 });
                         tableDetalle.AddCell(new PdfPCell(new Phrase(f.facFlete.ToString(), LetraCeldaSmall)) { HorizontalAlignment = 1 });
                         tableDetalle.AddCell(new PdfPCell(new Phrase("0", LetraCeldaSmall)) { HorizontalAlignment = 1 });
-                        tableDetalle.AddCell(new PdfPCell(new Phrase("0", LetraCeldaSmall)) { HorizontalAlignment = 1 });
-                        
+                        tableDetalle.AddCell(new PdfPCell(new Phrase(total.ToString(), LetraCeldaSmall)) { HorizontalAlignment = 1 });
                     }
                 }
 

@@ -131,6 +131,7 @@
           <Property Name="umfId" Type="int" Nullable="false" />
           <Property Name="umfClave" Type="nvarchar" MaxLength="20" />
           <Property Name="umfDescripcion" Type="nvarchar" MaxLength="150" />
+          <Property Name="umfEnUso" Type="bit" />
         </EntityType>
         <EntityType Name="imf_usuarios_usr">
           <Key>
@@ -573,6 +574,7 @@
           <Property Name="umfDescripcion" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="imf_facturadetalle_fde" Relationship="ImportFlexModel.FK_imf_facturadetalle_fde_imf_unidadmedidafactura_umf" FromRole="imf_unidadmedidafactura_umf" ToRole="imf_facturadetalle_fde" />
           <NavigationProperty Name="imf_productos_prod" Relationship="ImportFlexModel.FK_imf_productos_prod_imf_unidadmedidafactura_umf" FromRole="imf_unidadmedidafactura_umf" ToRole="imf_productos_prod" />
+          <Property Name="umfEnUso" Type="Boolean" />
         </EntityType>
         <EntityType Name="imf_facturadetalle_fde">
           <Key>
@@ -944,6 +946,7 @@
           <EntitySetMapping Name="imf_unidadmedidafactura_umf">
             <EntityTypeMapping TypeName="ImportFlexModel.imf_unidadmedidafactura_umf">
               <MappingFragment StoreEntitySet="imf_unidadmedidafactura_umf">
+                <ScalarProperty Name="umfEnUso" ColumnName="umfEnUso" />
                 <ScalarProperty Name="umfDescripcion" ColumnName="umfDescripcion" />
                 <ScalarProperty Name="umfClave" ColumnName="umfClave" />
                 <ScalarProperty Name="umfId" ColumnName="umfId" />

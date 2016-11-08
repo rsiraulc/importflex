@@ -24,7 +24,7 @@ namespace ImportFlex.Views.Importaciones
                 id = int.Parse(Request.Params["Id"]);
                 CargarFactura(int.Parse(Request.Params["Id"]));
                 CargarProductos();
-                CargarUnidadesMedida();
+                CargarCatalogos();
                 CargarDetalleFactura(int.Parse(Request.Params["Id"]));
                 CargarTraducciones();
                 SetearComboBoxs();
@@ -66,33 +66,59 @@ namespace ImportFlex.Views.Importaciones
             cbTraduccion.AllowCustomText = true;
             cbTraduccion.MarkFirstMatch = true;
             cbTraduccion.Filter = RadComboBoxFilter.Contains;
+
+
+            cbUMF.AllowCustomText = true;
+            cbUMF.MarkFirstMatch = true;
+            cbUMF.Filter = RadComboBoxFilter.Contains;
+
+            cbPaisOrigen.AllowCustomText = true;
+            cbPaisOrigen.MarkFirstMatch = true;
+            cbPaisOrigen.Filter = RadComboBoxFilter.Contains;
+
         }
 
         private void LimpiarControles()
         {
             cbUMC.SelectedIndex = -1;
             cbProducto.SelectedIndex = -1;
+            cbPaisOrigen.SelectedIndex = -1;
+            cbUMF.SelectedIndex = -1;
             tbxNumeroSerie.Text = "";
             tbxValor.Text = "0";
             tbxFraccion.Text = "";
 
         }
 
-        private void CargarUnidadesMedida()
+        private void CargarCatalogos()
         {
             var data = new CatalogosController();
-            var response = data.GetAllUMC();
-            if (response.Success)
+            var umc = data.GetAllUMC();
+            if (umc.Success)
             {
-                cbUMC.DataSource = response.lstUMC;
+                cbUMC.DataSource = umc.lstUMC;
                 cbUMC.DataBind();
+            }
+
+            var umf = data.GetUMFEnUso();
+            if (umf.Success)
+            {
+                cbUMF.DataSource = umf.lstUMF;
+                cbUMF.DataBind();
+            }
+
+            var paises = data.GetAllPaises();
+            if (paises.Success)
+            {
+                cbPaisOrigen.DataSource = paises.lstPaises;
+                cbPaisOrigen.DataBind();
             }
         }
 
         private void CargarProductos()
         {
             var data = new ProductoController();
-            var response = data.GetAllProductos();
+            var response = data.GetProductosActivos();
 
             if (response.Success)
             {
@@ -143,13 +169,13 @@ namespace ImportFlex.Views.Importaciones
                 fdeNumeroSerieProducto = NoSerie,
                 fdeValor = Convert.ToDecimal(tbxValor.Text),
                 fdeFecha = DateTime.Now,
-                fdeCantidadUMF = 1,
-                fdeIdUMF = 456,
+                fdeCantidadUMF = cantidad,
+                fdeIdUMF = Convert.ToInt16(cbUMF.SelectedValue),
                 //VER QUE SHOW
                 fdeVinculacion = "0",
                 fdeMetodoValoracion = "0",
                 fdeIdPaisVendedorComprador = 72,
-                fdIdPaisOrigenDestino = 72,
+                fdIdPaisOrigenDestino = Convert.ToInt16(cbPaisOrigen.SelectedValue),
                 fdeIdUsuarioRegistro = Sesiones.UsuarioID.Value
             };
 
@@ -179,6 +205,8 @@ namespace ImportFlex.Views.Importaciones
                 p.prodFraccionArancelaria = tbxFraccion.Text;
                 p.prodUltimoCosto = Convert.ToDecimal(tbxValor.Text);
                 p.prodIdUltimaUMC = Convert.ToInt16(cbUMC.SelectedValue);
+                p.prodIdUltimaUMF = Convert.ToInt16(cbUMF.SelectedValue);
+                p.prodIdPaisOrigen = Convert.ToInt16(cbPaisOrigen.SelectedValue);
                 data.UpdateProducto(p);
             }
         }
@@ -223,7 +251,18 @@ namespace ImportFlex.Views.Importaciones
             if (response.Success)
             {
                 tbxProductoDescripcion.Text = response.Producto.prodDescripcionRSI;
+                tbxMarca.Text = response.Producto.prodMarca;
+                tbxModelo.Text = response.Producto.prodModelo;
+                tbxValor.Text = response.Producto.prodUltimoCosto.HasValue ? response.Producto.prodUltimoCosto.Value.ToString() : "0";
                 cbUMC.SelectedIndex = response.Producto.prodIdUltimaUMC == null ? 0 : response.Producto.prodIdUltimaUMC.Value - 1;
+                cbUMF.SelectedValue = response.Producto.prodIdUltimaUMF.ToString() ?? "1";
+                cbUMC.DataBind();
+                cbUMF.DataBind();
+
+                cbPaisOrigen.SelectedIndex = response.Producto.prodIdPaisOrigen.Value - 1;
+                cbPaisOrigen.DataBind();
+
+                tbxFraccion.Text = response.Producto.prodFraccionArancelaria;
 
                 if (response.Producto.prodTraduccion != "")
                 {
@@ -251,14 +290,7 @@ namespace ImportFlex.Views.Importaciones
                     lblSerieCantidad.Text = "Cantidad";
                 }
 
-                //tbxProductoTraduccion.Text = response.Producto.prodTraduccion;
-                tbxMarca.Text = response.Producto.prodMarca;
-                tbxModelo.Text = response.Producto.prodModelo;
-                tbxValor.Text = response.Producto.prodUltimoCosto.HasValue
-                    ? response.Producto.prodUltimoCosto.Value.ToString()
-                    : "0";
 
-                cbUMC.Focus();
                 tbxProductoDescripcion.ToolTip = tbxProductoDescripcion.Text;
                 tbxProductoTraduccion.ToolTip = tbxProductoTraduccion.Text;
             }
