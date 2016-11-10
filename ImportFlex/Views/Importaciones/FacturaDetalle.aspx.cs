@@ -118,7 +118,7 @@ namespace ImportFlex.Views.Importaciones
         private void CargarProductos()
         {
             var data = new ProductoController();
-            var response = data.GetProductosActivos();
+            var response = data.GetAllProductos();
 
             if (response.Success)
             {

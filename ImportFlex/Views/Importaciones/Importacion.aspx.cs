@@ -68,7 +68,8 @@ namespace ImportFlex.Views.Importaciones
                 impParte = parte ?? 1,
                 impTipoOperacion = int.Parse(cbTipoOPeracion.SelectedValue),
                 impTipoRegistro = 501,
-                impIdUsuarioRegistro = Sesiones.UsuarioID.Value
+                impIdUsuarioRegistro = Sesiones.UsuarioID.Value,
+                impTieneNumeroImportacion = chkNumeroPedimento.Checked
             };
 
             var response = data.InsertImportacion(importacion);

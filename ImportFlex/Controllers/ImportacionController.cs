@@ -97,7 +97,11 @@ namespace ImportFlex.Controllers
 
                 if (!status.IsNullOrWhiteSpace() && fechas != null)
                 {
-                    response.lstImportaciones = db.imf_importaciones_imp.Where(p => (p.impFecha >= fechas.FechaInicio && p.impFecha < fechas.FechaFinal) && status == p.impStatus).ToList();
+                    response.lstImportaciones =
+                        db.imf_importaciones_imp.Where(
+                            p =>
+                                (p.impFecha >= fechas.FechaInicio && p.impFecha < fechas.FechaFinal) &&
+                                status == p.impStatus).ToList();
                     response.Success = true;
                 }
                 else if (!status.IsNullOrWhiteSpace() && fechas == null)
@@ -108,7 +112,8 @@ namespace ImportFlex.Controllers
                 else if (status.IsNullOrWhiteSpace() && fechas != null)
                 {
                     response.lstImportaciones =
-                        db.imf_importaciones_imp.Where(p => p.impFecha >= fechas.FechaInicio && p.impFecha < fechas.FechaFinal).ToList();
+                        db.imf_importaciones_imp.Where(
+                            p => p.impFecha >= fechas.FechaInicio && p.impFecha < fechas.FechaFinal).ToList();
                     response.Success = true;
                 }
                 else
@@ -212,7 +217,7 @@ namespace ImportFlex.Controllers
                         response.Importacion.impFechaUltimaExportacion = DateTime.Now;
                         break;
 
-                        case StatusImportacion.FINALIZADO:
+                    case StatusImportacion.FINALIZADO:
                         response.Importacion.impIdUsuarioFinalizo = idUsuario;
                         response.Importacion.impFechaFinalizacion = DateTime.Now;
                         break;
@@ -317,9 +322,9 @@ namespace ImportFlex.Controllers
                 var imp = db.imf_importaciones_imp.Where(p => p.impNumeroPedimento == numeroPedimento).ToList();
 
                 var max = from x in imp
-                          where x.impNumeroPedimento == numeroPedimento
-                          orderby x.impParte descending
-                          select x.impParte;
+                    where x.impNumeroPedimento == numeroPedimento
+                    orderby x.impParte descending
+                    select x.impParte;
 
                 return max.First().Value + 1;
             }
@@ -328,6 +333,37 @@ namespace ImportFlex.Controllers
 
                 return 1;
             }
+        }
+
+        public ResponseBase UpdateNumeroPedimento(imf_importaciones_imp importacion, string numeroPedimentoNuevo, int idUsuario)
+        {
+
+            var response = new ResponseBase();
+
+            try
+            {
+                // SE HACE EL UPDATE DE VALORES EN ESTE PEDIMENTO Y EN LAS PARTES QUE TENGAN EL MISMO NUMERO DE PEDIMENTO
+                var partes = db.imf_importaciones_imp.Where(p => p.impNumeroPedimento == importacion.impNumeroPedimento);
+
+                foreach (var parte in partes)
+                {
+                    parte.impNumeroPedimento = numeroPedimentoNuevo;
+                    parte.impFechaUpdateNumeroPedimento = DateTime.Now;
+                    parte.impIdUsuarioUpdateNumeroPedimento = idUsuario;
+                    parte.impTieneNumeroImportacion = true;
+                }
+
+                db.SaveChanges();
+                response.Success = true;
+
+            }
+            catch (Exception ex)
+            {
+                response.Success = false;
+                response.Message = ex.Message;
+            }
+
+            return response;
         }
     }
 }

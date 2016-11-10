@@ -36,9 +36,11 @@ namespace ImportFlex.Views.Importaciones
 
             if (response.Success)
             {
-                lblTitulo.Text = "Facturas del Pedimento No." + response.Importacion.impNumeroPedimento;
+                lblTitulo.Text = "Facturas del Pedimento " + response.Importacion.impNumeroPedimento;
                 if (response.Importacion.impParte > 1)
                     lblTitulo.Text += $" Parte {response.Importacion.impParte}";
+
+                btnUpdateNumeroPedimento.Visible = !response.Importacion.impTieneNumeroImportacion ?? true;
 
                 // MANEJO DE VISUALIZACION DE BOTONES
                 switch (response.Importacion.impStatus)
@@ -171,10 +173,32 @@ namespace ImportFlex.Views.Importaciones
                     Response.TransmitFile(respuesta.RutaArchivo);
                     Response.End();
                 }
+                else
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "alertSuccess", $"alert('{response.Message}');", true);
+                
 
                 // ELIMINA ARCHIVO DEL SERVIDOR
                 ht.EliminarArchivo(respuesta.RutaArchivo);
             }
+        }
+
+        protected void btnUpdateNumeroPedimento_OnClick(object sender, EventArgs e)
+        {
+            var data = new ImportacionController();
+            var response = data.GetImportacionById(int.Parse(Request.Params["Id"]));
+
+            if (response.Success)
+            {
+                var update = data.UpdateNumeroPedimento(response.Importacion, tbxNumeroPedimento.Text, Sesiones.UsuarioID.Value);
+
+                if (update.Success)
+                    Response.Redirect("~/Views/Importaciones/ImportacionDetalle.aspx?ID=" + response.Importacion.impIdImportacion);
+                else
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "alertSuccess",
+                        $"alert('{update.Message}');", true);
+            }
+            else
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "alertSuccess", $"alert('{response.Message}');", true);
         }
     }
 }

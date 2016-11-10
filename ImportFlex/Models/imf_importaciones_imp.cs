@@ -42,11 +42,15 @@ namespace ImportFlex.Models
         public Nullable<System.DateTime> impFechaUltimaExportacion { get; set; }
         public Nullable<int> impIdUsuarioFinalizo { get; set; }
         public Nullable<System.DateTime> impFechaFinalizacion { get; set; }
+        public Nullable<int> impIdUsuarioUpdateNumeroPedimento { get; set; }
+        public Nullable<System.DateTime> impFechaUpdateNumeroPedimento { get; set; }
+        public Nullable<bool> impTieneNumeroImportacion { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<imf_facturas_fac> imf_facturas_fac { get; set; }
         public virtual imf_usuarios_usr imf_usuarios_usr_exporto { get; set; }
         public virtual imf_usuarios_usr imf_usuarios_usr_finalizo { get; set; }
         public virtual imf_usuarios_usr imf_usuarios_usr_registro { get; set; }
+        public virtual imf_usuarios_usr imf_usuarios_usr { get; set; }
     }
 }

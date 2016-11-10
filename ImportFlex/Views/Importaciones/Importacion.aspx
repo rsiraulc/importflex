@@ -21,7 +21,7 @@
                         <div class="col-sm-5">
                             <label class="col-sm-4 control-label">Fecha</label>
                             <div class="col-sm-8">
-                                <telerik:RadMonthYearPicker ID="rmypFechaFiltro" runat="server" Skin="Bootstrap" Width="100%" ></telerik:RadMonthYearPicker>
+                                <telerik:RadMonthYearPicker ID="rmypFechaFiltro" runat="server" Skin="Bootstrap" Width="100%"></telerik:RadMonthYearPicker>
                             </div>
                         </div>
                         <div class="col-sm-5">
@@ -78,38 +78,47 @@
                                     <span class="text-formulario">No. de Pedimento</span>
                                 </div>
                                 <div class="col-lg-8 col-md-12 col-xs-12">
-                                    <telerik:RadTextBox ID="tbxNumeroPedimento" runat="server" MaxLength="7" Skin="Bootstrap" Width="100%"></telerik:RadTextBox>
+                                    <telerik:RadTextBox ID="tbxNumeroPedimento" runat="server" MaxLength="15" Skin="Bootstrap" Width="100%"></telerik:RadTextBox>
                                 </div>
                             </div>
                             <div class="col-sm-6">
-                                <div class="col-lg-4 col-md-12 col-xs-12">
-                                    <span class="text-formulario">Región</span>
-                                </div>
-                                <div class="col-lg-8 col-md-12 col-xs-12">
-                                    <telerik:RadComboBox ID="cbRegion" runat="server" DataValueField="Clave" DataTextField="Descripcion" Skin="Bootstrap" Width="100%"></telerik:RadComboBox>
-                                </div>
+                                <div class="col-lg-10 col-md-12 col-xs-12">
+                                    <span class="text-formulario">¿Cuentas con No. Pedimento?</span>
+                            </div>
+                            <div class="col-lg-1 col-md-12 col-xs-12">
+                                <telerik:RadCheckBox ID="chkNumeroPedimento" OnClientCheckedChanged="chkNumeroPedimento_checked" runat="server" Text="" Skin="Bootstrap" AutoPostBack="False" Checked="True"></telerik:RadCheckBox>
                             </div>
                         </div>
-                        <div class="row" style="margin-top: 15px;">
-                            <div class="col-sm-6">
-                                <div class="col-lg-4 col-md-12 col-xs-12">
-                                    <span class="text-formulario">Operación</span>
-                                </div>
-                                <div class="col-lg-8 col-md-12 col-xs-12">
-                                    <telerik:RadComboBox ID="cbTipoOPeracion" runat="server" DataValueField="Clave" DataTextField="Descripcion" Skin="Bootstrap" Width="100%"></telerik:RadComboBox>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row" style="margin-top: 20px; margin-bottom: 10px;">
-                            <div class="col-lg-4 col-md-4 col-xs-4 ">
-                                <asp:Button runat="server" CssClass="btn btn-block btn-danger" Text="Cancelar" OnClientClick="CloseWindow();return false;" ID="btnCloseWindowNuevaVenta" />
-                            </div>
-                            <div class="col-lg-4 col-md-4 col-xs-4"></div>
-                            <div class="col-lg-4 col-md-4 col-xs-4">
 
-                                <asp:Button runat="server" CssClass="btn btn-block btn-primary" Text="Guardar" OnClick="btnGuardarImportacion_OnClick" ID="btnGuardarImportacion" />
+                    </div>
+                    <div class="row" style="margin-top: 15px;">
+                        <div class="col-sm-6">
+                            <div class="col-lg-4 col-md-12 col-xs-12">
+                                <span class="text-formulario">Región</span>
+                            </div>
+                            <div class="col-lg-8 col-md-12 col-xs-12">
+                                <telerik:RadComboBox ID="cbRegion" runat="server" DataValueField="Clave" DataTextField="Descripcion" Skin="Bootstrap" Width="100%"></telerik:RadComboBox>
                             </div>
                         </div>
+                        <div class="col-sm-6">
+                            <div class="col-lg-4 col-md-12 col-xs-12">
+                                <span class="text-formulario">Operación</span>
+                            </div>
+                            <div class="col-lg-8 col-md-12 col-xs-12">
+                                <telerik:RadComboBox ID="cbTipoOPeracion" runat="server" DataValueField="Clave" DataTextField="Descripcion" Skin="Bootstrap" Width="100%"></telerik:RadComboBox>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 20px; margin-bottom: 10px;">
+                        <div class="col-lg-4 col-md-4 col-xs-4 ">
+                            <asp:Button runat="server" CssClass="btn btn-block btn-danger" Text="Cancelar" OnClientClick="CloseWindow();return false;" ID="btnCloseWindowNuevaVenta" />
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-xs-4"></div>
+                        <div class="col-lg-4 col-md-4 col-xs-4">
+
+                            <asp:Button runat="server" CssClass="btn btn-block btn-primary" Text="Guardar" OnClick="btnGuardarImportacion_OnClick" ID="btnGuardarImportacion" />
+                        </div>
+                    </div>
                 </ContentTemplate>
             </telerik:RadWindow>
         </Windows>
@@ -160,6 +169,26 @@
                 var window = $find('<%=radwindowImportacionDuplicada.ClientID%>');
                 window.close();
                 return false;
+            }
+
+            function chkNumeroPedimento_checked(s, e) {
+                var check = e.get_checked();
+                var tbx = $find('<%=tbxNumeroPedimento.ClientID%>');
+                var d = new Date();
+                var mes = d.getMonth();
+                
+                if (d.getMonth() == 10)
+                    mes = '11';
+                else if (d.getMonth() == 11)
+                    mes = '12';
+
+                var name = 'RSI' + '' + d.getFullYear() + '' + mes + '' + d.getDate();
+
+                if (!check) {
+                    tbx.set_value(name);
+                } else {
+                    tbx.set_value('');
+                }
             }
         </script>
     </telerik:RadCodeBlock>

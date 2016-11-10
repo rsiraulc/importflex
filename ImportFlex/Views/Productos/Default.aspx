@@ -3,7 +3,8 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div class="col-sm-12" style="margin-top: 20px;">
         <div class="row">
-            <div class="col-sm-10"> <h2>Productos</h2>
+            <div class="col-sm-10">
+                <h2>Productos</h2>
             </div>
             <div class="col-sm-2">
                 <asp:Button runat="server" ID="btnNuevoProducto" Style="margin: 20px;" OnClientClick="OpenWindow();return false;" CssClass="btn btn-block btn-primary btn-md" Text="Nuevo Producto" />
@@ -23,7 +24,7 @@
                         </div>
                         <div class="col-sm-4">
                             <div class="col-lg-4 col-md-12 col-xs-12">
-                                <span class="text-formulario">Descripcion</span>
+                                <span class="text-formulario">Descripción</span>
                             </div>
                             <div class="col-lg-8 col-md-12 col-xs-12">
                                 <telerik:RadTextBox ID="tbxDescripcion" runat="server" Skin="Bootstrap" Width="100%"></telerik:RadTextBox>

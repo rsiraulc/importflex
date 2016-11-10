@@ -32,6 +32,7 @@
         <AssociationConnector Association="ImportFlexModel.FK_imf_productos_prod_imf_paises_pai" />
         <AssociationConnector Association="ImportFlexModel.FK_imf_productos_prod_imf_unidadmedidacomercial_umc" />
         <AssociationConnector Association="ImportFlexModel.FK_imf_productos_prod_imf_unidadmedidafactura_umf" />
+        <AssociationConnector Association="ImportFlexModel.FK_imf_importaciones_imp_imf_usuarios_usr" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

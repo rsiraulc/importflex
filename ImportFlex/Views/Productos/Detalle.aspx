@@ -79,7 +79,7 @@
             </div>
             <div class="col-sm-4">
                 <div class="col-lg-4 col-md-12 col-xs-12">
-                    <span class="text-formulario">Activo</span>                  
+                    <span class="text-formulario">Activo</span>
                 </div>
                 <div class="col-lg-8 col-md-12 col-xs-12">
                     <telerik:RadCheckBox ID="checkStatus" Skin="Bootstrap" AutoPostBack="False" runat="server" Text=""></telerik:RadCheckBox>
@@ -103,7 +103,7 @@
                     <telerik:RadNumericTextBox ID="tbxPiezasXBulto" Type="Number" MaxLength="6" runat="server" Skin="Bootstrap" Width="100%"></telerik:RadNumericTextBox>
                 </div>
             </div>
-                        <div class="col-sm-4">
+            <div class="col-sm-4">
                 <div class="col-lg-4 col-md-12 col-xs-12">
                     <span class="text-formulario">Ultimo Costo</span>
                 </div>
@@ -131,8 +131,8 @@
             </div>
             <div class="col-lg-2 col-md-2 col-xs-2"></div>
             <div class="col-lg-2 col-md-2 col-xs-2">
-                    <asp:Button ID="btnGuardar" runat="server" CssClass="btn btn-block btn-primary" Text="Guardar" OnClick="btnGuardar_OnClick" Width="100%" />
-                </div>
+                <asp:Button ID="btnGuardar" runat="server" CssClass="btn btn-block btn-primary" Text="Guardar" OnClick="btnGuardar_OnClick" Width="100%" />
+            </div>
         </div>
     </div>
 </asp:Content>

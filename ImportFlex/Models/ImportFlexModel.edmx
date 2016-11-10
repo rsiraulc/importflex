@@ -49,7 +49,7 @@
             <PropertyRef Name="impIdImportacion" />
           </Key>
           <Property Name="impIdImportacion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="impNumeroPedimento" Type="varchar" MaxLength="7" Nullable="false" />
+          <Property Name="impNumeroPedimento" Type="varchar" MaxLength="15" Nullable="false" />
           <Property Name="impFecha" Type="datetime" Nullable="false" />
           <Property Name="impTotalArticulos" Type="int" />
           <Property Name="impTotal" Type="decimal" Precision="10" Scale="2" />
@@ -70,6 +70,9 @@
           <Property Name="impFechaUltimaExportacion" Type="datetime" />
           <Property Name="impIdUsuarioFinalizo" Type="int" />
           <Property Name="impFechaFinalizacion" Type="datetime" />
+          <Property Name="impIdUsuarioUpdateNumeroPedimento" Type="int" />
+          <Property Name="impFechaUpdateNumeroPedimento" Type="datetime" />
+          <Property Name="impTieneNumeroImportacion" Type="bit" />
         </EntityType>
         <EntityType Name="imf_paises_pai">
           <Key>
@@ -267,6 +270,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_imf_importaciones_imp_imf_usuarios_usr">
+          <End Role="imf_usuarios_usr" Type="Self.imf_usuarios_usr" Multiplicity="0..1" />
+          <End Role="imf_importaciones_imp" Type="Self.imf_importaciones_imp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="imf_usuarios_usr">
+              <PropertyRef Name="usrIdUsuario" />
+            </Principal>
+            <Dependent Role="imf_importaciones_imp">
+              <PropertyRef Name="impIdUsuarioUpdateNumeroPedimento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_imf_importaciones_imp_imf_usuarios_usr_exportacion">
           <End Role="imf_usuarios_usr" Type="Self.imf_usuarios_usr" Multiplicity="0..1" />
           <End Role="imf_importaciones_imp" Type="Self.imf_importaciones_imp" Multiplicity="*" />
@@ -402,6 +417,10 @@
             <End Role="imf_usuarios_usr" EntitySet="imf_usuarios_usr" />
             <End Role="imf_facturas_fac" EntitySet="imf_facturas_fac" />
           </AssociationSet>
+          <AssociationSet Name="FK_imf_importaciones_imp_imf_usuarios_usr" Association="Self.FK_imf_importaciones_imp_imf_usuarios_usr">
+            <End Role="imf_usuarios_usr" EntitySet="imf_usuarios_usr" />
+            <End Role="imf_importaciones_imp" EntitySet="imf_importaciones_imp" />
+          </AssociationSet>
           <AssociationSet Name="FK_imf_importaciones_imp_imf_usuarios_usr_exportacion" Association="Self.FK_imf_importaciones_imp_imf_usuarios_usr_exportacion">
             <End Role="imf_usuarios_usr" EntitySet="imf_usuarios_usr" />
             <End Role="imf_importaciones_imp" EntitySet="imf_importaciones_imp" />
@@ -475,6 +494,7 @@
           <NavigationProperty Name="imf_importaciones_imp_exporto" Relationship="ImportFlexModel.FK_imf_importaciones_imp_imf_usuarios_usr_exportacion" FromRole="imf_usuarios_usr" ToRole="imf_importaciones_imp" />
           <NavigationProperty Name="imf_importaciones_imp_finalizo" Relationship="ImportFlexModel.FK_imf_importaciones_imp_imf_usuarios_usr_finalizo" FromRole="imf_usuarios_usr" ToRole="imf_importaciones_imp" />
           <NavigationProperty Name="imf_importaciones_imp_registro" Relationship="ImportFlexModel.FK_imf_importaciones_imp_imf_usuarios_usr_registro" FromRole="imf_usuarios_usr" ToRole="imf_importaciones_imp" />
+          <NavigationProperty Name="imf_importaciones_imp" Relationship="ImportFlexModel.FK_imf_importaciones_imp_imf_usuarios_usr" FromRole="imf_usuarios_usr" ToRole="imf_importaciones_imp" />
         </EntityType>
         <EntityContainer Name="ImportFlexEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="imf_paises_pai" EntityType="Self.imf_paises_pai" />
@@ -554,6 +574,10 @@
           <AssociationSet Name="FK_imf_productos_prod_imf_unidadmedidafactura_umf" Association="ImportFlexModel.FK_imf_productos_prod_imf_unidadmedidafactura_umf">
             <End Role="imf_unidadmedidafactura_umf" EntitySet="imf_unidadmedidafactura_umf" />
             <End Role="imf_productos_prod" EntitySet="imf_productos_prod" />
+          </AssociationSet>
+          <AssociationSet Name="FK_imf_importaciones_imp_imf_usuarios_usr" Association="ImportFlexModel.FK_imf_importaciones_imp_imf_usuarios_usr">
+            <End Role="imf_usuarios_usr" EntitySet="imf_usuarios_usr" />
+            <End Role="imf_importaciones_imp" EntitySet="imf_importaciones_imp" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="imf_unidadmedidacomercial_umc">
@@ -724,7 +748,7 @@
             <PropertyRef Name="impIdImportacion" />
           </Key>
           <Property Name="impIdImportacion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="impNumeroPedimento" Type="String" Nullable="false" MaxLength="7" FixedLength="false" Unicode="false" />
+          <Property Name="impNumeroPedimento" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="impFecha" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="impTotalArticulos" Type="Int32" />
           <Property Name="impTotal" Type="Decimal" Precision="10" Scale="2" />
@@ -749,6 +773,10 @@
           <NavigationProperty Name="imf_usuarios_usr_exporto" Relationship="ImportFlexModel.FK_imf_importaciones_imp_imf_usuarios_usr_exportacion" FromRole="imf_importaciones_imp" ToRole="imf_usuarios_usr" />
           <NavigationProperty Name="imf_usuarios_usr_finalizo" Relationship="ImportFlexModel.FK_imf_importaciones_imp_imf_usuarios_usr_finalizo" FromRole="imf_importaciones_imp" ToRole="imf_usuarios_usr" />
           <NavigationProperty Name="imf_usuarios_usr_registro" Relationship="ImportFlexModel.FK_imf_importaciones_imp_imf_usuarios_usr_registro" FromRole="imf_importaciones_imp" ToRole="imf_usuarios_usr" />
+          <Property Name="impIdUsuarioUpdateNumeroPedimento" Type="Int32" />
+          <Property Name="impFechaUpdateNumeroPedimento" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="imf_usuarios_usr" Relationship="ImportFlexModel.FK_imf_importaciones_imp_imf_usuarios_usr" FromRole="imf_importaciones_imp" ToRole="imf_usuarios_usr" />
+          <Property Name="impTieneNumeroImportacion" Type="Boolean" />
         </EntityType>
         <Association Name="FK_imf_facturas_fac_imf_importaciones_imp">
           <End Type="ImportFlexModel.imf_importaciones_imp" Role="imf_importaciones_imp" Multiplicity="1" />
@@ -895,6 +923,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_imf_importaciones_imp_imf_usuarios_usr">
+          <End Type="ImportFlexModel.imf_usuarios_usr" Role="imf_usuarios_usr" Multiplicity="0..1" />
+          <End Type="ImportFlexModel.imf_importaciones_imp" Role="imf_importaciones_imp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="imf_usuarios_usr">
+              <PropertyRef Name="usrIdUsuario" />
+            </Principal>
+            <Dependent Role="imf_importaciones_imp">
+              <PropertyRef Name="impIdUsuarioUpdateNumeroPedimento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1006,6 +1046,9 @@
           <EntitySetMapping Name="imf_importaciones_imp">
             <EntityTypeMapping TypeName="ImportFlexModel.imf_importaciones_imp">
               <MappingFragment StoreEntitySet="imf_importaciones_imp">
+                <ScalarProperty Name="impTieneNumeroImportacion" ColumnName="impTieneNumeroImportacion" />
+                <ScalarProperty Name="impFechaUpdateNumeroPedimento" ColumnName="impFechaUpdateNumeroPedimento" />
+                <ScalarProperty Name="impIdUsuarioUpdateNumeroPedimento" ColumnName="impIdUsuarioUpdateNumeroPedimento" />
                 <ScalarProperty Name="impFechaFinalizacion" ColumnName="impFechaFinalizacion" />
                 <ScalarProperty Name="impIdUsuarioFinalizo" ColumnName="impIdUsuarioFinalizo" />
                 <ScalarProperty Name="impFechaUltimaExportacion" ColumnName="impFechaUltimaExportacion" />

@@ -94,6 +94,15 @@ namespace ImportFlex.Views.Importaciones {
         protected global::Telerik.Web.UI.RadTextBox tbxNumeroPedimento;
         
         /// <summary>
+        /// chkNumeroPedimento control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Telerik.Web.UI.RadCheckBox chkNumeroPedimento;
+        
+        /// <summary>
         /// cbRegion control.
         /// </summary>
         /// <remarks>

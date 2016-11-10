@@ -40,6 +40,15 @@ namespace ImportFlex.Views.Importaciones {
         protected global::System.Web.UI.WebControls.Button btnFinalizarPedimento;
         
         /// <summary>
+        /// btnUpdateNumeroPedimento control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnUpdateNumeroPedimento;
+        
+        /// <summary>
         /// lnkDescargarFormatos control.
         /// </summary>
         /// <remarks>
@@ -164,5 +173,50 @@ namespace ImportFlex.Views.Importaciones {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnRegistrarFactura;
+        
+        /// <summary>
+        /// radWindowActualizarNP control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Telerik.Web.UI.RadWindow radWindowActualizarNP;
+        
+        /// <summary>
+        /// tbxNumeroPedimento control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Telerik.Web.UI.RadTextBox tbxNumeroPedimento;
+        
+        /// <summary>
+        /// Button1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Button1;
+        
+        /// <summary>
+        /// btnUpdateNumeroPedimentoModal control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnUpdateNumeroPedimentoModal;
+        
+        /// <summary>
+        /// radWindowManagerNP control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Telerik.Web.UI.RadWindowManager radWindowManagerNP;
     }
 }

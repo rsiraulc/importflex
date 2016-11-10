@@ -22,6 +22,7 @@ namespace ImportFlex.Models
             this.imf_importaciones_imp_exporto = new HashSet<imf_importaciones_imp>();
             this.imf_importaciones_imp_finalizo = new HashSet<imf_importaciones_imp>();
             this.imf_importaciones_imp_registro = new HashSet<imf_importaciones_imp>();
+            this.imf_importaciones_imp = new HashSet<imf_importaciones_imp>();
         }
     
         public int usrIdUsuario { get; set; }
@@ -45,5 +46,7 @@ namespace ImportFlex.Models
         public virtual ICollection<imf_importaciones_imp> imf_importaciones_imp_finalizo { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<imf_importaciones_imp> imf_importaciones_imp_registro { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<imf_importaciones_imp> imf_importaciones_imp { get; set; }
     }
 }

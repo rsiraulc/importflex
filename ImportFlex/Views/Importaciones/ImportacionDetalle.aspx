@@ -11,27 +11,27 @@
                 <telerik:RadLabel ID="lblTitulo" CssClass="h2" runat="server" Skin="Bootstrap"></telerik:RadLabel>
             </div>
             <div class="col-sm-3">
-                <asp:Button ID="btnNuevaFactura" OnClientClick="OpenWindow();return false;" CssClass="btn btn-block btn-success btn-md" Style="margin-top: 20px;" runat="server" Text="Agregar Factura" />
+                <asp:Button ID="btnNuevaFactura" OnClientClick="OpenWindow(0);return false;" CssClass="btn btn-block btn-success btn-md" Style="margin-top: 20px;" runat="server" Text="Agregar Factura" />
             </div>
             <div class="col-sm-3">
                 <asp:Button ID="btnFinalizarPedimento" CssClass="btn btn-block btn-success btn-md" Style="margin-top: 20px;" runat="server" Text="Cerrar Pedimento" OnClick="btnFinalizarPedimento_OnClick" Visible="False" />
             </div>
             <div class="col-sm-3">
-                <%--<asp:Button ID="btnExportarHT" CssClass="btn btn-block btn-primary btn-md" Style="margin-top: 20px;" runat="server" Text="Descargar Hoja Traducción" OnClick="btnExportarHT_OnClick" Visible="True" />--%>
+                <asp:Button ID="btnUpdateNumeroPedimento" CssClass="btn btn-block btn-primary btn-md" Style="margin-top: 20px;" runat="server" Text="Actualizar Num. Pedimento" OnClientClick="OpenWindow(1);return false;" Visible="True" />
             </div>
             <div class="col-sm-3">
-                    <div class="btn-group" style="width: 100%">
-                        <button type="button" class="btn btn-block btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="width: 100%; margin-top: 20px;">
-                            Descargar <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu" style="width: 100%">
-                            <li>
-                                <asp:LinkButton ID="lnkDescargarFormatos" runat="server" OnClick="lnkDescargarFormatos_OnClick" Width="100%">Formatos Aduana (.zip)</asp:LinkButton>
-                            </li>
-                            <li>
-                                <asp:LinkButton ID="lnkDescargarHT" runat="server" OnClick="lnkDescargarHT_OnClick" Width="100%">Hoja Traducción (.pdf)</asp:LinkButton></li>
-                        </ul>
-                    </div>
+                <div class="btn-group" style="width: 100%">
+                    <button type="button" class="btn btn-block btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="width: 100%; margin-top: 20px;">
+                        Descargar <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" style="width: 100%">
+                        <li>
+                            <asp:LinkButton ID="lnkDescargarFormatos" runat="server" OnClick="lnkDescargarFormatos_OnClick" Width="100%">Formatos Aduana (.zip)</asp:LinkButton>
+                        </li>
+                        <li>
+                            <asp:LinkButton ID="lnkDescargarHT" runat="server" OnClick="lnkDescargarHT_OnClick" Width="100%">Hoja Traducción (.pdf)</asp:LinkButton></li>
+                    </ul>
+                </div>
                 <%--<asp:Button ID="btnExportar" CssClass="btn btn-block btn-primary btn-md" Style="margin-top: 20px;" runat="server" Text="Descargar Formatos" OnClick="btnExportar_OnClick" />--%>
             </div>
         </div>
@@ -155,16 +155,59 @@
                         </div>
                 </ContentTemplate>
             </telerik:RadWindow>
+            <telerik:RadWindow ID="radWindowActualizarNP" Style="z-index: 2001;" AutoSize="True" MinWidth="800px" MaxHeight="450px" Width="850" MinHeight="250px" AutoSizeBehaviors="Width, Default" DestroyOnClose="True" Modal="True" Animation="Fade" runat="server" Behaviors="Close">
+                <ContentTemplate>
+                    <div class="container" style="width: 700px; z-index: 5002">
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-xs-12">
+                                <h3>Actualizar Número de Pedimento</h3>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top: 10px">
+                            <div class="col-lg-6 col-md-12 col-xs-12">
+                                <span class="text-formulario">Nuevo Número de Pedimento</span>
+                            </div>
+                            <div class="col-lg-6 col-md-12 col-xs-12">
+                                <telerik:RadTextBox ID="tbxNumeroPedimento" runat="server" MaxLength="15" Skin="Bootstrap" Width="100%"></telerik:RadTextBox>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top: 20px; margin-bottom: 10px;">
+                            <div class="col-lg-4 col-md-4 col-xs-4 ">
+                                <asp:Button runat="server" CssClass="btn btn-block btn-danger" Text="Cancelar" OnClientClick="CloseWindowNP();return false;" ID="Button1" />
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-xs-4"></div>
+                            <div class="col-lg-4 col-md-4 col-xs-4">
+                                <asp:Button ID="btnUpdateNumeroPedimentoModal" runat="server" CssClass="btn btn-block btn-primary" Text="Actualizar" OnClick="btnUpdateNumeroPedimento_OnClick" />
+                            </div>
+                        </div>
+                </ContentTemplate>
+            </telerik:RadWindow>
+        </Windows>
+    </telerik:RadWindowManager>
+
+
+    <!-- MODAL PARA ACTUALIZAR NUMERO DE PEDIMENTO -->
+    <telerik:RadWindowManager runat="server" ID="radWindowManagerNP" DestroyOnClose="True" EnableShadow="True" Skin="Bootstrap" Title="ImportFlex">
+        <Windows>
         </Windows>
     </telerik:RadWindowManager>
 
     <telerik:RadCodeBlock runat="server">
         <script>
-            function OpenWindow() {
-                window.radopen("Nueva Factura", "radWindowNuevaFactura");
+            function OpenWindow(x) {
+                if (x == 0)
+                    window.radopen("Nueva Factura", "radWindowNuevaFactura");
+                else
+                    window.radopen("radWindowActualizarNP", "radWindowActualizarNP");
             }
             function CloseWindow() {
                 var window = $find('<%=radWindowNuevaFactura.ClientID%>');
+                window.close();
+                return false;
+            }
+
+            function CloseWindowNP() {
+                var window = $find('<%=radWindowActualizarNP.ClientID%>');
                 window.close();
                 return false;
             }
