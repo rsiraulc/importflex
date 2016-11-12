@@ -112,8 +112,10 @@
                                 <telerik:RadTextBox ID="tbxFraccion" runat="server" MaxLength="50" Skin="Bootstrap" Width="100%"></telerik:RadTextBox>
                             </div>
                         </div>
-                        <div class="col-lg-2 col-md-2 col-xs-2"></div>
-                        <div class="col-lg-2 col-md-2 col-xs-2">
+                        <div class="col-lg-2 col-md-12 col-xs-12">
+                            <telerik:RadCheckBox ID="chkAgregarMismoProducto" runat="server" AutoPostBack="False" Text="Agregar mismo producto" Skin="Bootstrap"></telerik:RadCheckBox>
+                        </div>
+                        <div class="col-lg-2 col-md-12 col-xs-12">
                             <asp:Button ID="btnAgregarProducto" runat="server" CssClass="btn btn-block btn-primary" Text="Agregar" OnClientClick="ValidarControles" OnClick="btnAgregarProducto_OnClick" Width="100%" />
                         </div>
                     </div>

@@ -34,6 +34,7 @@ namespace ImportFlex.Controllers
             try
             {
                 response.Productos = db.imf_productos_prod.Where(p => p.prodStatus.Value == true).ToList();
+                response.Success = true;
             }
             catch (Exception ex)
             {

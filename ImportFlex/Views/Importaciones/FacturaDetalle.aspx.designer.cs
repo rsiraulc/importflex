@@ -157,6 +157,15 @@ namespace ImportFlex.Views.Importaciones {
         protected global::Telerik.Web.UI.RadTextBox tbxFraccion;
         
         /// <summary>
+        /// chkAgregarMismoProducto control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Telerik.Web.UI.RadCheckBox chkAgregarMismoProducto;
+        
+        /// <summary>
         /// btnAgregarProducto control.
         /// </summary>
         /// <remarks>

@@ -27,25 +27,43 @@ namespace ImportFlex.Controllers.Export
                         ? $"0{f.facFechaFactura.Value.Day}"
                         : f.facFechaFactura.Value.Day.ToString();
                     var fechaFactura = $"{f.facFechaFactura.Value.Year}{f.facFechaFactura.Value.Month}{dia}";
+                    var pedimento = p.impTieneNumeroImportacion == true ? p.impNumeroPedimento : "";
 
-                    string texto =
-                        $"{p.impTipoRegistro}|{p.impTipoOperacion}|C1|{p.impNumeroPedimento}|{p.impCodigoImportador}|0|0|0|0|0|0|0|7|7|7|{p.impRegion}|\r\n";
-                    texto +=
-                        $"505|{f.facNumeroFactura}|{fechaFactura}|DAP|USD|{f.facValorExtranjera}|{f.facValorUsd}|{f.imf_proveedores_prv.prvCodigo}||||||||||||||||||||||||||||||||||||\r\n";
+                    var lst559 = new List<imf_facturadetalle_fde>();
+                    var lst551 = new List<imf_facturadetalle_fde>();
 
+                    // ENCABEZADO - DATOS DE PEDIMENTO
+                    string texto = $"{p.impTipoRegistro}|{p.impTipoOperacion}|C1|{pedimento}|{p.impCodigoImportador}|0|0|0|0|0|0|0|7|7|7|{p.impRegion}|\r\n";
+
+                    // DATOS DE FACTURA
+                    texto += $"505|{f.facNumeroFactura}|{fechaFactura}|DAP|USD|{f.facValorExtranjera}|{f.facValorUsd}|{f.imf_proveedores_prv.prvCodigo}||||||||||||||||||||||||||||||||||||\r\n";
+
+
+                    // DETALLE DE FACTURA (551)
                     foreach (var df in f.imf_facturadetalle_fde)
                     {
-                        // PONDRE DESCRIPCION RSI POR MIENTRAS
-                        texto +=
-                            $"551|{df.imf_productos_prod.prodFraccionArancelaria}|{df.imf_productos_prod.prodTraduccion}|{df.imf_productos_prod.prodNumeroParte}|{df.fdeValor}|{df.fdeCantidadUMC}|{df.imf_unidadmedidacomercial_umc.umcDescripcion}|0|0|{df.fdeVinculacion}|{df.fdeMetodoValoracion}|{df.imf_productos_prod.prodMarca}|{df.imf_productos_prod.prodModelo}|{df.imf_paises_pai.paiClavePais}|{df.imf_paises_pai1.paiClavePais}|0|{df.fdeCantidadUMF}|{df.imf_unidadmedidafactura_umf.umfDescripcion}||||||||||||||||||||||||||{f.facNumeroFactura}||\r\n";
+                        var cantidadTarifa = df.imf_unidadmedidacomercial_umc.umcIdClave == 6 ? df.fdeCantidadUMC : 0;
+                        var UMT = df.imf_unidadmedidacomercial_umc.umcIdClave == 6? df.imf_unidadmedidacomercial_umc.umcIdClave:0;
+
+
+                        if (lst551.Any(d => d.fdeIdProducto == df.fdeIdProducto))
+                            lst559.Add(df);
+                        else
+                        {
+                            texto += $"551|{df.imf_productos_prod.prodFraccionArancelaria}|{df.imf_productos_prod.prodTraduccion}|{df.imf_productos_prod.prodNumeroParte}|{df.fdeValor}|{df.fdeCantidadUMC}|{df.imf_unidadmedidacomercial_umc.umcIdClave}|{cantidadTarifa}||{df.fdeVinculacion}|1|{df.imf_productos_prod.prodMarca}|{df.imf_productos_prod.prodModelo}|{df.imf_paises_pai.paiClavePais}|USA||{df.fdeCantidadUMF}|{df.imf_unidadmedidafactura_umf.umfClave}||||||||||||||||||||||{UMT}||||{f.facNumeroFactura}||\r\n";
+                            lst551.Add(df);
+                        }
                     }
 
-                    foreach (var df in f.imf_facturadetalle_fde)
+
+                    // SE AGREGAN DESCRIPCIONES COVE (559)
+                    foreach (var df in lst559)
                     {
-                        texto +=
-                            $"559|{df.imf_productos_prod.prodMarca}|{df.imf_productos_prod.prodModelo}|{df.imf_productos_prod.prodSubModelo}|{df.fdeNumeroSerieProducto}|\r\n";
+                        texto += $"559|{df.imf_productos_prod.prodMarca}|{df.imf_productos_prod.prodModelo}|{df.imf_productos_prod.prodSubModelo}|{df.fdeNumeroSerieProducto}|\r\n";
                     }
 
+
+                    // LINEA FINAL DE DOCUMENTO
                     texto += "999|\r\n";
 
 
@@ -56,6 +74,8 @@ namespace ImportFlex.Controllers.Export
 
                     //AGREGA ARCHIVO A LA LISTA
                     lstArchivos.Add(file);
+                    lst551 = null;
+                    lst559 = null;
                 }
 
                 // AGRUPAR ARCHIVOS EN ZIP

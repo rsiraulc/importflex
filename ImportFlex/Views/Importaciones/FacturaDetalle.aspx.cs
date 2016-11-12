@@ -23,13 +23,18 @@ namespace ImportFlex.Views.Importaciones
             {
                 id = int.Parse(Request.Params["Id"]);
                 CargarFactura(int.Parse(Request.Params["Id"]));
-                CargarProductos();
+                CargarProductos(null);
                 CargarCatalogos();
                 CargarDetalleFactura(int.Parse(Request.Params["Id"]));
                 CargarTraducciones();
                 SetearComboBoxs();
-                LimpiarControles();
 
+                if (Request.Params["ProductoID"] != null)
+                {
+                    var idProd = int.Parse(Request.Params["ProductoID"]);
+                    CargarProductos(idProd);
+                    CargarDatosProducto(idProd);
+                }
             }
         }
 
@@ -115,16 +120,22 @@ namespace ImportFlex.Views.Importaciones
             }
         }
 
-        private void CargarProductos()
+        private void CargarProductos(int? id)
         {
             var data = new ProductoController();
-            var response = data.GetAllProductos();
+            var response = data.GetProductosActivos();
 
             if (response.Success)
             {
                 lstProductos = response.Productos;
                 cbProducto.DataSource = response.Productos;
                 cbProducto.DataBind();
+
+                if (id.HasValue)
+                {
+                    cbProducto.SelectedValue = id.Value.ToString();
+                    cbProducto.DataBind();
+                }
             }
         }
 
@@ -178,14 +189,20 @@ namespace ImportFlex.Views.Importaciones
                 fdIdPaisOrigenDestino = Convert.ToInt16(cbPaisOrigen.SelectedValue),
                 fdeIdUsuarioRegistro = Sesiones.UsuarioID.Value
             };
-
+            ActualizarProducto();
             var response = fd.InsertFacturaDetalle(detalle);
+
             if (response.Success)
             {
-                //OPCION PROVISIONAL PARA LLENADO DE DATOS DE PRODUCTO
-                ActualizarProducto();
-
-                Response.Redirect($"~/Views/Importaciones/FacturaDetalle?ID={response.FacturaDetalle.fdeIdFactura}");
+                if (chkAgregarMismoProducto.Checked.Value)
+                {
+                    Response.Redirect($"~/Views/Importaciones/FacturaDetalle?ID={response.FacturaDetalle.fdeIdFactura}&ProductoID={cbProducto.SelectedValue}");
+                }
+                else
+                {
+                    LimpiarControles();
+                    Response.Redirect($"~/Views/Importaciones/FacturaDetalle?ID={response.FacturaDetalle.fdeIdFactura}");
+                }
             }
             else
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "alertSuccess",
@@ -199,7 +216,10 @@ namespace ImportFlex.Views.Importaciones
             if (response.Success)
             {
                 var p = response.Producto;
-                p.prodTraduccion = cbTraduccion.SelectedValue.Replace("- ", "");
+                if (!string.IsNullOrEmpty(cbTraduccion.SelectedValue))
+                    p.prodTraduccion = cbTraduccion.SelectedValue.Replace("- ", "");
+                else
+                    p.prodTraduccion = tbxProductoTraduccion.Text;
                 p.prodMarca = tbxMarca.Text;
                 p.prodModelo = tbxModelo.Text;
                 p.prodFraccionArancelaria = tbxFraccion.Text;
