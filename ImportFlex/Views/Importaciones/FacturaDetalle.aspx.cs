@@ -7,6 +7,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using ImportFlex.Account;
 using ImportFlex.Controllers;
+using ImportFlex.Controllers.Enums;
 using ImportFlex.Models;
 using Telerik.Web.UI;
 
@@ -49,11 +50,20 @@ namespace ImportFlex.Views.Importaciones
         private void CargarFactura(int id)
         {
             var data = new FacturaController();
+            var impcontroller = new ImportacionController();
             var response = data.GetFacturaById(id);
 
             if (response.Success)
             {
-                lblTitulo.Text = $"Factura {response.Factura.imf_proveedores_prv.prvCodigo} No. {response.Factura.facNumeroFactura}";
+                lblTitulo.Text =
+                    $"Factura {response.Factura.imf_proveedores_prv.prvCodigo} No. {response.Factura.facNumeroFactura}";
+                var imp = impcontroller.GetImportacionById(response.Factura.facIdImportacion);
+
+                if (imp.Importacion.impStatus == StatusImportacion.FINALIZADO.ToString())
+                {
+                    divAddProducto.Visible = false;
+                    gvDetalleFactura.MasterTableView.GetColumn("Detalle").Display = false;
+                }
             }
         }
 

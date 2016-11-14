@@ -13,7 +13,7 @@
 
         <asp:UpdatePanel ID="updateProducto" runat="server" UpdateMode="Conditional">
             <ContentTemplate>
-                <div class="well">
+                <div class="well" id="divAddProducto" runat="server">
                     <div class="row">
                         <div class="col-sm-4">
                             <div class="col-lg-4 col-md-12 col-xs-12">

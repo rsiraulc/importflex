@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Web.UI;
 using ImportFlex.Account;
@@ -41,6 +42,7 @@ namespace ImportFlex.Views.Importaciones
                     lblTitulo.Text += $" Parte {response.Importacion.impParte}";
 
                 btnUpdateNumeroPedimento.Visible = !response.Importacion.impTieneNumeroImportacion ?? true;
+                btnMenuDescargar.Visible = response.Importacion.imf_facturas_fac.Any();
 
                 // MANEJO DE VISUALIZACION DE BOTONES
                 switch (response.Importacion.impStatus)

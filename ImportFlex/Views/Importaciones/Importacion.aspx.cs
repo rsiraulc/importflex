@@ -22,6 +22,8 @@ namespace ImportFlex.Views.Importaciones
                 CargarRegionOperacion();
                 cbStatus.DataSource = new List<string> {"TODOS","BORRADOR", "ENPROCESO", "EXPORTADO", "FINALIZADA" };
                 cbStatus.DataBind();
+
+                tbxNumeroPedimento.Text = $"RSI{DateTime.Now.Year}{DateTime.Now.Month}{DateTime.Now.Day}";
             }
         }
 

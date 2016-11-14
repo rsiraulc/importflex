@@ -21,7 +21,7 @@
             </div>
             <div class="col-sm-3">
                 <div class="btn-group" style="width: 100%">
-                    <button type="button" class="btn btn-block btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="width: 100%; margin-top: 20px;">
+                    <button type="button" id="btnMenuDescargar" runat="server" class="btn btn-block btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="width: 100%; margin-top: 20px;">
                         Descargar <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu" style="width: 100%">
