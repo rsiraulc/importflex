@@ -165,58 +165,61 @@ namespace ImportFlex.Views.Importaciones
 
         protected void btnAgregarProducto_OnClick(object sender, EventArgs e)
         {
-            var fd = new FacturaDetalleController();
-            decimal cantidad = 0;
-            string NoSerie = "";
-
-            if (tbxNumeroSerie.Visible)
+            if (IsValid)
             {
-                cantidad = 1;
-                NoSerie = tbxNumeroSerie.Text;
-            }
-            else
-            {
-                cantidad = Convert.ToDecimal(tbxCantidad.Text);
-                NoSerie = "NA";
-            }
+                var fd = new FacturaDetalleController();
+                decimal cantidad = 0;
+                string NoSerie = "";
 
-
-            var detalle = new imf_facturadetalle_fde
-            {
-                fdeIdFactura = int.Parse(Request.Params["Id"]),
-                fdeCantidadUMC = cantidad,
-                fdeIdUMC = Convert.ToInt32(cbUMC.SelectedValue),
-                fdeIdProducto = Convert.ToInt32(cbProducto.SelectedValue),
-                fdeNumeroSerieProducto = NoSerie,
-                fdeValor = Convert.ToDecimal(tbxValor.Text),
-                fdeFecha = DateTime.Now,
-                fdeCantidadUMF = cantidad,
-                fdeIdUMF = Convert.ToInt16(cbUMF.SelectedValue),
-                //VER QUE SHOW
-                fdeVinculacion = "0",
-                fdeMetodoValoracion = "0",
-                fdeIdPaisVendedorComprador = 72,
-                fdIdPaisOrigenDestino = Convert.ToInt16(cbPaisOrigen.SelectedValue),
-                fdeIdUsuarioRegistro = Sesiones.UsuarioID.Value
-            };
-            ActualizarProducto();
-            var response = fd.InsertFacturaDetalle(detalle);
-
-            if (response.Success)
-            {
-                if (chkAgregarMismoProducto.Checked.Value)
+                if (tbxNumeroSerie.Visible)
                 {
-                    Response.Redirect($"~/Views/Importaciones/FacturaDetalle?ID={response.FacturaDetalle.fdeIdFactura}&ProductoID={cbProducto.SelectedValue}");
+                    cantidad = 1;
+                    NoSerie = tbxNumeroSerie.Text;
                 }
                 else
                 {
-                    LimpiarControles();
-                    Response.Redirect($"~/Views/Importaciones/FacturaDetalle?ID={response.FacturaDetalle.fdeIdFactura}");
+                    cantidad = Convert.ToDecimal(tbxCantidad.Text);
+                    NoSerie = "NA";
                 }
+
+
+                var detalle = new imf_facturadetalle_fde
+                {
+                    fdeIdFactura = int.Parse(Request.Params["Id"]),
+                    fdeCantidadUMC = cantidad,
+                    fdeIdUMC = Convert.ToInt32(cbUMC.SelectedValue),
+                    fdeIdProducto = Convert.ToInt32(cbProducto.SelectedValue),
+                    fdeNumeroSerieProducto = NoSerie,
+                    fdeValor = Convert.ToDecimal(tbxValor.Text),
+                    fdeFecha = DateTime.Now,
+                    fdeCantidadUMF = cantidad,
+                    fdeIdUMF = Convert.ToInt16(cbUMF.SelectedValue),
+                    //VER QUE SHOW
+                    fdeVinculacion = "0",
+                    fdeMetodoValoracion = "0",
+                    fdeIdPaisVendedorComprador = 72,
+                    fdIdPaisOrigenDestino = Convert.ToInt16(cbPaisOrigen.SelectedValue),
+                    fdeIdUsuarioRegistro = Sesiones.UsuarioID.Value
+                };
+                ActualizarProducto();
+                var response = fd.InsertFacturaDetalle(detalle);
+
+                if (response.Success)
+                {
+                    if (chkAgregarMismoProducto.Checked.Value)
+                    {
+                        Response.Redirect($"~/Views/Importaciones/FacturaDetalle?ID={response.FacturaDetalle.fdeIdFactura}&ProductoID={cbProducto.SelectedValue}");
+                    }
+                    else
+                    {
+                        LimpiarControles();
+                        Response.Redirect($"~/Views/Importaciones/FacturaDetalle?ID={response.FacturaDetalle.fdeIdFactura}");
+                    }
+                }
+                else
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "alertSuccess",
+                        $"alert('Ha ocurrido un error al agregar el producto. {response.Message}');", true);
             }
-            else
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "alertSuccess",
-                    $"alert('Ha ocurrido un error al agregar el producto. {response.Message}');", true);
         }
 
         private void ActualizarProducto()

@@ -21,6 +21,9 @@
                             </div>
                             <div class="col-lg-8 col-md-12 col-xs-12">
                                 <telerik:RadComboBox ID="cbProducto" RenderMode="Lightweight" EmptyMessage="No. Parte" DataValueField="prodIdProducto" DataTextField="prodNumeroParte" runat="server" Width="100%" AutoPostBack="True" OnSelectedIndexChanged="cbProducto_OnSelectedIndexChanged"></telerik:RadComboBox>
+                                
+                                 <asp:RequiredFieldValidator runat="server" ControlToValidate="cbProducto"
+                                CssClass="text-danger" ErrorMessage="Campo Requerido" />
                             </div>
                         </div>
                         <div class="col-sm-4">
@@ -29,6 +32,8 @@
                             </div>
                             <div class="col-lg-8 col-md-12 col-xs-12">
                                 <telerik:RadTextBox ID="tbxProductoDescripcion" Skin="Bootstrap" ReadOnly="True" runat="server" Width="100%"></telerik:RadTextBox>
+                                <asp:RequiredFieldValidator runat="server" ControlToValidate="tbxProductoDescripcion"
+                                CssClass="text-danger" ErrorMessage="Campo Requerido" />
                             </div>
                         </div>
                         <div class="col-sm-4">
@@ -38,6 +43,9 @@
                             <div class="col-lg-8 col-md-12 col-xs-12">
                                 <telerik:RadTextBox ID="tbxProductoTraduccion" ReadOnly="True" runat="server" Visible="True" Skin="Bootstrap" Width="100%"></telerik:RadTextBox>
                                 <telerik:RadComboBox ID="cbTraduccion" runat="server" Visible="False" Skin="Bootstrap" Width="100%"></telerik:RadComboBox>
+                                
+                                <asp:RequiredFieldValidator runat="server" ControlToValidate="cbTraduccion"
+                                CssClass="text-danger" ErrorMessage="Campo Requerido" />
                             </div>
                         </div>
                     </div>
@@ -48,6 +56,8 @@
                             </div>
                             <div class="col-lg-8 col-md-12 col-xs-12">
                                 <telerik:RadTextBox ID="tbxMarca" Skin="Bootstrap" ReadOnly="False" runat="server" Width="100%"></telerik:RadTextBox>
+                                <asp:RequiredFieldValidator runat="server" ControlToValidate="tbxMarca"
+                                CssClass="text-danger" ErrorMessage="Campo Requerido" />
                             </div>
                         </div>
                         <div class="col-sm-4">
@@ -56,6 +66,9 @@
                             </div>
                             <div class="col-lg-8 col-md-12 col-xs-12">
                                 <telerik:RadTextBox ID="tbxModelo" ReadOnly="False" runat="server" Skin="Bootstrap" Width="100%"></telerik:RadTextBox>
+                                
+                                <asp:RequiredFieldValidator runat="server" ControlToValidate="tbxModelo"
+                                CssClass="text-danger" ErrorMessage="Campo Requerido" />
                             </div>
                         </div>
                         <div class="col-sm-4">
@@ -65,6 +78,8 @@
                             <div class="col-lg-8 col-md-12 col-xs-12">
                                 <telerik:RadTextBox ID="tbxNumeroSerie" runat="server" MaxLength="50" Skin="Bootstrap" Width="100%"></telerik:RadTextBox>
                                 <telerik:RadNumericTextBox ID="tbxCantidad" Type="Number" MaxLength="8" ShowSpinButtons="False" runat="server" Skin="Bootstrap" Width="100%" Visible="False"></telerik:RadNumericTextBox>
+                                
+
                             </div>
                         </div>
 
@@ -76,6 +91,9 @@
                             </div>
                             <div class="col-lg-8 col-md-12 col-xs-12">
                                 <telerik:RadComboBox ID="cbUMC" RenderMode="Lightweight" DataValueField="umcIdClave" DataTextField="umcDescripcion" runat="server" Skin="Bootstrap" Width="100%"></telerik:RadComboBox>
+                                
+                                <asp:RequiredFieldValidator runat="server" ControlToValidate="cbUMC"
+                                CssClass="text-danger" ErrorMessage="Campo Requerido" />
                             </div>
                         </div>
                         <div class="col-sm-4">
@@ -84,6 +102,9 @@
                             </div>
                             <div class="col-lg-8 col-md-12 col-xs-12">
                                 <telerik:RadComboBox ID="cbUMF" RenderMode="Lightweight" DataValueField="umfId" DataTextField="umfDescripcion" runat="server" Skin="Bootstrap" Width="100%"></telerik:RadComboBox>
+                                
+                                <asp:RequiredFieldValidator runat="server" ControlToValidate="cbUMF"
+                                CssClass="text-danger" ErrorMessage="Campo Requerido" />
                             </div>
                         </div>
                         <div class="col-sm-4">
@@ -92,6 +113,9 @@
                             </div>
                             <div class="col-lg-8 col-md-12 col-xs-12">
                                 <telerik:RadComboBox ID="cbPaisOrigen" RenderMode="Lightweight" DataValueField="paiIdPais" DataTextField="paiDescripcion" runat="server" Skin="Bootstrap" Width="100%"></telerik:RadComboBox>
+                                
+                                <asp:RequiredFieldValidator runat="server" ControlToValidate="cbPaisOrigen"
+                                CssClass="text-danger" ErrorMessage="Campo Requerido" />
                             </div>
                         </div>
                     </div>
@@ -102,6 +126,9 @@
                             </div>
                             <div class="col-lg-8 col-md-12 col-xs-12">
                                 <telerik:RadNumericTextBox ID="tbxValor" NumberFormat-DecimalDigits="2" Type="Currency" runat="server" ShowSpinButtons="False" Skin="Bootstrap" Width="100%"></telerik:RadNumericTextBox>
+                                
+                                <asp:RequiredFieldValidator runat="server" ControlToValidate="tbxValor"
+                                CssClass="text-danger" ErrorMessage="Campo Requerido" />
                             </div>
                         </div>
                         <div class="col-sm-4">
@@ -110,6 +137,9 @@
                             </div>
                             <div class="col-lg-8 col-md-12 col-xs-12">
                                 <telerik:RadTextBox ID="tbxFraccion" runat="server" MaxLength="50" Skin="Bootstrap" Width="100%"></telerik:RadTextBox>
+                                
+                                <asp:RequiredFieldValidator runat="server" ControlToValidate="tbxFraccion"
+                                CssClass="text-danger" ErrorMessage="Campo Requerido" />
                             </div>
                         </div>
                         <div class="col-lg-2 col-md-12 col-xs-12">
