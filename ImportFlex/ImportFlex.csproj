@@ -205,6 +205,7 @@
     <Content Include="Images\iconDetails.png" />
     <Content Include="Images\iconEdit.png" />
     <Content Include="Images\iconHistory.png" />
+    <Content Include="Images\logo.png" />
     <Content Include="Images\Logo_RSI_40px.png" />
     <Content Include="Images\Remove.png" />
     <Content Include="Models\ImportFlexModel.edmx.diagram">
@@ -494,7 +495,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseJQuerySupport="False" UseAjaxifiedTemplates="False" />
+      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="False" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
