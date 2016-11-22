@@ -8,7 +8,7 @@
         <EntityTypeShape EntityType="ImportFlexModel.imf_paises_pai" Width="1.5" PointX="0.75" PointY="6.625" IsExpanded="true" />
         <EntityTypeShape EntityType="ImportFlexModel.imf_proveedores_prv" Width="1.5" PointX="6.5" PointY="13" IsExpanded="true" />
         <EntityTypeShape EntityType="ImportFlexModel.imf_usuarios_usr" Width="1.5" PointX="8" PointY="2.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="ImportFlexModel.imf_unidadmedidacomercial_umc" Width="1.5" PointX="7.375" PointY="6.875" />
+        <EntityTypeShape EntityType="ImportFlexModel.imf_unidadmedidacomercial_umc" Width="1.5" PointX="6.375" PointY="6.375" />
         <EntityTypeShape EntityType="ImportFlexModel.imf_unidadmedidafactura_umf" Width="1.5" PointX="7.375" PointY="10" />
         <EntityTypeShape EntityType="ImportFlexModel.imf_facturadetalle_fde" Width="3.125" PointX="13.75" PointY="2.75" />
         <AssociationConnector Association="ImportFlexModel.FK_imf_facturadetalle_fde_imf_paises_pai" />
@@ -33,6 +33,10 @@
         <AssociationConnector Association="ImportFlexModel.FK_imf_productos_prod_imf_unidadmedidacomercial_umc" />
         <AssociationConnector Association="ImportFlexModel.FK_imf_productos_prod_imf_unidadmedidafactura_umf" />
         <AssociationConnector Association="ImportFlexModel.FK_imf_importaciones_imp_imf_usuarios_usr" />
+        <EntityTypeShape EntityType="ImportFlexModel.imf_traducciones_trad" Width="2.125" PointX="10.25" PointY="9.5" />
+        <AssociationConnector Association="ImportFlexModel.FK_imf_productos_prod_imf_traducciones_trad" />
+        <AssociationConnector Association="ImportFlexModel.FK_imf_traducciones_trad_imf_usuarios_usr" />
+        <AssociationConnector Association="ImportFlexModel.FK_imf_traducciones_trad_imf_usuarios_usr1" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

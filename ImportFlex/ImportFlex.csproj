@@ -305,6 +305,7 @@
     <Compile Include="Controllers\ImportacionController.cs" />
     <Compile Include="Controllers\ProductoController.cs" />
     <Compile Include="Controllers\ProveedorController.cs" />
+    <Compile Include="Controllers\TraduccionController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
@@ -335,6 +336,8 @@
     <Compile Include="Messages\ProveedoresResponse.cs" />
     <Compile Include="Messages\ProveedorResponse.cs" />
     <Compile Include="Messages\ResponseBase.cs" />
+    <Compile Include="Messages\TraduccionesResponse.cs" />
+    <Compile Include="Messages\TraduccionResponse.cs" />
     <Compile Include="Models\imf_facturadetalle_fde.cs">
       <DependentUpon>ImportFlexModel.tt</DependentUpon>
     </Compile>
@@ -354,6 +357,9 @@
       <DependentUpon>ImportFlexModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\imf_roles_rls.cs">
+      <DependentUpon>ImportFlexModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\imf_traducciones_trad.cs">
       <DependentUpon>ImportFlexModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\imf_unidadmedidacomercial_umc.cs">
@@ -462,8 +468,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Controllers\Archivos\" />
-    <Folder Include="Controllers\Mappers\" />
-    <Folder Include="Controllers\Views\" />
     <Folder Include="Views\Configuracion\" />
   </ItemGroup>
   <ItemGroup>

@@ -35,5 +35,6 @@ namespace ImportFlex.Models
         public virtual DbSet<imf_roles_rls> imf_roles_rls { get; set; }
         public virtual DbSet<imf_importaciones_imp> imf_importaciones_imp { get; set; }
         public virtual DbSet<imf_productos_prod> imf_productos_prod { get; set; }
+        public virtual DbSet<imf_traducciones_trad> imf_traducciones_trad { get; set; }
     }
 }

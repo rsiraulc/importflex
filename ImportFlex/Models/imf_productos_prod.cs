@@ -36,11 +36,13 @@ namespace ImportFlex.Models
         public bool prodRequiereNoSerie { get; set; }
         public Nullable<int> prodIdUltimaUMC { get; set; }
         public Nullable<int> prodIdUltimaUMF { get; set; }
+        public Nullable<int> prodIdTraduccion { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<imf_facturadetalle_fde> imf_facturadetalle_fde { get; set; }
         public virtual imf_paises_pai imf_paises_pai { get; set; }
         public virtual imf_unidadmedidacomercial_umc imf_unidadmedidacomercial_umc { get; set; }
         public virtual imf_unidadmedidafactura_umf imf_unidadmedidafactura_umf { get; set; }
+        public virtual imf_traducciones_trad imf_traducciones_trad { get; set; }
     }
 }

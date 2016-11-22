@@ -29,6 +29,7 @@
 width:99% !important;
 }
 
+.center-block {float: none !important}
 and g
 
 article,
@@ -531,7 +532,7 @@ h1,
 
 h2,
 .h2 {
-  font-size: 45px;
+  font-size: 40px;
 }
 
 h3,

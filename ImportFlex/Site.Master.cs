@@ -21,13 +21,12 @@ namespace ImportFlex
             linkCerrarSesion.Visible = page != "/Account/Login";
 
             if (string.IsNullOrEmpty(Sesiones.EmailUsuario) && page != "/Account/Login")
-            {
                 Response.Redirect("~/Account/Login.aspx");
-            }
             else
-            {
                 lblNombre.Text = string.IsNullOrEmpty(Sesiones.EmailUsuario) ? "": $"Hola {Sesiones.NombreUsuario}!";
-            }
+
+            //if (page == "/Account/Login")
+            //    divMenu.Visible = false;
 
         }
 

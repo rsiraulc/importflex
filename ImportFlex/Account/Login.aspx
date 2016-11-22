@@ -1,7 +1,10 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="ImportFlex.Account.Login" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <div class="row">
+  
+
+    <div class="center-block">
+            <div class="row">
         <div class="col-sm-12">
             <h1 style="font-size: 45px">Bienvenido a FlexImport</h1>
         </div>
@@ -42,4 +45,6 @@
         </div>
 
     </div>
+    </div>
+
 </asp:Content>
