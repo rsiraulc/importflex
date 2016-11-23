@@ -42,9 +42,13 @@ namespace ImportFlex.Views.Importaciones
         #region Cargar Configuraciones
         private void CargarTraducciones()
         {
-            var data = new CatalogosController();
-            cbTraduccion.DataSource = data.GetListaTraducciones();
-            cbTraduccion.DataBind();
+            var data = new TraduccionController();
+            var response = data.GetAllTraducciones();
+            if (response.Success)
+            {
+                cbxEditarTraduccion.DataSource = response.Traducciones;
+                cbxEditarTraduccion.DataBind();
+            }
         }
 
         private void CargarFactura(int id)
@@ -77,10 +81,10 @@ namespace ImportFlex.Views.Importaciones
             cbUMC.MarkFirstMatch = true;
             cbUMC.Filter = RadComboBoxFilter.Contains;
 
+            cbxEditarTraduccion.AllowCustomText = true;
+            cbxEditarTraduccion.MarkFirstMatch = true;
+            cbxEditarTraduccion.Filter = RadComboBoxFilter.Contains;
 
-            cbTraduccion.AllowCustomText = true;
-            cbTraduccion.MarkFirstMatch = true;
-            cbTraduccion.Filter = RadComboBoxFilter.Contains;
 
 
             cbUMF.AllowCustomText = true;
@@ -229,10 +233,6 @@ namespace ImportFlex.Views.Importaciones
             if (response.Success)
             {
                 var p = response.Producto;
-                if (!string.IsNullOrEmpty(cbTraduccion.SelectedValue))
-                    p.prodTraduccion = cbTraduccion.SelectedValue.Replace("- ", "");
-                else
-                    p.prodTraduccion = tbxProductoTraduccion.Text;
                 p.prodMarca = tbxMarca.Text;
                 p.prodModelo = tbxModelo.Text;
                 p.prodFraccionArancelaria = tbxFraccion.Text;
@@ -277,10 +277,9 @@ namespace ImportFlex.Views.Importaciones
 
         private void CargarDatosProducto(int id)
         {
-            
             var data = new ProductoController();
-
             var response = data.GetProductoById(id);
+
             if (response.Success)
             {
                 tbxProductoDescripcion.Text = response.Producto.prodDescripcionRSI;
@@ -292,22 +291,17 @@ namespace ImportFlex.Views.Importaciones
                 cbUMC.DataBind();
                 cbUMF.DataBind();
 
+                if (response.Producto.prodIdTraduccion.HasValue)
+                {
+                    var traduccionController = new TraduccionController();
+                    var traduccion = traduccionController.GetTraduccionPorId(response.Producto.prodIdTraduccion.Value);
+                    tbxProductoTraduccion.Text = traduccion.Traduccion.tradTraduccion;
+                }
+
                 cbPaisOrigen.SelectedIndex = response.Producto.prodIdPaisOrigen.Value - 1;
                 cbPaisOrigen.DataBind();
 
                 tbxFraccion.Text = response.Producto.prodFraccionArancelaria;
-
-                if (response.Producto.prodTraduccion != "")
-                {
-                    cbTraduccion.Visible = false;
-                    tbxProductoTraduccion.Visible = true;
-                    tbxProductoTraduccion.Text = response.Producto.prodTraduccion;
-                }
-                else
-                {
-                    cbTraduccion.Visible = true;
-                    tbxProductoTraduccion.Visible = false;
-                }
 
                 //VALIDA SI REQUIERE NUMERO DE SERIE O QUE INGRESE CANTIDAD
                 if (response.Producto.prodRequiereNoSerie)
@@ -327,6 +321,52 @@ namespace ImportFlex.Views.Importaciones
                 tbxProductoDescripcion.ToolTip = tbxProductoDescripcion.Text;
                 tbxProductoTraduccion.ToolTip = tbxProductoTraduccion.Text;
             }
+        }
+
+        protected void btnGuardar_OnClick(object sender, EventArgs e)
+        {
+            ActualizarTraduccion(Convert.ToInt32(cbxEditarTraduccion.SelectedValue));
+        }
+
+        private void ActualizarTraduccion(int idTraduccion)
+        {
+            var data = new ProductoController();
+            var response = data.GetProductoById(Convert.ToInt32(cbProducto.SelectedValue));
+
+            if (response.Success)
+            {
+                var p = response.Producto;
+
+                p.prodIdTraduccion = idTraduccion;
+                data.UpdateProducto(p);
+
+                CargarDatosProducto(Convert.ToInt32(cbProducto.SelectedValue));
+            }
+        }
+
+        protected void btnCrear_OnClick(object sender, EventArgs e)
+        {
+            var data = new TraduccionController();
+            var usrController = new UsuarioController();
+            var usr = usrController.GetUsuarioById(Sesiones.UsuarioID.Value).Usuario;
+
+            var response = data.InsertTraduccion(new imf_traducciones_trad
+            {
+                tradFechaRegistro = DateTime.Now,
+                tradIdUsuarioRegistro = usr.usrIdUsuario,
+                tradTraduccion = tbxNuevaTraduccion.Text
+            });
+
+
+            if (response.Success)
+            {
+                // ASIGNA NUEVA TRADUCCION AL PRODUCTO
+                ActualizarTraduccion(response.Traduccion.tradIdTraduccion);   
+            }
+            else
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "alertSuccess",
+                    $"alert('Ha ocurrido un error. {response.Message}');", true);
+
         }
     }
 }

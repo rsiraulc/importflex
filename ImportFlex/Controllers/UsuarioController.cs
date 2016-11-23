@@ -40,6 +40,24 @@ namespace ImportFlex.Controllers
             return response;
         }
 
+        public UsuarioResponse GetUsuarioById(int id)
+        {
+            var response = new UsuarioResponse();
+
+            try
+            {
+                response.Usuario = db.imf_usuarios_usr.Find(id);
+                response.Success = true;
+            }
+            catch (Exception ex)
+            {
+                response.Success = false;
+                response.Message = ex.Message;
+            }
+
+            return response;
+        }
+
         public UsuarioResponse GetUsuarioByCorreo(string correo)
         {
             var response = new UsuarioResponse();
