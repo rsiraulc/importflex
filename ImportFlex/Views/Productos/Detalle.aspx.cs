@@ -27,10 +27,6 @@ namespace ImportFlex.Views.Productos
         {
             var data = new CatalogosController();
 
-            // CARGAR TRADUCCIONES
-            cbTraduccion.DataSource = data.GetListaTraducciones();
-            cbTraduccion.DataBind();
-
             // CARGAR PAISES
             cbPais.DataSource = data.GetAllPaises().lstPaises;
             cbPais.DataBind();

@@ -57,6 +57,7 @@
                             <ul class="dropdown-menu">
                                 <li><a runat="server" href="~/Views/Productos/Default.aspx">Productos</a></li>
                                 <li><a runat="server" href="~/Views/Proveedores/Default.aspx">Proveedores</a></li>
+                                <li><a runat="server" href="~/Views/Traducciones/Default.aspx">Traducciones</a></li>
 <%--                                <li><a runat="server" href="#">Unidad de Medida Comercial</a></li>
                                 <li><a runat="server" href="#">Unidad de Medida de Factura</a></li>
                                 <li><a runat="server" href="#">Paises</a></li>--%>

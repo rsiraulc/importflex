@@ -52,6 +52,9 @@ namespace ImportFlex.Controllers
 
             try
             {
+                traduccion.tradIdUsuarioUltimaModificacion = traduccion.tradIdUsuarioRegistro;
+                traduccion.tradFechaUltimaModificacion = traduccion.tradFechaRegistro;
+
                 var _traduccion = db.imf_traducciones_trad.Add(traduccion);
                 db.SaveChanges();
 
@@ -87,14 +90,12 @@ namespace ImportFlex.Controllers
             return response;
         }
 
-        public TraduccionResponse UpdateTraduccion(int id)
+        public TraduccionResponse UpdateTraduccion(imf_traducciones_trad traduccion)
         {
             var response = new TraduccionResponse();
 
             try
             {
-                var traduccion = GetTraduccionPorId(id).Traduccion;
-
                 var _trad = GetTraduccionPorId(traduccion.tradIdTraduccion);
                 if (_trad.Traduccion != null)
                 {
