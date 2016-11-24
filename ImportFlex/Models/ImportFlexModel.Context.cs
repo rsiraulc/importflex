@@ -30,11 +30,11 @@ namespace ImportFlex.Models
         public virtual DbSet<imf_usuarios_usr> imf_usuarios_usr { get; set; }
         public virtual DbSet<imf_unidadmedidacomercial_umc> imf_unidadmedidacomercial_umc { get; set; }
         public virtual DbSet<imf_unidadmedidafactura_umf> imf_unidadmedidafactura_umf { get; set; }
-        public virtual DbSet<imf_facturadetalle_fde> imf_facturadetalle_fde { get; set; }
         public virtual DbSet<imf_facturas_fac> imf_facturas_fac { get; set; }
         public virtual DbSet<imf_roles_rls> imf_roles_rls { get; set; }
         public virtual DbSet<imf_importaciones_imp> imf_importaciones_imp { get; set; }
-        public virtual DbSet<imf_productos_prod> imf_productos_prod { get; set; }
         public virtual DbSet<imf_traducciones_trad> imf_traducciones_trad { get; set; }
+        public virtual DbSet<imf_facturadetalle_fde> imf_facturadetalle_fde { get; set; }
+        public virtual DbSet<imf_productos_prod> imf_productos_prod { get; set; }
     }
 }

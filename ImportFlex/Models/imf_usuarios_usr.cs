@@ -17,7 +17,6 @@ namespace ImportFlex.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public imf_usuarios_usr()
         {
-            this.imf_facturadetalle_fde = new HashSet<imf_facturadetalle_fde>();
             this.imf_facturas_fac = new HashSet<imf_facturas_fac>();
             this.imf_importaciones_imp_exporto = new HashSet<imf_importaciones_imp>();
             this.imf_importaciones_imp_finalizo = new HashSet<imf_importaciones_imp>();
@@ -25,6 +24,7 @@ namespace ImportFlex.Models
             this.imf_importaciones_imp = new HashSet<imf_importaciones_imp>();
             this.TradRegistro = new HashSet<imf_traducciones_trad>();
             this.TradUltimaModificacion = new HashSet<imf_traducciones_trad>();
+            this.imf_facturadetalle_fde = new HashSet<imf_facturadetalle_fde>();
         }
     
         public int usrIdUsuario { get; set; }
@@ -39,8 +39,6 @@ namespace ImportFlex.Models
     
         public virtual imf_roles_rls imf_roles_rls { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<imf_facturadetalle_fde> imf_facturadetalle_fde { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<imf_facturas_fac> imf_facturas_fac { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<imf_importaciones_imp> imf_importaciones_imp_exporto { get; set; }
@@ -54,5 +52,7 @@ namespace ImportFlex.Models
         public virtual ICollection<imf_traducciones_trad> TradRegistro { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<imf_traducciones_trad> TradUltimaModificacion { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<imf_facturadetalle_fde> imf_facturadetalle_fde { get; set; }
     }
 }

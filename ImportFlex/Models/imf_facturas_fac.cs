@@ -34,11 +34,12 @@ namespace ImportFlex.Models
         public string facNumeroEntrada { get; set; }
         public string facNotas { get; set; }
         public int facIdUsuarioRegistro { get; set; }
+        public Nullable<bool> facVinculacion { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<imf_facturadetalle_fde> imf_facturadetalle_fde { get; set; }
         public virtual imf_proveedores_prv imf_proveedores_prv { get; set; }
         public virtual imf_importaciones_imp imf_importaciones_imp { get; set; }
         public virtual imf_usuarios_usr imf_usuarios_usr { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<imf_facturadetalle_fde> imf_facturadetalle_fde { get; set; }
     }
 }

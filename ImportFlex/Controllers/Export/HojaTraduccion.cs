@@ -128,7 +128,7 @@ namespace ImportFlex.Controllers.Export
                         tableDetalle.AddCell(new PdfPCell(new Phrase(num.ToString(), LetraCeldaSmall)) {HorizontalAlignment = 1 });
                         tableDetalle.AddCell(new PdfPCell(new Phrase(f.facNumeroEntrada, LetraCeldaSmall)) { HorizontalAlignment = 1 });
                         tableDetalle.AddCell(new PdfPCell(new Phrase(f.facNumeroFactura, LetraCeldaSmall)) { HorizontalAlignment = 1 });
-                        tableDetalle.AddCell(new PdfPCell(new Phrase(d.imf_productos_prod.prodTraduccion, LetraCeldaSmall)) { HorizontalAlignment = 1 });
+                        tableDetalle.AddCell(new PdfPCell(new Phrase(d.imf_productos_prod.imf_traducciones_trad.tradTraduccion, LetraCeldaSmall)) { HorizontalAlignment = 1 });
                         tableDetalle.AddCell(new PdfPCell(new Phrase(d.fdeCantidadUMC.ToString(), LetraCeldaSmall)) { HorizontalAlignment = 1 });
                         tableDetalle.AddCell(new PdfPCell(new Phrase("0", LetraCeldaSmall)) { HorizontalAlignment = 1 });
                         tableDetalle.AddCell(new PdfPCell(new Phrase("0", LetraCeldaSmall)) { HorizontalAlignment = 1 });

@@ -199,7 +199,6 @@ namespace ImportFlex.Views.Importaciones
                     fdeCantidadUMF = cantidad,
                     fdeIdUMF = Convert.ToInt16(cbUMF.SelectedValue),
                     //VER QUE SHOW
-                    fdeVinculacion = "0",
                     fdeMetodoValoracion = "0",
                     fdeIdPaisVendedorComprador = 72,
                     fdIdPaisOrigenDestino = Convert.ToInt16(cbPaisOrigen.SelectedValue),

@@ -22,7 +22,6 @@ namespace ImportFlex.Models
     
         public int prodIdProducto { get; set; }
         public string prodDescripcionRSI { get; set; }
-        public string prodTraduccion { get; set; }
         public string prodNumeroParte { get; set; }
         public Nullable<bool> prodStatus { get; set; }
         public string prodMarca { get; set; }
@@ -41,8 +40,8 @@ namespace ImportFlex.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<imf_facturadetalle_fde> imf_facturadetalle_fde { get; set; }
         public virtual imf_paises_pai imf_paises_pai { get; set; }
+        public virtual imf_traducciones_trad imf_traducciones_trad { get; set; }
         public virtual imf_unidadmedidacomercial_umc imf_unidadmedidacomercial_umc { get; set; }
         public virtual imf_unidadmedidafactura_umf imf_unidadmedidafactura_umf { get; set; }
-        public virtual imf_traducciones_trad imf_traducciones_trad { get; set; }
     }
 }

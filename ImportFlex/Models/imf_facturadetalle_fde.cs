@@ -23,18 +23,17 @@ namespace ImportFlex.Models
         public Nullable<decimal> fdeCantidadUMC { get; set; }
         public Nullable<int> fdeIdUMF { get; set; }
         public Nullable<decimal> fdeCantidadUMF { get; set; }
-        public string fdeVinculacion { get; set; }
         public string fdeMetodoValoracion { get; set; }
         public Nullable<int> fdIdPaisOrigenDestino { get; set; }
         public Nullable<int> fdeIdPaisVendedorComprador { get; set; }
         public string fdeNumeroSerieProducto { get; set; }
         public int fdeIdUsuarioRegistro { get; set; }
     
+        public virtual imf_facturas_fac imf_facturas_fac { get; set; }
         public virtual imf_paises_pai imf_paises_pai { get; set; }
         public virtual imf_paises_pai imf_paises_pai1 { get; set; }
         public virtual imf_unidadmedidacomercial_umc imf_unidadmedidacomercial_umc { get; set; }
         public virtual imf_unidadmedidafactura_umf imf_unidadmedidafactura_umf { get; set; }
-        public virtual imf_facturas_fac imf_facturas_fac { get; set; }
         public virtual imf_usuarios_usr imf_usuarios_usr { get; set; }
         public virtual imf_productos_prod imf_productos_prod { get; set; }
     }

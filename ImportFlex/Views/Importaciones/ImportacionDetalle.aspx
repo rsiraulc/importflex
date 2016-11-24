@@ -136,6 +136,14 @@
                         <div class="row" style="margin-top: 10px;">
                             <div class="col-sm-6">
                                 <div class="col-lg-4 col-md-12 col-xs-12">
+                                    <span class="text-formulario">Vinculación</span>
+                                </div>
+                                <div class="col-lg-8 col-md-12 col-xs-12">
+                                    <telerik:RadCheckBox ID="chkVinculacion" runat="server" Text="" Skin="Bootstrap" AutoPostBack="False"></telerik:RadCheckBox>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="col-lg-4 col-md-12 col-xs-12">
                                     <span class="text-formulario">Notas</span>
                                 </div>
                                 <div class="col-lg-8 col-md-12 col-xs-12">

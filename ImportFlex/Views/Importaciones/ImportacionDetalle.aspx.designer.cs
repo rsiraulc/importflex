@@ -157,6 +157,15 @@ namespace ImportFlex.Views.Importaciones {
         protected global::Telerik.Web.UI.RadTextBox tbxEntrada;
         
         /// <summary>
+        /// chkVinculacion control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Telerik.Web.UI.RadCheckBox chkVinculacion;
+        
+        /// <summary>
         /// tbxNotas control.
         /// </summary>
         /// <remarks>

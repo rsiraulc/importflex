@@ -88,12 +88,17 @@ namespace ImportFlex.Views.Importaciones
 
         protected void btnGuardarFactura_OnClick(object sender, EventArgs e)
         {
+            RegistrarFactura();
+        }
+
+        private void RegistrarFactura()
+        {
             var data = new FacturaController();
             var factura = new imf_facturas_fac
             {
                 facIdImportacion = int.Parse(Request.Params["Id"]),
                 facNumeroFactura = txbNumeroFactura.Text,
-                facMoneda = "USD",                
+                facMoneda = "USD",
                 facValorUsd = Convert.ToDecimal(tbxValorUSD.Text),
                 facValorExtranjera = Convert.ToDecimal(tbxValorUSD.Text),
                 facFlete = Convert.ToDecimal(txbFlete.Text),
@@ -103,7 +108,8 @@ namespace ImportFlex.Views.Importaciones
                 facFechaRegistro = DateTime.Now,
                 facNumeroEntrada = tbxEntrada.Text,
                 facNotas = tbxNotas.Text,
-                facIdUsuarioRegistro = Sesiones.UsuarioID.Value
+                facIdUsuarioRegistro = Sesiones.UsuarioID.Value,
+                facVinculacion = chkVinculacion.Checked
             };
 
             var response = data.InsertFactura(factura);
@@ -117,7 +123,7 @@ namespace ImportFlex.Views.Importaciones
             }
         }
 
-        
+
         protected void btnFinalizarPedimento_OnClick(object sender, EventArgs e)
         {
             var data = new ImportacionController();

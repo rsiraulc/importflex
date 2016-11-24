@@ -27,9 +27,9 @@ namespace ImportFlex.Models
         public Nullable<int> tradIdUsuarioUltimaModificacion { get; set; }
         public Nullable<System.DateTime> tradFechaUltimaModificacion { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<imf_productos_prod> imf_productos_prod { get; set; }
         public virtual imf_usuarios_usr UsuarioRegistro { get; set; }
         public virtual imf_usuarios_usr UsuarioUltimaModificacion { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<imf_productos_prod> imf_productos_prod { get; set; }
     }
 }
