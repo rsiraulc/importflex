@@ -91,11 +91,15 @@ namespace ImportFlex.Controllers
 
             try
             {
-                var idFactura = detalle.fdeIdFactura;
+                var cantidad = detalle.fdeCantidadUMC;
+                var importe = detalle.fdeValor;
                 var fac = db.imf_facturas_fac.Find(detalle.fdeIdFactura);
                 var imp = db.imf_importaciones_imp.Find(fac.facIdImportacion);
                 db.imf_facturadetalle_fde.Remove(detalle);
-                imp.impTotalArticulos--;
+                imp.impTotalArticulos -= (int)cantidad;
+                imp.impTotal -= importe;
+                fac.facValorUsd -= importe;
+                fac.facValorExtranjera -= importe;
                 db.SaveChanges();
 
                 response.Success = true;

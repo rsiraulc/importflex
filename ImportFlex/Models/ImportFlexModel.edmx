@@ -51,7 +51,7 @@
           <Property Name="impIdImportacion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="impNumeroPedimento" Type="varchar" MaxLength="15" Nullable="false" />
           <Property Name="impFecha" Type="datetime" Nullable="false" />
-          <Property Name="impTotalArticulos" Type="int" />
+          <Property Name="impTotalArticulos" Type="decimal" Precision="10" Scale="2" />
           <Property Name="impTotal" Type="decimal" Precision="10" Scale="2" />
           <Property Name="impStatus" Type="nvarchar" MaxLength="50" />
           <Property Name="impClave" Type="nvarchar" MaxLength="10" />

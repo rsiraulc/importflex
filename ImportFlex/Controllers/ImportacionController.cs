@@ -238,10 +238,16 @@ namespace ImportFlex.Controllers
                 importacion.impTotal = 0;
                 foreach (var f in importacion.imf_facturas_fac)
                 {
+                    var factura = importacion.imf_facturas_fac.FirstOrDefault(fac => fac.facIdFactura == idFactura);
+                    factura.facValorUsd = 0;
+                    factura.facValorExtranjera = 0;
+
                     foreach (var d in f.imf_facturadetalle_fde)
                     {
                         importacion.impTotalArticulos += Convert.ToInt32(d.fdeCantidadUMC);
                         importacion.impTotal += d.fdeValor;
+                        factura.facValorExtranjera += d.fdeValor;
+                        factura.facValorUsd += d.fdeValor;
                     }
                 }
                 db.SaveChanges();

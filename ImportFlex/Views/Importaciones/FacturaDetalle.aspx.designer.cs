@@ -184,6 +184,24 @@ namespace ImportFlex.Views.Importaciones {
         protected global::Telerik.Web.UI.RadGrid gvDetalleFactura;
         
         /// <summary>
+        /// lblTotalArticulos control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Telerik.Web.UI.RadLabel lblTotalArticulos;
+        
+        /// <summary>
+        /// lblValorTotal control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Telerik.Web.UI.RadLabel lblValorTotal;
+        
+        /// <summary>
         /// btnIrImportacion control.
         /// </summary>
         /// <remarks>

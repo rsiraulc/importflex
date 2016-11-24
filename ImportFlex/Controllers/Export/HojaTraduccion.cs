@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
+using ImportFlex.Controllers.Enums;
 using ImportFlex.Messages;
 using ImportFlex.Models;
 using Telerik.Charting.Styles;
@@ -38,7 +39,7 @@ namespace ImportFlex.Controllers.Export
                 var pdfWriter = PdfWriter.GetInstance(doc, new FileStream(path, FileMode.OpenOrCreate));
                 var eh = new PdfPageEventHelper();
                 pdfWriter.PageEvent = eh;
-                doc.AddTitle("Pedimento");
+                doc.AddTitle($"HojaTraduccion_{p.impNumeroPedimento}_{p.impParte}");
                 doc.Open();
 
                 /***** ENCABEZADO *********************/
@@ -82,7 +83,7 @@ namespace ImportFlex.Controllers.Export
                 var destinatario =
                     "RSI MEXICO S DE RL DE CV \r JUAN MANUEL SALVATIERRA 1A \r GARITA DE OTAY, TIJUANA B.C. 22430 \r R.F.C. RME1201231S7";
 
-                var tramite = "IMPORTACION DEFINITIVA REGION";
+                var tramite = $"{TipoOperacion.GetTipoOperacionById(p.impTipoOperacion.Value)} DEFINITIVA {RegionPedimento.GetRegionById(Convert.ToInt32(p.impRegion))}";
 
                 tableDatos.AddCell(new PdfPCell(new Phrase("DECLARACIÓN", LetraCeldaSmallBold)) { BackgroundColor = BaseColor.LIGHT_GRAY, HorizontalAlignment = 1 });
                 tableDatos.AddCell(new PdfPCell(new Phrase("DESTINATARIO", LetraCeldaSmallBold)) { BackgroundColor = BaseColor.LIGHT_GRAY, HorizontalAlignment = 1 });

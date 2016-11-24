@@ -19,5 +19,20 @@ namespace ImportFlex.Controllers.Enums
                 new TipoOperacion {Clave = 3, Descripcion = "Reexpedición"}
             };
         }
+
+        public static string GetTipoOperacionById(int id)
+        {
+            switch (id)
+            {
+                case 1:
+                    return "IMPORTACION";
+                case 2:
+                    return "EXPORTACION";
+                case 3:
+                    return "REEXPEDICION";
+                default:
+                    return "";
+            }
+        }
     }
 }

@@ -26,5 +26,18 @@ namespace ImportFlex.Controllers.Enums
                 new RegionPedimento { Clave = "9", Descripcion = "Interior"},
             };
         }
+
+        public static string GetRegionById(int id)
+        {
+            switch (id)
+            {
+                case 1:
+                    return "FRONTERIZO";
+                case 2:
+                    return "INTERIOR";
+                default:
+                    return "";
+            }
+        }
     }
 }

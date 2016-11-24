@@ -62,6 +62,8 @@ namespace ImportFlex.Views.Importaciones
                 lblTitulo.Text =
                     $"Factura {response.Factura.imf_proveedores_prv.prvCodigo} No. {response.Factura.facNumeroFactura}";
                 var imp = impcontroller.GetImportacionById(response.Factura.facIdImportacion);
+                lblValorTotal.Text = "Total $" + response.Factura.facValorUsd;
+                lblTotalArticulos.Text = $"Total artículos: {response.Factura.imf_facturadetalle_fde.Sum(d => d.fdeCantidadUMC)}";
 
                 if (imp.Importacion.impStatus == StatusImportacion.FINALIZADO.ToString())
                 {
@@ -284,9 +286,9 @@ namespace ImportFlex.Views.Importaciones
                 tbxProductoDescripcion.Text = response.Producto.prodDescripcionRSI;
                 tbxMarca.Text = response.Producto.prodMarca;
                 tbxModelo.Text = response.Producto.prodModelo;
-                tbxValor.Text = response.Producto.prodUltimoCosto.HasValue ? response.Producto.prodUltimoCosto.Value.ToString() : "0";
-                cbUMC.SelectedIndex = response.Producto.prodIdUltimaUMC == null ? 0 : response.Producto.prodIdUltimaUMC.Value - 1;
-                cbUMF.SelectedValue = response.Producto.prodIdUltimaUMF.ToString() ?? "1";
+                tbxValor.Text = response.Producto.prodUltimoCosto?.ToString() ?? "0";
+                cbUMC.SelectedValue = response.Producto.prodIdUltimaUMC?.ToString() ?? "6";
+                cbUMF.SelectedValue = response.Producto.prodIdUltimaUMF?.ToString() ?? "710";
                 cbUMC.DataBind();
                 cbUMF.DataBind();
 
@@ -297,7 +299,7 @@ namespace ImportFlex.Views.Importaciones
                     tbxProductoTraduccion.Text = traduccion.Traduccion.tradTraduccion;
                 }
 
-                cbPaisOrigen.SelectedIndex = response.Producto.prodIdPaisOrigen.Value - 1;
+                cbPaisOrigen.SelectedValue = response.Producto.prodIdPaisOrigen?.ToString() ?? "72";
                 cbPaisOrigen.DataBind();
 
                 tbxFraccion.Text = response.Producto.prodFraccionArancelaria;

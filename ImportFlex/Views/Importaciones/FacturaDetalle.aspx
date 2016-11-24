@@ -47,7 +47,7 @@
                                         <button onclick="OpenWindow();" class="btn btn-primary" style="width: 100%"><span class="glyphicon glyphicon-pencil"></span></button>
                                     </span>
                                 </div>
-                                 <asp:RequiredFieldValidator runat="server" ControlToValidate="tbxProductoTraduccion"
+                                <asp:RequiredFieldValidator runat="server" ControlToValidate="tbxProductoTraduccion"
                                     CssClass="text-danger" ErrorMessage="Campo Requerido" />
 
                             </div>
@@ -183,11 +183,20 @@
                 </telerik:RadGrid>
             </div>
         </div>
+        <div class="row" style="margin-top: 20px;">
+            <div class="col-sm-3">
+                <telerik:RadLabel ID="lblTotalArticulos" CssClass="h4" runat="server"></telerik:RadLabel>
+            </div>
+            <div class="col-sm-6"></div>
+            <div class="col-sm-3" style="text-align: right;">
+                <telerik:RadLabel ID="lblValorTotal" CssClass="h3" runat="server"></telerik:RadLabel>
+            </div>
+        </div>
 
         <div class="row" style="margin-top: 20px">
             <div class="col-lg-10 col-md-10 col-xs-10"></div>
             <div class="col-lg-2 col-md-2 col-xs-2">
-                <asp:Button ID="btnIrImportacion" runat="server" CssClass="btn btn-block btn-default" Text="Ir a Pedimento" Width="100%" OnClick="btnIrImportacion_OnClick" />
+                <asp:Button ID="btnIrImportacion" runat="server" CssClass="btn btn-block btn-default" Text="Ir a Pedimento" Width="100%" OnClick="btnIrImportacion_OnClick" CausesValidation="False" />
             </div>
         </div>
     </div>
@@ -222,7 +231,7 @@
                             </div>
                         </div>
 
-                        <div class="row"  style="margin-top: 20px; margin-bottom: 10px;">
+                        <div class="row" style="margin-top: 20px; margin-bottom: 10px;">
                             <div class="col-lg-4 col-md-4 col-xs-4 ">
                                 <asp:Button runat="server" CssClass="btn btn-block btn-danger" Text="Cancelar" OnClientClick="CloseWindow();return false;" ID="btnCancelar" />
                             </div>
@@ -235,8 +244,12 @@
                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-4 col-xs-4">
-                                <div id="divBtnGuardar" style="display: block;"><asp:Button runat="server" CssClass="btn btn-block btn-primary" Text="Guardar" ID="btnGuardar" OnClick="btnGuardar_OnClick" CausesValidation="False"/></div> 
-                                <div id="divBtnCrear" style="display: none;"><asp:Button runat="server" CssClass="btn btn-block btn-primary" Text="Guardar" ID="btnCrear" OnClick="btnCrear_OnClick" CausesValidation="False"/></div> 
+                                <div id="divBtnGuardar" style="display: block;">
+                                    <asp:Button runat="server" CssClass="btn btn-block btn-primary" Text="Guardar" ID="btnGuardar" OnClick="btnGuardar_OnClick" CausesValidation="False" />
+                                </div>
+                                <div id="divBtnCrear" style="display: none;">
+                                    <asp:Button runat="server" CssClass="btn btn-block btn-primary" Text="Guardar" ID="btnCrear" OnClick="btnCrear_OnClick" CausesValidation="False" />
+                                </div>
                             </div>
                         </div>
                 </ContentTemplate>
