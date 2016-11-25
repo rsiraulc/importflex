@@ -1,8 +1,10 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="ImportFlex.Views.Proveedores.Default" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-     <div class="col-sm-12" style="margin-top: 20px;">
+    <div class="col-sm-12" style="margin-top: 20px;">
         <div class="row">
-            <div class="col-sm-10"> <h2>Proveedores</h2>
+            <div class="col-sm-10">
+                <h2>Proveedores</h2>
             </div>
             <div class="col-sm-2">
                 <asp:Button runat="server" ID="btnNuevoProveedor" Style="margin: 20px;" OnClientClick="OpenWindow();return false;" CssClass="btn btn-block btn-primary btn-md" Text="Nuevo Proveedor" />
@@ -10,11 +12,15 @@
         </div>
         <div class="row" style="padding: 5px 0px 5px 0px">
             <div class="well">
-                <div class="col-sm-12">
-                    <div class="row">
-                        <div class="col-sm-2">
-                            <asp:Button ID="btnFiltrar" runat="server" CssClass="btn btn-block btn-default" Text="Filtrar" OnClick="btnFiltrar_OnClick_" />
-                        </div>
+                <div class="row">
+                    <div class="col-sm-2">
+                        <span class="text-formulario">Código/Descripción</span>
+                    </div>
+                    <div class="col-sm-7">
+                        <telerik:RadTextBox ID="tbxCodigoDescripcion" runat="server" Skin="Bootstrap" Width="100%"></telerik:RadTextBox>
+                    </div>
+                    <div class="col-sm-2">
+                        <asp:Button ID="btnFiltrar" runat="server" CssClass="btn btn-block btn-default" Text="Filtrar" OnClick="btnFiltrar_OnClick_" />
                     </div>
                 </div>
             </div>

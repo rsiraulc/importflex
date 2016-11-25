@@ -22,6 +22,33 @@ namespace ImportFlex {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl divMenu;
         
         /// <summary>
+        /// aPedimento control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor aPedimento;
+        
+        /// <summary>
+        /// aMenu control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor aMenu;
+        
+        /// <summary>
+        /// aConfiguracion control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor aConfiguracion;
+        
+        /// <summary>
         /// lblNombre control.
         /// </summary>
         /// <remarks>

@@ -33,7 +33,7 @@ namespace ImportFlex.Controllers.Enums
             {
                 case 1:
                     return "FRONTERIZO";
-                case 2:
+                case 9:
                     return "INTERIOR";
                 default:
                     return "";

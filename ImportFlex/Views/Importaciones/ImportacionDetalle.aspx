@@ -10,6 +10,9 @@
             <div class="col-sm-12">
                 <telerik:RadLabel ID="lblTitulo" CssClass="h2" runat="server" Skin="Bootstrap"></telerik:RadLabel>
             </div>
+            <div class="col-sm-12">
+                <telerik:RadLabel ID="lblDatosImportacion" runat="server"></telerik:RadLabel>
+            </div>
             <div class="col-sm-3">
                 <asp:Button ID="btnNuevaFactura" OnClientClick="OpenWindow(0);return false;" CssClass="btn btn-block btn-success btn-md" Style="margin-top: 20px;" runat="server" Text="Agregar Factura" />
             </div>
@@ -58,6 +61,15 @@
                 </telerik:RadGrid>
             </div>
         </div>
+        <div class="row" style="margin-top: 20px;">
+            <div class="col-sm-3">
+                <telerik:RadLabel ID="lblTotalFacturas" CssClass="h4" runat="server"></telerik:RadLabel>
+            </div>
+            <div class="col-sm-6"></div>
+            <div class="col-sm-3" style="text-align: right;">
+                <telerik:RadLabel ID="lblValorTotal" CssClass="h3" runat="server"></telerik:RadLabel>
+            </div>
+        </div>
     </div>
 
 
@@ -104,10 +116,10 @@
                             </div>
                             <div class="col-sm-6">
                                 <div class="col-lg-4 col-md-12 col-xs-12">
-                                    <span class="text-formulario">Valor USD</span>
+                                    <span class="text-formulario">No. Entrada</span>
                                 </div>
                                 <div class="col-lg-8 col-md-12 col-xs-12">
-                                    <telerik:RadNumericTextBox ID="tbxValorUSD" NumberFormat-DecimalDigits="2" Type="Currency" runat="server" ShowSpinButtons="False" Skin="Bootstrap" MaxLength="14" Width="100%"></telerik:RadNumericTextBox>
+                                    <telerik:RadTextBox ID="tbxEntrada" runat="server" Skin="Bootstrap" Width="100%"></telerik:RadTextBox>
                                 </div>
                             </div>
                         </div>
@@ -124,29 +136,23 @@
                             </div>
                             <div class="col-sm-6">
                                 <div class="col-lg-4 col-md-12 col-xs-12">
-                                    <span class="text-formulario">No. Entrada</span>
-                                </div>
-                                <div class="col-lg-8 col-md-12 col-xs-12">
-                                    <telerik:RadTextBox ID="tbxEntrada" runat="server" Skin="Bootstrap" Width="100%"></telerik:RadTextBox>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- FILA 4 -->
-                        <div class="row" style="margin-top: 10px;">
-                            <div class="col-sm-6">
-                                <div class="col-lg-4 col-md-12 col-xs-12">
                                     <span class="text-formulario">Vinculación</span>
                                 </div>
                                 <div class="col-lg-8 col-md-12 col-xs-12">
                                     <telerik:RadCheckBox ID="chkVinculacion" runat="server" Text="" Skin="Bootstrap" AutoPostBack="False"></telerik:RadCheckBox>
                                 </div>
                             </div>
-                            <div class="col-sm-6">
-                                <div class="col-lg-4 col-md-12 col-xs-12">
+
+                        </div>
+
+                        <!-- FILA 4 -->
+                        <div class="row" style="margin-top: 10px;">
+
+                            <div class="col-sm-12">
+                                <div class="col-lg-2 col-md-12 col-xs-12">
                                     <span class="text-formulario">Notas</span>
                                 </div>
-                                <div class="col-lg-8 col-md-12 col-xs-12">
+                                <div class="col-lg-10 col-md-12 col-xs-12" style="padding-left: 10px;">
                                     <telerik:RadTextBox ID="tbxNotas" EmptyMessage="Notas (Opcional)" MaxLength="200" Height="45px" runat="server" Skin="Bootstrap" Width="100%"></telerik:RadTextBox>
                                 </div>
                             </div>

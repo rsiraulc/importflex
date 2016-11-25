@@ -50,7 +50,8 @@ namespace ImportFlex.Controllers.Export
                             lst559.Add(df);
                         else
                         {
-                            texto += $"551|{df.imf_productos_prod.prodFraccionArancelaria}|{df.imf_productos_prod.imf_traducciones_trad.tradTraduccion}|{df.imf_productos_prod.prodNumeroParte}|{df.fdeValor}|{df.fdeCantidadUMC}|{df.imf_unidadmedidacomercial_umc.umcIdClave}|{cantidadTarifa}||{f.facVinculacion}|1|{df.imf_productos_prod.prodMarca}|{df.imf_productos_prod.prodModelo}|{df.imf_paises_pai.paiClavePais}|USA||{df.fdeCantidadUMF}|{df.imf_unidadmedidafactura_umf.umfClave}|||||||||||||||||||||{UMT}||||{f.facNumeroFactura}||\r\n";
+                            var vinculacion = f.facVinculacion == true ? "1" : "0";
+                            texto += $"551|{df.imf_productos_prod.prodFraccionArancelaria}|{df.imf_productos_prod.imf_traducciones_trad.tradTraduccion}|{df.imf_productos_prod.prodNumeroParte}|{df.fdeValor}|{df.fdeCantidadUMC}|{df.imf_unidadmedidacomercial_umc.umcIdClave}|{cantidadTarifa}||{vinculacion}|1|{df.imf_productos_prod.prodMarca}|{df.imf_productos_prod.prodModelo}|{df.imf_paises_pai.paiClavePais}|USA||{df.fdeCantidadUMF}|{df.imf_unidadmedidafactura_umf.umfClave}|||||||||||||||||||||{UMT}||||{f.facNumeroFactura}||\r\n";
                             lst551.Add(df);
                         }
                     }

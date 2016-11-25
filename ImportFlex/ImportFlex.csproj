@@ -211,6 +211,7 @@
     <Content Include="Models\ImportFlexModel.edmx.diagram">
       <DependentUpon>ImportFlexModel.edmx</DependentUpon>
     </Content>
+    <None Include="Properties\PublishProfiles\Local2311.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Models\ImportFlexModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -268,7 +269,9 @@
     <Content Include="Views\Proveedores\Detalle.aspx" />
     <Content Include="Views\Traducciones\Default.aspx" />
     <Content Include="Views\Traducciones\Detalle.aspx" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Bundle.config" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />

@@ -46,6 +46,24 @@ namespace ImportFlex.Controllers
             return response;
         }
 
+        public ProveedoresResponse GetProveedoresByFiltro(string filtro)
+        {
+            var response = new ProveedoresResponse();
+
+            try
+            {
+                response.lstProveedores = db.imf_proveedores_prv.Where(p => (p.prvCodigo.Contains(filtro) || p.prvDescripcion.Contains(filtro))).ToList();
+                response.Success = true;
+            }
+            catch (Exception ex)
+            {
+                response.Success = false;
+                response.Message = ex.Message;
+            }
+
+            return response;
+        }
+
         public ProveedorResponse InsertProveedor(imf_proveedores_prv proveedor)
         {
             var response = new ProveedorResponse();

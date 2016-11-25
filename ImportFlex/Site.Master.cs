@@ -6,6 +6,7 @@ using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using ImportFlex.Account;
+using Microsoft.Ajax.Utilities;
 
 namespace ImportFlex
 {
@@ -25,8 +26,13 @@ namespace ImportFlex
             else
                 lblNombre.Text = string.IsNullOrEmpty(Sesiones.EmailUsuario) ? "": $"Hola {Sesiones.NombreUsuario}!";
 
-            //if (page == "/Account/Login")
-            //    divMenu.Visible = false;
+            if (Sesiones.Rol != "ADMIN")
+            {
+                aMenu.Visible = false;
+                aConfiguracion.Visible = false;
+                if (Sesiones.Rol.IsNullOrWhiteSpace())
+                    aPedimento.Visible = false;
+            }
 
         }
 

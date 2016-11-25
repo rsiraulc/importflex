@@ -41,14 +41,20 @@ namespace ImportFlex.Views.Importaciones
                 if (response.Importacion.impParte > 1)
                     lblTitulo.Text += $" Parte {response.Importacion.impParte}";
 
+                lblDatosImportacion.Text =
+                    $"Status: {response.Importacion.impStatus} - Tipo de Operación: {TipoOperacion.GetTipoOperacionById(response.Importacion.impTipoOperacion.Value)} - Región: {RegionPedimento.GetRegionById(Convert.ToInt32(response.Importacion.impRegion))}";
+
                 btnUpdateNumeroPedimento.Visible = !response.Importacion.impTieneNumeroImportacion ?? true;
                 btnMenuDescargar.Visible = response.Importacion.imf_facturas_fac.Any();
+                lblTotalFacturas.Text = "Total facturas: " + response.Importacion.impTotalFacturas;
+                lblValorTotal.Text = "Total $" + response.Importacion.impTotal;
 
                 // MANEJO DE VISUALIZACION DE BOTONES
                 switch (response.Importacion.impStatus)
                 {
                     case "BORRADOR":
-                        //btnExportar.Visible = false;
+                        lblTotalFacturas.Visible = false;
+                        lblValorTotal.Visible = false;
                         break;
                     case "EXPORTADO":
                         btnFinalizarPedimento.Visible = true;
@@ -101,8 +107,6 @@ namespace ImportFlex.Views.Importaciones
                 facMoneda = "USD",
                 facValorUsd = 0,
                 facValorExtranjera = 0,
-                //facValorUsd = Convert.ToDecimal(tbxValorUSD.Text),
-                //facValorExtranjera = Convert.ToDecimal(tbxValorUSD.Text),
                 facFlete = Convert.ToDecimal(txbFlete.Text),
                 facIdProveedor = Convert.ToInt32(cbProveedor.SelectedValue),
                 facTerminoFacturacion = "",

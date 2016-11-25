@@ -126,12 +126,15 @@ namespace ImportFlex.Controllers.Export
                     {
                         num++;
                         var total = d.fdeValor + p.impTotalFlete;
+                        var peso = d.fdeCantidadUMC*d.imf_productos_prod.prodPeso;
+                        var bultos = d.fdeCantidadUMC*d.imf_productos_prod.prodPiezasPorBulto;
+
                         tableDetalle.AddCell(new PdfPCell(new Phrase(num.ToString(), LetraCeldaSmall)) {HorizontalAlignment = 1 });
                         tableDetalle.AddCell(new PdfPCell(new Phrase(f.facNumeroEntrada, LetraCeldaSmall)) { HorizontalAlignment = 1 });
                         tableDetalle.AddCell(new PdfPCell(new Phrase(f.facNumeroFactura, LetraCeldaSmall)) { HorizontalAlignment = 1 });
                         tableDetalle.AddCell(new PdfPCell(new Phrase(d.imf_productos_prod.imf_traducciones_trad.tradTraduccion, LetraCeldaSmall)) { HorizontalAlignment = 1 });
                         tableDetalle.AddCell(new PdfPCell(new Phrase(d.fdeCantidadUMC.ToString(), LetraCeldaSmall)) { HorizontalAlignment = 1 });
-                        tableDetalle.AddCell(new PdfPCell(new Phrase("0", LetraCeldaSmall)) { HorizontalAlignment = 1 });
+                        tableDetalle.AddCell(new PdfPCell(new Phrase(bultos.ToString(), LetraCeldaSmall)) { HorizontalAlignment = 1 });
                         tableDetalle.AddCell(new PdfPCell(new Phrase("0", LetraCeldaSmall)) { HorizontalAlignment = 1 });
                         tableDetalle.AddCell(new PdfPCell(new Phrase(f.imf_proveedores_prv.prvDescripcion, LetraCeldaSmall)) { HorizontalAlignment = 1 });
                         tableDetalle.AddCell(new PdfPCell(new Phrase(d.imf_productos_prod.imf_paises_pai.paiClavePais, LetraCeldaSmall)) { HorizontalAlignment = 1 });

@@ -22,6 +22,15 @@ namespace ImportFlex.Views.Importaciones {
         protected global::Telerik.Web.UI.RadLabel lblTitulo;
         
         /// <summary>
+        /// lblDatosImportacion control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Telerik.Web.UI.RadLabel lblDatosImportacion;
+        
+        /// <summary>
         /// btnNuevaFactura control.
         /// </summary>
         /// <remarks>
@@ -85,6 +94,24 @@ namespace ImportFlex.Views.Importaciones {
         protected global::Telerik.Web.UI.RadGrid gvFactura;
         
         /// <summary>
+        /// lblTotalFacturas control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Telerik.Web.UI.RadLabel lblTotalFacturas;
+        
+        /// <summary>
+        /// lblValorTotal control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Telerik.Web.UI.RadLabel lblValorTotal;
+        
+        /// <summary>
         /// radWindowManager control.
         /// </summary>
         /// <remarks>
@@ -130,13 +157,13 @@ namespace ImportFlex.Views.Importaciones {
         protected global::Telerik.Web.UI.RadDatePicker dpFechaFacturacion;
         
         /// <summary>
-        /// tbxValorUSD control.
+        /// tbxEntrada control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadNumericTextBox tbxValorUSD;
+        protected global::Telerik.Web.UI.RadTextBox tbxEntrada;
         
         /// <summary>
         /// txbFlete control.
@@ -146,15 +173,6 @@ namespace ImportFlex.Views.Importaciones {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Telerik.Web.UI.RadNumericTextBox txbFlete;
-        
-        /// <summary>
-        /// tbxEntrada control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Telerik.Web.UI.RadTextBox tbxEntrada;
         
         /// <summary>
         /// chkVinculacion control.

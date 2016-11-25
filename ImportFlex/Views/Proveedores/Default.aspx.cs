@@ -32,7 +32,14 @@ namespace ImportFlex.Views.Proveedores
 
         protected void btnFiltrar_OnClick_(object sender, EventArgs e)
         {
-            
+            var data = new ProveedorController();
+            var response = data.GetProveedoresByFiltro(tbxCodigoDescripcion.Text);
+
+            if (response.Success)
+            {
+                gvProveedores.DataSource = response.lstProveedores;
+                gvProveedores.DataBind();
+            }
         }
     }
 }

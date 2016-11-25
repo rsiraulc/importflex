@@ -14,51 +14,56 @@
                 <asp:Button runat="server" ID="btnNuevaImportacion" Style="margin: 20px;" OnClientClick="OpenWindow();return false;" CssClass="btn btn-block btn-primary btn-md" Text="Nuevo Pedimento" />
             </div>
         </div>
-        <div class="row" style="padding: 5px 0px 5px 0px">
-            <div class="well">
-                <div class="col-sm-12">
-                    <div class="row">
-                        <div class="col-sm-5">
-                            <label class="col-sm-4 control-label">Fecha</label>
-                            <div class="col-sm-8">
-                                <telerik:RadMonthYearPicker ID="rmypFechaFiltro" runat="server" Skin="Bootstrap" Width="100%"></telerik:RadMonthYearPicker>
+        <asp:UpdatePanel ID="panelFiltro" runat="server">
+            <ContentTemplate>
+                <div class="row" style="padding: 5px 0px 5px 0px">
+                    <div class="well">
+                        <div class="col-sm-12">
+                            <div class="row">
+                                <div class="col-sm-5">
+                                    <label class="col-sm-4 control-label">Fecha</label>
+                                    <div class="col-sm-8">
+                                        <telerik:RadMonthYearPicker ID="rmypFechaFiltro" runat="server" Skin="Bootstrap" Width="100%"></telerik:RadMonthYearPicker>
+                                    </div>
+                                </div>
+                                <div class="col-sm-5">
+                                    <label class="col-sm-4 control-label">Status</label>
+                                    <div class="col-sm-8">
+                                        <telerik:RadComboBox ID="cbStatus" runat="server" Skin="Bootstrap" Width="100%"></telerik:RadComboBox>
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <asp:Button ID="btnFiltrar" runat="server" CssClass="btn btn-block btn-default" Text="Filtrar" OnClick="btnFiltrar_OnClick" />
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-sm-5">
-                            <label class="col-sm-4 control-label">Status</label>
-                            <div class="col-sm-8">
-                                <telerik:RadComboBox ID="cbStatus" runat="server" Skin="Bootstrap" Width="100%"></telerik:RadComboBox>
-                            </div>
-                        </div>
-                        <div class="col-sm-2">
-                            <asp:Button ID="btnFiltrar" runat="server" CssClass="btn btn-block btn-default" Text="Filtrar" OnClick="btnFiltrar_OnClick" />
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="row">
-            <telerik:RadGrid ID="gvImportaciones" runat="server" Width="100%" Skin="Bootstrap" AutoGenerateColumns="False">
-                <MasterTableView DataKeyNames="impIdImportacion">
-                    <Columns>
-                        <telerik:GridBoundColumn HeaderText="Id" UniqueName="Id" DataField="impIdImportacion"></telerik:GridBoundColumn>
-                        <telerik:GridBoundColumn HeaderText="No. Pedimento" UniqueName="NoPedimento" DataField="impNumeroPedimento"></telerik:GridBoundColumn>
-                        <telerik:GridBoundColumn HeaderText="Parte" UniqueName="Parte" DataField="impParte"></telerik:GridBoundColumn>
-                        <telerik:GridBoundColumn HeaderText="Fecha Registro" UniqueName="Fecha" DataField="impFecha"></telerik:GridBoundColumn>
-                        <telerik:GridBoundColumn HeaderText="Status" UniqueName="Status" DataField="impStatus"></telerik:GridBoundColumn>
-                        <telerik:GridBoundColumn HeaderText="Total Facturas" UniqueName="TotalFacturas" DataField="impTotalFacturas"></telerik:GridBoundColumn>
-                        <telerik:GridBoundColumn HeaderText="Total Articulos" UniqueName="TotalArticulos" DataField="impTotalArticulos"></telerik:GridBoundColumn>
-                        <telerik:GridBoundColumn HeaderText="Total" UniqueName="Total" DataField="impTotal" DataFormatString="{0:C}"></telerik:GridBoundColumn>
-                        <telerik:GridTemplateColumn UniqueName="Detalle">
-                            <ItemTemplate>
-                                <asp:ImageButton runat="server" ToolTip="Ver Detalle" ID="imgBtnDetalle" Width="32px" ImageUrl="~/Images/iconDetails.png"
-                                    PostBackUrl='<%# ResolveUrl("~/Views/Importaciones/ImportacionDetalle?ID="+Eval("impIdImportacion")) %>' />
-                            </ItemTemplate>
-                        </telerik:GridTemplateColumn>
-                    </Columns>
-                </MasterTableView>
-            </telerik:RadGrid>
-        </div>
+                <div class="row">
+                    <telerik:RadGrid ID="gvImportaciones" runat="server" Width="100%" Skin="Bootstrap" AutoGenerateColumns="False">
+                        <MasterTableView DataKeyNames="impIdImportacion">
+                            <Columns>
+                                <telerik:GridBoundColumn HeaderText="Id" UniqueName="Id" DataField="impIdImportacion"></telerik:GridBoundColumn>
+                                <telerik:GridBoundColumn HeaderText="No. Pedimento" UniqueName="NoPedimento" DataField="impNumeroPedimento"></telerik:GridBoundColumn>
+                                <telerik:GridBoundColumn HeaderText="Parte" UniqueName="Parte" DataField="impParte"></telerik:GridBoundColumn>
+                                <telerik:GridBoundColumn HeaderText="Fecha Registro" UniqueName="Fecha" DataField="impFecha"></telerik:GridBoundColumn>
+                                <telerik:GridBoundColumn HeaderText="Status" UniqueName="Status" DataField="impStatus"></telerik:GridBoundColumn>
+                                <telerik:GridBoundColumn HeaderText="Total Facturas" UniqueName="TotalFacturas" DataField="impTotalFacturas"></telerik:GridBoundColumn>
+                                <telerik:GridBoundColumn HeaderText="Total Articulos" UniqueName="TotalArticulos" DataField="impTotalArticulos"></telerik:GridBoundColumn>
+                                <telerik:GridBoundColumn HeaderText="Total" UniqueName="Total" DataField="impTotal" DataFormatString="{0:C}"></telerik:GridBoundColumn>
+                                <telerik:GridTemplateColumn UniqueName="Detalle">
+                                    <ItemTemplate>
+                                        <asp:ImageButton runat="server" ToolTip="Ver Detalle" ID="imgBtnDetalle" Width="32px" ImageUrl="~/Images/iconDetails.png"
+                                            PostBackUrl='<%# ResolveUrl("~/Views/Importaciones/ImportacionDetalle?ID="+Eval("impIdImportacion")) %>' />
+                                    </ItemTemplate>
+                                </telerik:GridTemplateColumn>
+                            </Columns>
+                        </MasterTableView>
+                    </telerik:RadGrid>
+                </div>
+            </ContentTemplate>
+        </asp:UpdatePanel>
+
     </div>
 
     <!-- MODAL PARA CAPTURA DE NUEVA IMPORTACION -->
