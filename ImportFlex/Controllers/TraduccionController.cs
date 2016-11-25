@@ -46,6 +46,24 @@ namespace ImportFlex.Controllers
             return response;
         }
 
+        public TraduccionesResponse GetTraduccionesByFiltros(string filtro)
+        {
+            var response = new TraduccionesResponse();
+
+            try
+            {
+                response.Traducciones = db.imf_traducciones_trad.Where(t => t.tradTraduccion.Contains(filtro)).ToList();
+                response.Success = true;
+            }
+            catch (Exception ex)
+            {
+                response.Message = ex.Message;
+                response.Success = false;
+            }
+
+            return response;
+        }
+
         public TraduccionResponse InsertTraduccion(imf_traducciones_trad traduccion)
         {
             var response = new TraduccionResponse();

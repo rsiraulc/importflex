@@ -22,13 +22,13 @@ namespace ImportFlex.Views.Traducciones {
         protected global::System.Web.UI.WebControls.Button btnNuevaTraduccion;
         
         /// <summary>
-        /// tbxNumeroParte control.
+        /// panelFiltro control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadTextBox tbxNumeroParte;
+        protected global::System.Web.UI.UpdatePanel panelFiltro;
         
         /// <summary>
         /// tbxDescripcion control.

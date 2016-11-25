@@ -32,7 +32,14 @@ namespace ImportFlex.Views.Traducciones
 
         protected void btnFiltrar_OnClick(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            var data = new TraduccionController();
+            var response = data.GetTraduccionesByFiltros(tbxDescripcion.Text);
+
+            if (response.Success)
+            {
+                gvTraducciones.DataSource = response.Traducciones;
+                gvTraducciones.DataBind();
+            }
         }
     }
 }
