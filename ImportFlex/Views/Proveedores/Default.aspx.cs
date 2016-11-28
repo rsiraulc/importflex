@@ -41,5 +41,10 @@ namespace ImportFlex.Views.Proveedores
                 gvProveedores.DataBind();
             }
         }
+
+        protected void btnNuevoProveedor_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Views/Proveedores/Detalle.aspx");
+        }
     }
 }

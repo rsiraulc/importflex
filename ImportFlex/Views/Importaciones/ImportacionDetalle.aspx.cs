@@ -115,7 +115,8 @@ namespace ImportFlex.Views.Importaciones
                 facNumeroEntrada = tbxEntrada.Text,
                 facNotas = tbxNotas.Text,
                 facIdUsuarioRegistro = Sesiones.UsuarioID.Value,
-                facVinculacion = chkVinculacion.Checked
+                facVinculacion = chkVinculacion.Checked,
+                facOrdenCompra = tbxPO.Text
             };
 
             var response = data.InsertFactura(factura);
@@ -214,6 +215,34 @@ namespace ImportFlex.Views.Importaciones
             }
             else
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "alertSuccess", $"alert('{response.Message}');", true);
+        }
+
+        protected void lnkDescargarFIP_OnClick(object sender, EventArgs e)
+        {
+            var data = new ImportacionController();
+            var response = data.GetImportacionById(int.Parse(Request.Params["Id"]));
+
+            if (response.Success)
+            {
+                var fip = new FormatoImportacionFrontera();
+                var respuesta = fip.GetFormatoImportacion(response.Importacion);
+
+                if (respuesta.Success)
+                {
+                    Response.Clear();
+                    Response.ClearHeaders();
+                    Response.ClearContent();
+                    Response.AddHeader("Content-Disposition", "attachment; filename=" + respuesta.NombreArchivo);
+                    Response.ContentType = "application/pdf";
+                    Response.Flush();
+                    Response.TransmitFile(respuesta.RutaArchivo);
+                    Response.End();
+                }
+                else
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "alertSuccess", $"alert('{response.Message}');", true);
+
+                fip.EliminarArchivo(respuesta.RutaArchivo);
+            }
         }
     }
 }

@@ -18,8 +18,18 @@ namespace ImportFlex.Views.Proveedores
         {
             if (!IsPostBack)
             {
-                CargarProveedor(int.Parse(Request.Params["Id"]));
+                CargarIncoterms();
+                if (Request.Params["ID"] != null)
+                    CargarProveedor(int.Parse(Request.Params["ID"]));
+                
+
             }
+        }
+
+        private void CargarIncoterms()
+        {
+            cbxIncoterm.DataSource = new List<string> { "EXW", "FCA", "FAS", "FOB", "CFR", "CIF", "CPT", "CIP", "DAT", "DAP", "DDP" };
+            cbxIncoterm.DataBind();
         }
 
         private void CargarProveedor(int id)
@@ -34,6 +44,9 @@ namespace ImportFlex.Views.Proveedores
                 tbxDescripcion.Text = response.Proveedor.prvDescripcion;
                 tbxTax.Text = response.Proveedor.prvIdTax;
 
+                cbxIncoterm.SelectedValue = response.Proveedor.prvIncoterm ?? "DAP";
+                cbxIncoterm.DataBind();
+
                 proveedor = response.Proveedor;
             }
         }
@@ -42,16 +55,38 @@ namespace ImportFlex.Views.Proveedores
         {
             var data = new ProveedorController();
 
+            if (Request.Params["ID"] == null)
+                proveedor = new imf_proveedores_prv();
+            else
+            {
+                var _response = data.GetProveedorById(Convert.ToInt32(Request.Params["ID"]));
+                if (_response.Success)
+                    proveedor = _response.Proveedor;
+            }
+
             proveedor.prvCodigo = tbxCodigo.Text;
             proveedor.prvDescripcion = tbxDescripcion.Text;
             proveedor.prvIdTax = tbxTax.Text;
+            proveedor.prvIncoterm = cbxIncoterm.SelectedValue;
 
-            var response = data.UpdateProveedor(proveedor);
-            if (response.Success)
-                Response.Redirect($"~/Views/Proveedores/Default");
+            if (Request.Params["ID"] != null)
+            {
+                var response = data.UpdateProveedor(proveedor);
+                if (response.Success)
+                    Response.Redirect($"~/Views/Proveedores/Default");
+                else
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "alertSuccess",
+                       $"alert('Ha ocurrido un error. {response.Message}');", true);
+            }
             else
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "alertSuccess",
-                   $"alert('Ha ocurrido un error. {response.Message}');", true);
+            {
+                var response = data.InsertProveedor(proveedor);
+                if (response.Success)
+                    Response.Redirect($"~/Views/Proveedores/Detalle.aspx?ID={response.Proveedor.prvIdProveedor}");
+                else
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "alertSuccess",
+                      $"alert('Ha ocurrido un error. {response.Message}');", true);
+            }
         }
     }
 }

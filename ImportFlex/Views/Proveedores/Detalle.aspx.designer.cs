@@ -49,6 +49,15 @@ namespace ImportFlex.Views.Proveedores {
         protected global::Telerik.Web.UI.RadTextBox tbxTax;
         
         /// <summary>
+        /// cbxIncoterm control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Telerik.Web.UI.RadComboBox cbxIncoterm;
+        
+        /// <summary>
         /// btnGuardar control.
         /// </summary>
         /// <remarks>

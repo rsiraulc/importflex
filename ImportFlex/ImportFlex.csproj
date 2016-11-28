@@ -213,6 +213,7 @@
       <DependentUpon>ImportFlexModel.edmx</DependentUpon>
     </Content>
     <None Include="Properties\PublishProfiles\Local2311.pubxml" />
+    <None Include="Properties\PublishProfiles\Produccion.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Models\ImportFlexModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -305,6 +306,7 @@
     <Compile Include="Controllers\Export\ArchivoPedimento.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Controllers\Export\FormatoImportacionFrontera.cs" />
     <Compile Include="Controllers\Export\HojaTraduccion.cs" />
     <Compile Include="Controllers\FacturaController.cs" />
     <Compile Include="Controllers\FacturaDetalleController.cs" />

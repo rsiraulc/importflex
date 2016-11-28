@@ -7,7 +7,7 @@
                 <h2>Proveedores</h2>
             </div>
             <div class="col-sm-2">
-                <asp:Button runat="server" ID="btnNuevoProveedor" Style="margin: 20px;" OnClientClick="OpenWindow();return false;" CssClass="btn btn-block btn-primary btn-md" Text="Nuevo Proveedor" />
+                <asp:Button runat="server" ID="btnNuevoProveedor" Style="margin: 20px;" CssClass="btn btn-block btn-primary btn-md" Text="Nuevo Proveedor"  OnClick="btnNuevoProveedor_Click"/>
             </div>
         </div>
         <div class="row" style="padding: 5px 0px 5px 0px">
@@ -34,6 +34,7 @@
                         <telerik:GridBoundColumn HeaderText="Código" UniqueName="Codigo" DataField="prvCodigo"></telerik:GridBoundColumn>
                         <telerik:GridBoundColumn HeaderText="Descripción" UniqueName="Descripcion" DataField="prvDescripcion"></telerik:GridBoundColumn>
                         <telerik:GridBoundColumn HeaderText="Tax Id" UniqueName="IdTax" DataField="prvIdTax"></telerik:GridBoundColumn>
+                        <telerik:GridBoundColumn HeaderText="INCOTERM" UniqueName="Incoterm" DataField="prvIncoterm"></telerik:GridBoundColumn>
                         <telerik:GridTemplateColumn UniqueName="Detalle">
                             <ItemTemplate>
                                 <asp:ImageButton runat="server" ToolTip="Ver Detalle" ID="imgBtnDetalle" Width="32px" ImageUrl="~/Images/iconDetails.png"

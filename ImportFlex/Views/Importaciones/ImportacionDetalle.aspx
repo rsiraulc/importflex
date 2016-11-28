@@ -33,6 +33,8 @@
                         </li>
                         <li>
                             <asp:LinkButton ID="lnkDescargarHT" runat="server" OnClick="lnkDescargarHT_OnClick" Width="100%">Hoja Traducción (.pdf)</asp:LinkButton></li>
+                        <li>
+                            <asp:LinkButton ID="lnkDescargarFIP" runat="server" OnClick="lnkDescargarFIP_OnClick" Width="100%">Formato Importación (.pdf)</asp:LinkButton></li>
                     </ul>
                 </div>
                 <%--<asp:Button ID="btnExportar" CssClass="btn btn-block btn-primary btn-md" Style="margin-top: 20px;" runat="server" Text="Descargar Formatos" OnClick="btnExportar_OnClick" />--%>
@@ -46,6 +48,7 @@
                             <telerik:GridBoundColumn HeaderText="ID" UniqueName="ID" DataField="facIdFactura"></telerik:GridBoundColumn>
                             <telerik:GridBoundColumn HeaderText="No. Factura" UniqueName="NoFactura" DataField="facNumeroFactura"></telerik:GridBoundColumn>
                             <telerik:GridBoundColumn HeaderText="No. Entrada" UniqueName="NoEntrada" DataField="facNumeroEntrada"></telerik:GridBoundColumn>
+                            <telerik:GridBoundColumn HeaderText="P.O." UniqueName="PO" DataField="facOrdenCompra"></telerik:GridBoundColumn>
                             <telerik:GridBoundColumn HeaderText="Proveedor" UniqueName="ProveedorNombre" DataField="imf_proveedores_prv.prvCodigo"></telerik:GridBoundColumn>
                             <telerik:GridBoundColumn HeaderText="Proveedor" UniqueName="ProveedorNombre" DataField="imf_proveedores_prv.prvCodigo"></telerik:GridBoundColumn>
                             <telerik:GridBoundColumn HeaderText="Fecha Factura" UniqueName="fechaFacturacion" DataField="facFechaFactura"></telerik:GridBoundColumn>
@@ -147,12 +150,20 @@
 
                         <!-- FILA 4 -->
                         <div class="row" style="margin-top: 10px;">
+                            <div class="col-sm-6">
+                                <div class="col-lg-4 col-md-12 col-sm-12">
+                                    <span class="text-formulario">P.O.</span>
+                                </div>
+                                <div class="col-lg-8 col-md-12 col-sm-12">
+                                    <telerik:RadTextBox ID="tbxPO" runat="server" EmptyMessage="Purchase Order" Skin="Bootstrap" Width="100%"></telerik:RadTextBox>
+                                </div>
+                            </div>
 
-                            <div class="col-sm-12">
-                                <div class="col-lg-2 col-md-12 col-xs-12">
+                            <div class="col-sm-6">
+                                <div class="col-lg-4 col-md-12 col-xs-12">
                                     <span class="text-formulario">Notas</span>
                                 </div>
-                                <div class="col-lg-10 col-md-12 col-xs-12" style="padding-left: 10px;">
+                                <div class="col-lg-8 col-md-12 col-xs-12" style="padding-left: 10px;">
                                     <telerik:RadTextBox ID="tbxNotas" EmptyMessage="Notas (Opcional)" MaxLength="200" Height="45px" runat="server" Skin="Bootstrap" Width="100%"></telerik:RadTextBox>
                                 </div>
                             </div>

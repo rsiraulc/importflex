@@ -3,10 +3,10 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div class="row" style="margin-top: 20px;">
         <div class="col-sm-12">
-            <telerik:RadLabel ID="lblTitulo" CssClass="h2" runat="server"></telerik:RadLabel>
+            <telerik:RadLabel ID="lblTitulo" CssClass="h2" runat="server" Text="Proveedor"></telerik:RadLabel>
         </div>
     </div>
-    <div class="well" style="padding: 5px 0px 5px 0px">
+    <div class="well" style="padding: 7px 20px 20px 15px">
         <div class="row" style="margin-top: 20px;">
             <div class="col-sm-4">
                 <div class="col-lg-4 col-md-12 col-xs-12">
@@ -30,6 +30,16 @@
                 </div>
                 <div class="col-lg-8 col-md-12 col-xs-12">
                     <telerik:RadTextBox ID="tbxTax" runat="server" Skin="Bootstrap" Width="100%"></telerik:RadTextBox>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="margin-top: 20px">
+            <div class="col-sm-4">
+                <div class="col-lg-4 col-md-12 col-xs-12">
+                    <span class="text-formulario">Incoterm</span>
+                </div>
+                <div class="col-lg-8 col-md-12 col-xs-12">
+                    <telerik:RadComboBox ID="cbxIncoterm" runat="server" Skin="Bootstrap" Width="100%"></telerik:RadComboBox>
                 </div>
             </div>
         </div>

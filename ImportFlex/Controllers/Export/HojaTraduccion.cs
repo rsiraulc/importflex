@@ -14,17 +14,17 @@ namespace ImportFlex.Controllers.Export
 {
     public class HojaTraduccion
     {
-        private Font LetraTituloReporte = FontFactory.GetFont(FontFactory.HELVETICA, 16, Font.BOLD);
-        Font LetraTituloTabla = FontFactory.GetFont(FontFactory.HELVETICA, 14, Font.BOLD);
-        Font LetraTituloTablaWhite = FontFactory.GetFont(FontFactory.HELVETICA, 9, Font.BOLD, BaseColor.WHITE);
-        Font LetraTituloTablaBlack = FontFactory.GetFont(FontFactory.HELVETICA, 9, Font.BOLD, BaseColor.WHITE);
-        Font LetraTituloRojo = FontFactory.GetFont(FontFactory.HELVETICA, 9, Font.BOLD, BaseColor.RED);
-        Font LetraTituloTablaGrande = FontFactory.GetFont(FontFactory.HELVETICA, 10, Font.BOLD);
-        Font LetraCeldaTabla = FontFactory.GetFont(FontFactory.HELVETICA, 9, Font.NORMAL);
-        Font LetraCeldaSmallBold = FontFactory.GetFont(FontFactory.HELVETICA, 5, Font.BOLD);
-        Font LetraCeldaSmall = FontFactory.GetFont(FontFactory.HELVETICA, 5, Font.NORMAL);
-        Font LetraLinks = FontFactory.GetFont(FontFactory.HELVETICA, 9, Font.NORMAL, BaseColor.BLUE);
-        BaseColor colorRow;
+        protected Font LetraTituloReporte = FontFactory.GetFont(FontFactory.HELVETICA, 16, Font.BOLD);
+        protected Font LetraTituloTabla = FontFactory.GetFont(FontFactory.HELVETICA, 14, Font.BOLD);
+        protected Font LetraTituloTablaWhite = FontFactory.GetFont(FontFactory.HELVETICA, 9, Font.BOLD, BaseColor.WHITE);
+        protected Font LetraTituloTablaBlack = FontFactory.GetFont(FontFactory.HELVETICA, 9, Font.BOLD, BaseColor.WHITE);
+        protected Font LetraTituloRojo = FontFactory.GetFont(FontFactory.HELVETICA, 9, Font.BOLD, BaseColor.RED);
+        protected Font LetraTituloTablaGrande = FontFactory.GetFont(FontFactory.HELVETICA, 10, Font.BOLD);
+        protected Font LetraCeldaTabla = FontFactory.GetFont(FontFactory.HELVETICA, 9, Font.NORMAL);
+        protected Font LetraCeldaSmallBold = FontFactory.GetFont(FontFactory.HELVETICA, 5, Font.BOLD);
+        protected Font LetraCeldaSmall = FontFactory.GetFont(FontFactory.HELVETICA, 5, Font.NORMAL);
+        protected Font LetraLinks = FontFactory.GetFont(FontFactory.HELVETICA, 9, Font.NORMAL, BaseColor.BLUE);
+        protected BaseColor colorRow;
 
         public ArchivoResponse CrearHojaTraduccion(imf_importaciones_imp p)
         {
@@ -47,7 +47,7 @@ namespace ImportFlex.Controllers.Export
                 var tableEncabezado = new PdfPTable(3)
                 {
                     SpacingAfter = 10,
-                    WidthPercentage = 100
+                    WidthPercentage = 100,
                 };
 
                 tableEncabezado.SetWidths(new float[] { 150f, 350f, 100f });

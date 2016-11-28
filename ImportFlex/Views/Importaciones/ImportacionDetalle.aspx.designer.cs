@@ -85,6 +85,15 @@ namespace ImportFlex.Views.Importaciones {
         protected global::System.Web.UI.WebControls.LinkButton lnkDescargarHT;
         
         /// <summary>
+        /// lnkDescargarFIP control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lnkDescargarFIP;
+        
+        /// <summary>
         /// gvFactura control.
         /// </summary>
         /// <remarks>
@@ -182,6 +191,15 @@ namespace ImportFlex.Views.Importaciones {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Telerik.Web.UI.RadCheckBox chkVinculacion;
+        
+        /// <summary>
+        /// tbxPO control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Telerik.Web.UI.RadTextBox tbxPO;
         
         /// <summary>
         /// tbxNotas control.

@@ -35,6 +35,7 @@ namespace ImportFlex.Models
         public string facNotas { get; set; }
         public int facIdUsuarioRegistro { get; set; }
         public Nullable<bool> facVinculacion { get; set; }
+        public string facOrdenCompra { get; set; }
     
         public virtual imf_proveedores_prv imf_proveedores_prv { get; set; }
         public virtual imf_importaciones_imp imf_importaciones_imp { get; set; }

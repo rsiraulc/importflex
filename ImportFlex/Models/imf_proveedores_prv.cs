@@ -24,6 +24,7 @@ namespace ImportFlex.Models
         public string prvCodigo { get; set; }
         public string prvDescripcion { get; set; }
         public string prvIdTax { get; set; }
+        public string prvIncoterm { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<imf_facturas_fac> imf_facturas_fac { get; set; }

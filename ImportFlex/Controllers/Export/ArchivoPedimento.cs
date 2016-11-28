@@ -28,6 +28,7 @@ namespace ImportFlex.Controllers.Export
                         : f.facFechaFactura.Value.Day.ToString();
                     var fechaFactura = $"{f.facFechaFactura.Value.Year}{f.facFechaFactura.Value.Month}{dia}";
                     var pedimento = p.impTieneNumeroImportacion == true ? p.impNumeroPedimento : "";
+                    var terminoFacturacion = f.imf_proveedores_prv.prvIncoterm ?? "";
 
                     var lst559 = new List<imf_facturadetalle_fde>();
                     var lst551 = new List<imf_facturadetalle_fde>();
@@ -36,7 +37,7 @@ namespace ImportFlex.Controllers.Export
                     string texto = $"{p.impTipoRegistro}|{p.impTipoOperacion}|C1|{pedimento}|{p.impCodigoImportador}|0|0|0|0|0|0|0|7|7|7|{p.impRegion}|\r\n";
 
                     // DATOS DE FACTURA
-                    texto += $"505|{f.facNumeroFactura}|{fechaFactura}|DAP|USD|{f.facValorExtranjera}|{f.facValorUsd}|{f.imf_proveedores_prv.prvCodigo}||||||||||||||||||||||||||||||||||||\r\n";
+                    texto += $"505|{f.facNumeroFactura}|{fechaFactura}|{terminoFacturacion}|USD|{f.facValorExtranjera}|{f.facValorUsd}|{f.imf_proveedores_prv.prvCodigo}||||||||||||||||||||||||||||||||||||\r\n";
 
 
                     // DETALLE DE FACTURA (551)
