@@ -39,5 +39,11 @@ namespace ImportFlex.Views.Productos
                 gvProductos.DataBind();
             }
         }
+
+        protected void btnNuevoProducto_OnClick(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Views/Productos/Detalle.aspx");
+        }
+
     }
 }

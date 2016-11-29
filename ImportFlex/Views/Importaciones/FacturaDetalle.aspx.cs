@@ -310,12 +310,14 @@ namespace ImportFlex.Views.Importaciones
                     tbxNumeroSerie.Visible = true;
                     tbxCantidad.Visible = false;
                     lblSerieCantidad.Text = "No. Serie";
+                    rfvCantidad_NoSerie.ControlToValidate = "tbxNumeroSerie";
                 }
                 else
                 {
                     tbxNumeroSerie.Visible = false;
                     tbxCantidad.Visible = true;
                     lblSerieCantidad.Text = "Cantidad";
+                    rfvCantidad_NoSerie.ControlToValidate = "tbxCantidad";
                 }
 
 

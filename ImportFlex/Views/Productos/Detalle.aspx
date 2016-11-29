@@ -14,6 +14,7 @@
                 </div>
                 <div class="col-lg-8 col-md-12 col-xs-12">
                     <telerik:RadTextBox ID="tbxDescripcion" Skin="Bootstrap" runat="server" Width="100%"></telerik:RadTextBox>
+                    <asp:RequiredFieldValidator ID="rfvDescripcion" ControlToValidate="tbxDescripcion" runat="server" ErrorMessage="Campo Requerido" CssClass="text-danger"></asp:RequiredFieldValidator>
                 </div>
             </div>
             <div class="col-sm-4">
@@ -35,6 +36,7 @@
                 </div>
                 <div class="col-lg-8 col-md-12 col-xs-12">
                     <telerik:RadTextBox ID="tbxNumeroParte" runat="server" Skin="Bootstrap" Width="100%"></telerik:RadTextBox>
+                    <asp:RequiredFieldValidator ID="rfvNumeroParte" ControlToValidate="tbxNumeroParte" runat="server" ErrorMessage="Campo Requerido" CssClass="text-danger"></asp:RequiredFieldValidator>
                 </div>
             </div>
         </div>
@@ -65,13 +67,14 @@
                 </div>
             </div>
         </div>
-        <div class="row" style="margin-top: 20px;">
+        <div class="row" style="margin-top: 40px;">
             <div class="col-sm-4">
                 <div class="col-lg-4 col-md-12 col-xs-12">
                     <span class="text-formulario">Fracci&oacute;n Arancelaria</span>
                 </div>
                 <div class="col-lg-8 col-md-12 col-xs-12">
                     <telerik:RadTextBox ID="tbxFraccion" Skin="Bootstrap" runat="server" Width="100%"></telerik:RadTextBox>
+                    <asp:RequiredFieldValidator ID="rfvFraccion" ControlToValidate="tbxFraccion" runat="server" ErrorMessage="Campo Requerido" CssClass="text-danger"></asp:RequiredFieldValidator>
                 </div>
             </div>
             <div class="col-sm-4">
@@ -80,6 +83,7 @@
                 </div>
                 <div class="col-lg-8 col-md-12 col-xs-12">
                     <telerik:RadComboBox ID="cbPais" DataValueField="paiIdPais" DataTextField="paiDescripcion" runat="server" Skin="Bootstrap" Width="100%"></telerik:RadComboBox>
+                    <asp:RequiredFieldValidator ID="rfvPais" ControlToValidate="cbPais" runat="server" ErrorMessage="Campo Requerido" CssClass="text-danger"></asp:RequiredFieldValidator>
                 </div>
             </div>
             <div class="col-sm-4">
@@ -117,13 +121,14 @@
                 </div>
             </div>
         </div>
-        <div class="row" style="margin-top: 20px;">
+        <div class="row" style="margin-top: 40px;">
             <div class="col-sm-4">
                 <div class="col-lg-4 col-md-12 col-xs-12">
                     <span class="text-formulario">Unidad Aduana</span>
                 </div>
                 <div class="col-lg-8 col-md-12 col-xs-12">
                     <telerik:RadComboBox ID="cbUMC" RenderMode="Lightweight" DataValueField="umcIdClave" DataTextField="umcDescripcion" runat="server" Skin="Bootstrap" Width="100%"></telerik:RadComboBox>
+                    <asp:RequiredFieldValidator ID="rfvUMC" ControlToValidate="cbUMC" runat="server" ErrorMessage="Campo Requerido" CssClass="text-danger"></asp:RequiredFieldValidator>
                 </div>
             </div>
             <div class="col-sm-4">
@@ -132,6 +137,7 @@
                 </div>
                 <div class="col-lg-8 col-md-12 col-xs-12">
                     <telerik:RadComboBox ID="cbUMF" RenderMode="Lightweight" DataValueField="umfId" DataTextField="umfDescripcion" runat="server" Skin="Bootstrap" Width="100%"></telerik:RadComboBox>
+                    <asp:RequiredFieldValidator ID="rfvUMF" ControlToValidate="cbUMF" runat="server" ErrorMessage="Campo Requerido" CssClass="text-danger"></asp:RequiredFieldValidator>
                 </div>
             </div>
             <div class="col-lg-2 col-md-2 col-xs-2"></div>

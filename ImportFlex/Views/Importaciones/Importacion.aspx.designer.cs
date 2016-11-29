@@ -112,6 +112,15 @@ namespace ImportFlex.Views.Importaciones {
         protected global::Telerik.Web.UI.RadTextBox tbxNumeroPedimento;
         
         /// <summary>
+        /// rfvNumeroPedimento control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvNumeroPedimento;
+        
+        /// <summary>
         /// cbRegion control.
         /// </summary>
         /// <remarks>
@@ -121,6 +130,15 @@ namespace ImportFlex.Views.Importaciones {
         protected global::Telerik.Web.UI.RadComboBox cbRegion;
         
         /// <summary>
+        /// rfvRegion control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvRegion;
+        
+        /// <summary>
         /// cbTipoOPeracion control.
         /// </summary>
         /// <remarks>
@@ -128,6 +146,15 @@ namespace ImportFlex.Views.Importaciones {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Telerik.Web.UI.RadComboBox cbTipoOPeracion;
+        
+        /// <summary>
+        /// rfvTipoOperacion control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvTipoOperacion;
         
         /// <summary>
         /// btnCloseWindowNuevaVenta control.

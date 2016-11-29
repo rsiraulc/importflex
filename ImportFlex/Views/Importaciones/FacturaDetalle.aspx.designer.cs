@@ -112,6 +112,15 @@ namespace ImportFlex.Views.Importaciones {
         protected global::Telerik.Web.UI.RadNumericTextBox tbxCantidad;
         
         /// <summary>
+        /// rfvCantidad_NoSerie control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvCantidad_NoSerie;
+        
+        /// <summary>
         /// cbUMC control.
         /// </summary>
         /// <remarks>

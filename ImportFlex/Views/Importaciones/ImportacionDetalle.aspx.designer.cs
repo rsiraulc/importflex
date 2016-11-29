@@ -148,6 +148,15 @@ namespace ImportFlex.Views.Importaciones {
         protected global::Telerik.Web.UI.RadComboBox cbProveedor;
         
         /// <summary>
+        /// rfvProveedor control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvProveedor;
+        
+        /// <summary>
         /// txbNumeroFactura control.
         /// </summary>
         /// <remarks>
@@ -155,6 +164,15 @@ namespace ImportFlex.Views.Importaciones {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Telerik.Web.UI.RadTextBox txbNumeroFactura;
+        
+        /// <summary>
+        /// rfvNumeroFactura control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvNumeroFactura;
         
         /// <summary>
         /// dpFechaFacturacion control.
@@ -166,6 +184,15 @@ namespace ImportFlex.Views.Importaciones {
         protected global::Telerik.Web.UI.RadDatePicker dpFechaFacturacion;
         
         /// <summary>
+        /// rfvFecha control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvFecha;
+        
+        /// <summary>
         /// tbxEntrada control.
         /// </summary>
         /// <remarks>
@@ -175,6 +202,15 @@ namespace ImportFlex.Views.Importaciones {
         protected global::Telerik.Web.UI.RadTextBox tbxEntrada;
         
         /// <summary>
+        /// rfvEntrada control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvEntrada;
+        
+        /// <summary>
         /// txbFlete control.
         /// </summary>
         /// <remarks>
@@ -182,6 +218,15 @@ namespace ImportFlex.Views.Importaciones {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Telerik.Web.UI.RadNumericTextBox txbFlete;
+        
+        /// <summary>
+        /// rfvFlete control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvFlete;
         
         /// <summary>
         /// chkVinculacion control.
@@ -200,6 +245,15 @@ namespace ImportFlex.Views.Importaciones {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Telerik.Web.UI.RadTextBox tbxPO;
+        
+        /// <summary>
+        /// rfvPO control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvPO;
         
         /// <summary>
         /// tbxNotas control.
@@ -245,6 +299,15 @@ namespace ImportFlex.Views.Importaciones {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Telerik.Web.UI.RadTextBox tbxNumeroPedimento;
+        
+        /// <summary>
+        /// rfvNumeroPedimento control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvNumeroPedimento;
         
         /// <summary>
         /// Button1 control.

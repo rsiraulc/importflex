@@ -60,8 +60,7 @@
                             </div>
                             <div class="col-lg-8 col-md-12 col-xs-12">
                                 <telerik:RadTextBox ID="tbxMarca" Skin="Bootstrap" ReadOnly="False" runat="server" Width="100%"></telerik:RadTextBox>
-                                <asp:RequiredFieldValidator runat="server" ControlToValidate="tbxMarca"
-                                    CssClass="text-danger" ErrorMessage="Campo Requerido" />
+                                <%--<asp:RequiredFieldValidator runat="server" ControlToValidate="tbxMarca" CssClass="text-danger" ErrorMessage="Campo Requerido" />--%>
                             </div>
                         </div>
                         <div class="col-sm-4">
@@ -71,8 +70,7 @@
                             <div class="col-lg-8 col-md-12 col-xs-12">
                                 <telerik:RadTextBox ID="tbxModelo" ReadOnly="False" runat="server" Skin="Bootstrap" Width="100%"></telerik:RadTextBox>
 
-                                <asp:RequiredFieldValidator runat="server" ControlToValidate="tbxModelo"
-                                    CssClass="text-danger" ErrorMessage="Campo Requerido" />
+                              <%--  <asp:RequiredFieldValidator runat="server" ControlToValidate="tbxModelo" CssClass="text-danger" ErrorMessage="Campo Requerido" />--%>
                             </div>
                         </div>
                         <div class="col-sm-4">
@@ -82,7 +80,8 @@
                             <div class="col-lg-8 col-md-12 col-xs-12">
                                 <telerik:RadTextBox ID="tbxNumeroSerie" runat="server" MaxLength="50" Skin="Bootstrap" Width="100%"></telerik:RadTextBox>
                                 <telerik:RadNumericTextBox ID="tbxCantidad" Type="Number" MaxLength="8" ShowSpinButtons="False" runat="server" Skin="Bootstrap" Width="100%" Visible="False"></telerik:RadNumericTextBox>
-
+                                
+                                <asp:RequiredFieldValidator ID="rfvCantidad_NoSerie" runat="server" CssClass="text-danger" ControlToValidate="tbxNumeroSerie" ErrorMessage="Campo Requerido" />
 
                             </div>
                         </div>

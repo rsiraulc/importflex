@@ -14,13 +14,13 @@
                 <telerik:RadLabel ID="lblDatosImportacion" runat="server"></telerik:RadLabel>
             </div>
             <div class="col-sm-3">
-                <asp:Button ID="btnNuevaFactura" OnClientClick="OpenWindow(0);return false;" CssClass="btn btn-block btn-success btn-md" Style="margin-top: 20px;" runat="server" Text="Agregar Factura" />
+                <asp:Button ID="btnNuevaFactura" OnClientClick="OpenWindow(0);return false;" CssClass="btn btn-block btn-success btn-md" Style="margin-top: 20px;" runat="server" Text="Agregar Factura" CausesValidation="False"/>
             </div>
             <div class="col-sm-3">
-                <asp:Button ID="btnFinalizarPedimento" CssClass="btn btn-block btn-success btn-md" Style="margin-top: 20px;" runat="server" Text="Cerrar Pedimento" OnClick="btnFinalizarPedimento_OnClick" Visible="False" />
+                <asp:Button ID="btnFinalizarPedimento" CssClass="btn btn-block btn-success btn-md" Style="margin-top: 20px;" runat="server" Text="Cerrar Pedimento" OnClick="btnFinalizarPedimento_OnClick" Visible="False" CausesValidation="False"/>
             </div>
             <div class="col-sm-3">
-                <asp:Button ID="btnUpdateNumeroPedimento" CssClass="btn btn-block btn-primary btn-md" Style="margin-top: 20px;" runat="server" Text="Actualizar Num. Pedimento" OnClientClick="OpenWindow(1);return false;" Visible="True" />
+                <asp:Button ID="btnUpdateNumeroPedimento" CssClass="btn btn-block btn-primary btn-md" Style="margin-top: 20px;" runat="server" Text="Actualizar Num. Pedimento" OnClientClick="OpenWindow(1);return false;" Visible="True" CausesValidation="False"/>
             </div>
             <div class="col-sm-3">
                 <div class="btn-group" style="width: 100%">
@@ -29,12 +29,12 @@
                     </button>
                     <ul class="dropdown-menu" style="width: 100%">
                         <li>
-                            <asp:LinkButton ID="lnkDescargarFormatos" runat="server" OnClick="lnkDescargarFormatos_OnClick" Width="100%">Formatos Aduana (.zip)</asp:LinkButton>
+                            <asp:LinkButton ID="lnkDescargarFormatos" runat="server" OnClick="lnkDescargarFormatos_OnClick" Width="100%" CausesValidation="False">Formatos Aduana (.zip)</asp:LinkButton>
                         </li>
                         <li>
-                            <asp:LinkButton ID="lnkDescargarHT" runat="server" OnClick="lnkDescargarHT_OnClick" Width="100%">Hoja Traducción (.pdf)</asp:LinkButton></li>
+                            <asp:LinkButton ID="lnkDescargarHT" runat="server" OnClick="lnkDescargarHT_OnClick" Width="100%" CausesValidation="False">Hoja Traducción (.pdf)</asp:LinkButton></li>
                         <li>
-                            <asp:LinkButton ID="lnkDescargarFIP" runat="server" OnClick="lnkDescargarFIP_OnClick" Width="100%">Formato Importación (.pdf)</asp:LinkButton></li>
+                            <asp:LinkButton ID="lnkDescargarFIP" runat="server" OnClick="lnkDescargarFIP_OnClick" Width="100%" CausesValidation="False">Formato Importación (.pdf)</asp:LinkButton></li>
                     </ul>
                 </div>
                 <%--<asp:Button ID="btnExportar" CssClass="btn btn-block btn-primary btn-md" Style="margin-top: 20px;" runat="server" Text="Descargar Formatos" OnClick="btnExportar_OnClick" />--%>
@@ -79,7 +79,7 @@
     <!-- MODAL PARA AGREGAR FACTURAS  -->
     <telerik:RadWindowManager runat="server" ID="radWindowManager" DestroyOnClose="True" EnableShadow="True" Skin="Bootstrap" Title="ImportFlex">
         <Windows>
-            <telerik:RadWindow ID="radWindowNuevaFactura" Style="z-index: 2001;" AutoSize="True" MinWidth="800px" MaxHeight="450px" Width="850" MinHeight="250px" AutoSizeBehaviors="Width, Default" DestroyOnClose="True" Modal="True" Animation="Fade" runat="server" Behaviors="Close">
+            <telerik:RadWindow ID="radWindowNuevaFactura" Style="z-index: 2001;" AutoSize="True" MinWidth="800px" MaxHeight="500px" Width="850" MinHeight="300px" AutoSizeBehaviors="Width, Default" DestroyOnClose="True" Modal="True" Animation="Fade" runat="server" Behaviors="Close">
                 <ContentTemplate>
                     <div class="container" id="divTipoUnidad" style="width: 800px; z-index: 5002">
                         <div class="row">
@@ -95,6 +95,7 @@
                                 </div>
                                 <div class="col-lg-8 col-md-12 col-xs-12">
                                     <telerik:RadComboBox ID="cbProveedor" RenderMode="Lightweight" DataValueField="prvIdProveedor" DataTextField="prvCodigo" runat="server" Width="100%" Skin="Bootstrap"></telerik:RadComboBox>
+                                    <asp:RequiredFieldValidator ID="rfvProveedor" ValidationGroup="NvaFactura" runat="server" ControlToValidate="cbProveedor" ErrorMessage="Campo Requerido" CssClass="text-danger"></asp:RequiredFieldValidator>
                                 </div>
                             </div>
                             <div class="col-sm-6">
@@ -103,6 +104,7 @@
                                 </div>
                                 <div class="col-lg-8 col-md-12 col-xs-12">
                                     <telerik:RadTextBox ID="txbNumeroFactura" runat="server" Skin="Bootstrap" MaxLength="15" Width="100%"></telerik:RadTextBox>
+                                    <asp:RequiredFieldValidator ID="rfvNumeroFactura" ValidationGroup="NvaFactura" runat="server" ControlToValidate="txbNumeroFactura" ErrorMessage="Campo Requerido" CssClass="text-danger"></asp:RequiredFieldValidator>
                                 </div>
                             </div>
                         </div>
@@ -115,6 +117,7 @@
                                 </div>
                                 <div class="col-lg-8 col-md-12 col-xs-12">
                                     <telerik:RadDatePicker ID="dpFechaFacturacion" runat="server" Skin="Bootstrap" Width="100%"></telerik:RadDatePicker>
+                                    <asp:RequiredFieldValidator ID="rfvFecha" ValidationGroup="NvaFactura" runat="server" ControlToValidate="dpFechaFacturacion" ErrorMessage="Campo Requerido" CssClass="text-danger"></asp:RequiredFieldValidator>
                                 </div>
                             </div>
                             <div class="col-sm-6">
@@ -123,6 +126,7 @@
                                 </div>
                                 <div class="col-lg-8 col-md-12 col-xs-12">
                                     <telerik:RadTextBox ID="tbxEntrada" runat="server" Skin="Bootstrap" Width="100%"></telerik:RadTextBox>
+                                    <asp:RequiredFieldValidator ID="rfvEntrada" ValidationGroup="NvaFactura" runat="server" ControlToValidate="tbxEntrada" ErrorMessage="Campo Requerido" CssClass="text-danger"></asp:RequiredFieldValidator>
                                 </div>
                             </div>
                         </div>
@@ -134,7 +138,8 @@
                                     <span class="text-formulario">Flete</span>
                                 </div>
                                 <div class="col-lg-8 col-md-12 col-xs-12">
-                                    <telerik:RadNumericTextBox ID="txbFlete" NumberFormat-DecimalDigits="2" Type="Currency" runat="server" ShowSpinButtons="False" Skin="Bootstrap" Width="100%"></telerik:RadNumericTextBox>
+                                    <telerik:RadNumericTextBox ID="txbFlete" NumberFormat-DecimalDigits="2" Type="Currency" runat="server" ShowSpinButtons="False" Skin="Bootstrap" Width="100%" DisplayText="0.00"></telerik:RadNumericTextBox>
+                                    <asp:RequiredFieldValidator ID="rfvFlete" ValidationGroup="NvaFactura" runat="server" ControlToValidate="txbFlete" ErrorMessage="Campo Requerido" CssClass="text-danger"></asp:RequiredFieldValidator>
                                 </div>
                             </div>
                             <div class="col-sm-6">
@@ -156,6 +161,7 @@
                                 </div>
                                 <div class="col-lg-8 col-md-12 col-sm-12">
                                     <telerik:RadTextBox ID="tbxPO" runat="server" EmptyMessage="Purchase Order" Skin="Bootstrap" Width="100%"></telerik:RadTextBox>
+                                    <asp:RequiredFieldValidator ID="rfvPO" ValidationGroup="NvaFactura" runat="server" ControlToValidate="tbxPO" ErrorMessage="Campo Requerido" CssClass="text-danger"></asp:RequiredFieldValidator>
                                 </div>
                             </div>
 
@@ -175,11 +181,12 @@
                             </div>
                             <div class="col-lg-4 col-md-4 col-xs-4"></div>
                             <div class="col-lg-4 col-md-4 col-xs-4">
-                                <asp:Button runat="server" CssClass="btn btn-block btn-primary" Text="Guardar" OnClick="btnGuardarFactura_OnClick" ID="btnRegistrarFactura" />
+                                <asp:Button runat="server" CssClass="btn btn-block btn-primary" Text="Guardar" OnClick="btnGuardarFactura_OnClick" ID="btnRegistrarFactura" ValidationGroup="NvaFactura"/>
                             </div>
                         </div>
                 </ContentTemplate>
             </telerik:RadWindow>
+
             <telerik:RadWindow ID="radWindowActualizarNP" Style="z-index: 2001;" AutoSize="True" MinWidth="800px" MaxHeight="450px" Width="850" MinHeight="250px" AutoSizeBehaviors="Width, Default" DestroyOnClose="True" Modal="True" Animation="Fade" runat="server" Behaviors="Close">
                 <ContentTemplate>
                     <div class="container" style="width: 700px; z-index: 5002">
@@ -194,6 +201,7 @@
                             </div>
                             <div class="col-lg-6 col-md-12 col-xs-12">
                                 <telerik:RadTextBox ID="tbxNumeroPedimento" runat="server" MaxLength="15" Skin="Bootstrap" Width="100%"></telerik:RadTextBox>
+                                <asp:RequiredFieldValidator ID="rfvNumeroPedimento" ValidationGroup="UpdateNumeroPedimento" ControlToValidate="tbxNumeroPedimento" runat="server" ErrorMessage="Campo Requerido" CssClass="text-danger"></asp:RequiredFieldValidator>
                             </div>
                         </div>
                         <div class="row" style="margin-top: 20px; margin-bottom: 10px;">
@@ -202,7 +210,7 @@
                             </div>
                             <div class="col-lg-4 col-md-4 col-xs-4"></div>
                             <div class="col-lg-4 col-md-4 col-xs-4">
-                                <asp:Button ID="btnUpdateNumeroPedimentoModal" runat="server" CssClass="btn btn-block btn-primary" Text="Actualizar" OnClick="btnUpdateNumeroPedimento_OnClick" />
+                                <asp:Button ID="btnUpdateNumeroPedimentoModal" runat="server" CssClass="btn btn-block btn-primary" Text="Actualizar" OnClick="btnUpdateNumeroPedimento_OnClick" ValidationGroup="UpdateNumeroPedimento"/>
                             </div>
                         </div>
                 </ContentTemplate>

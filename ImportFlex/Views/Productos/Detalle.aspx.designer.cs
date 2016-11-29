@@ -31,6 +31,15 @@ namespace ImportFlex.Views.Productos {
         protected global::Telerik.Web.UI.RadTextBox tbxDescripcion;
         
         /// <summary>
+        /// rfvDescripcion control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvDescripcion;
+        
+        /// <summary>
         /// tbxProductoTraduccion control.
         /// </summary>
         /// <remarks>
@@ -47,6 +56,15 @@ namespace ImportFlex.Views.Productos {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Telerik.Web.UI.RadTextBox tbxNumeroParte;
+        
+        /// <summary>
+        /// rfvNumeroParte control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvNumeroParte;
         
         /// <summary>
         /// tbxMarca control.
@@ -85,6 +103,15 @@ namespace ImportFlex.Views.Productos {
         protected global::Telerik.Web.UI.RadTextBox tbxFraccion;
         
         /// <summary>
+        /// rfvFraccion control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvFraccion;
+        
+        /// <summary>
         /// cbPais control.
         /// </summary>
         /// <remarks>
@@ -92,6 +119,15 @@ namespace ImportFlex.Views.Productos {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Telerik.Web.UI.RadComboBox cbPais;
+        
+        /// <summary>
+        /// rfvPais control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvPais;
         
         /// <summary>
         /// checkStatus control.
@@ -139,6 +175,15 @@ namespace ImportFlex.Views.Productos {
         protected global::Telerik.Web.UI.RadComboBox cbUMC;
         
         /// <summary>
+        /// rfvUMC control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvUMC;
+        
+        /// <summary>
         /// cbUMF control.
         /// </summary>
         /// <remarks>
@@ -146,6 +191,15 @@ namespace ImportFlex.Views.Productos {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Telerik.Web.UI.RadComboBox cbUMF;
+        
+        /// <summary>
+        /// rfvUMF control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvUMF;
         
         /// <summary>
         /// btnGuardar control.

@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using ImportFlex.Account;
 using ImportFlex.Controllers;
+using ImportFlex.Messages;
 using ImportFlex.Models;
 using Telerik.Web.UI;
 
@@ -20,8 +21,10 @@ namespace ImportFlex.Views.Productos
             if (!IsPostBack)
             {
                 CargarCatalogos();
-                CargarProducto(int.Parse(Request.Params["Id"]));
                 CargarTraducciones();
+
+                if (Request.Params["Id"] != null)
+                    CargarProducto(int.Parse(Request.Params["Id"]));
             }
         }
 
@@ -81,7 +84,6 @@ namespace ImportFlex.Views.Productos
                 lblTitulo.Text = producto.prodDescripcionRSI;
 
                 tbxDescripcion.Text = producto.prodDescripcionRSI;
-//                cbTraduccion.SelectedValue = producto.prodTraduccion;
                 tbxMarca.Text = producto.prodMarca;
                 tbxModelo.Text = producto.prodModelo;
                 tbxSubModelo.Text = producto.prodSubModelo;
@@ -116,26 +118,35 @@ namespace ImportFlex.Views.Productos
         protected void btnGuardar_OnClick(object sender, EventArgs e)
         {
             var data = new ProductoController();
-            var p = producto;
+            producto = Request.Params["ID"] != null ? data.GetProductoById(Convert.ToInt32(Request.Params["ID"])).Producto : new imf_productos_prod();
 
-            p.prodDescripcionRSI = tbxDescripcion.Text;
+            producto.prodDescripcionRSI = tbxDescripcion.Text;
             //p.prodTraduccion = cbTraduccion.SelectedValue;
-            p.prodMarca = tbxMarca.Text;
-            p.prodModelo = tbxModelo.Text;
-            p.prodSubModelo = tbxSubModelo.Text;
-            p.prodNumeroParte = tbxNumeroParte.Text;
-            p.prodIdPaisOrigen = int.Parse(cbPais.SelectedValue);
-            p.prodFraccionArancelaria = tbxFraccion.Text;
-            p.prodPeso = Convert.ToDecimal(tbxPeso.Text);
-            p.prodPiezasPorBulto = Convert.ToDecimal(tbxPiezasXBulto.Text);
-            p.prodStatus = checkStatus.Checked;
-            p.prodIdUltimaUMC = Convert.ToInt32(cbUMC.SelectedValue);
-            p.prodIdUltimaUMF = Convert.ToInt32(cbUMF.SelectedValue);
+            producto.prodMarca = tbxMarca.Text;
+            producto.prodModelo = tbxModelo.Text;
+            producto.prodSubModelo = tbxSubModelo.Text;
+            producto.prodNumeroParte = tbxNumeroParte.Text;
+            producto.prodIdPaisOrigen = int.Parse(cbPais.SelectedValue);
+            producto.prodFraccionArancelaria = tbxFraccion.Text;
+            producto.prodPeso = string.IsNullOrEmpty(tbxPeso.Text) ? 0 : Convert.ToDecimal(tbxPeso.Text);
+            producto.prodPiezasPorBulto = string.IsNullOrEmpty(tbxPiezasXBulto.Text) ? 0 : Convert.ToDecimal(tbxPiezasXBulto.Text);
+            producto.prodStatus = checkStatus.Checked;
+            producto.prodIdUltimaUMC = Convert.ToInt32(cbUMC.SelectedValue);
+            producto.prodIdUltimaUMF = Convert.ToInt32(cbUMF.SelectedValue);
 
-            var response = data.UpdateProducto(producto);
+            var response = new ProductoResponse();
+
+            if (Request.Params["ID"] == null && Session["idTraduccion"] != null)
+            {
+                producto.prodIdTraduccion = Convert.ToInt32(Session["idTraduccion"].ToString());
+                Session["idTraduccion"] = null;
+            }
+
+
+            response = Request.Params["ID"] != null ? data.UpdateProducto(producto) : data.InsertProducto(producto);
 
             if (response.Success)
-                Response.Redirect("~/Views/Productos/Default.aspx");
+                Response.Redirect($"~/Views/Productos/Detalle.aspx?ID={response.Producto.prodIdProducto}");
             else
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "alertSuccess",
                     $"alert('Ha ocurrido un error al agregar el producto. {response.Message}');", true);
@@ -171,20 +182,28 @@ namespace ImportFlex.Views.Productos
                     $"alert('Ha ocurrido un error. {response.Message}');", true);
         }
 
-        private void ActualizarTraduccion(int idTraduccion)
+        private void ActualizarTraduccion(int _idTraduccion)
         {
             var data = new ProductoController();
-            var response = data.GetProductoById(Convert.ToInt32(Request.Params["ID"]));
-
-            if (response.Success)
+            if (Request.Params["ID"] != null)
             {
-                var p = response.Producto;
+                var response = data.GetProductoById(Convert.ToInt32(Request.Params["ID"]));
 
-                p.prodIdTraduccion = idTraduccion;
-                data.UpdateProducto(p);
-                
+                if (response.Success)
+                {
+                    var p = response.Producto;
 
-                CargarProducto(p.prodIdProducto);
+                    p.prodIdTraduccion = _idTraduccion;
+                    data.UpdateProducto(p);
+
+
+                    CargarProducto(p.prodIdProducto);
+                }
+            }
+            else
+            {
+                Session["idTraduccion"] = _idTraduccion;
+                tbxProductoTraduccion.Text = cbxEditarTraduccion.Text;
             }
         }
     }

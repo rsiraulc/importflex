@@ -33,7 +33,7 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-2">
-                                    <asp:Button ID="btnFiltrar" runat="server" CssClass="btn btn-block btn-default" Text="Filtrar" OnClick="btnFiltrar_OnClick" />
+                                    <asp:Button ID="btnFiltrar" runat="server" CssClass="btn btn-block btn-default" Text="Filtrar" OnClick="btnFiltrar_OnClick" CausesValidation="False"/>
                                 </div>
                             </div>
                         </div>
@@ -92,6 +92,7 @@
                                 </div>
                                 <div class="col-lg-8 col-md-12 col-xs-12">
                                     <telerik:RadTextBox ID="tbxNumeroPedimento" runat="server" MaxLength="15" Skin="Bootstrap" Width="100%"></telerik:RadTextBox>
+                                    <asp:RequiredFieldValidator ID="rfvNumeroPedimento" runat="server" ControlToValidate="tbxNumeroPedimento" ErrorMessage="Campo Requerido" CssClass="text-danger"></asp:RequiredFieldValidator>
                                 </div>
                             </div>
                         </div>
@@ -102,6 +103,7 @@
                                 </div>
                                 <div class="col-lg-8 col-md-12 col-xs-12">
                                     <telerik:RadComboBox ID="cbRegion" runat="server" DataValueField="Clave" DataTextField="Descripcion" Skin="Bootstrap" Width="100%"></telerik:RadComboBox>
+                                    <asp:RequiredFieldValidator ID="rfvRegion" runat="server" ControlToValidate="cbRegion" ErrorMessage="Campo Requerido" CssClass="text-danger"></asp:RequiredFieldValidator>
                                 </div>
                             </div>
                             <div class="col-sm-6">
@@ -110,6 +112,7 @@
                                 </div>
                                 <div class="col-lg-8 col-md-12 col-xs-12">
                                     <telerik:RadComboBox ID="cbTipoOPeracion" runat="server" DataValueField="Clave" DataTextField="Descripcion" Skin="Bootstrap" Width="100%"></telerik:RadComboBox>
+                                    <asp:RequiredFieldValidator ID="rfvTipoOperacion" runat="server" ControlToValidate="cbTipoOPeracion" ErrorMessage="Campo Requerido" CssClass="text-danger"></asp:RequiredFieldValidator>
                                 </div>
                             </div>
                         </div>

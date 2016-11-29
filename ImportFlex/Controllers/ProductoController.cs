@@ -155,6 +155,7 @@ namespace ImportFlex.Controllers
                     db.SaveChanges();
 
                     response.Success = true;
+                    response.Producto = producto;
                 }
                 else
                 {

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="ImportFlex.Views.Productos.Default" %>
+﻿<%@ Page Title="" EnableEventValidation="false" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="ImportFlex.Views.Productos.Default" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div class="col-sm-12" style="margin-top: 20px;">
@@ -7,7 +7,7 @@
                 <h2>Productos</h2>
             </div>
             <div class="col-sm-2">
-                <asp:Button runat="server" ID="btnNuevoProducto" Style="margin: 20px;" OnClientClick="OpenWindow();return false;" CssClass="btn btn-block btn-primary btn-md" Text="Nuevo Producto" />
+                <asp:Button runat="server" ID="btnNuevoProducto" Style="margin: 20px;" CssClass="btn btn-block btn-primary btn-md" Text="Nuevo Producto" OnClick="btnNuevoProducto_OnClick" />
             </div>
         </div>
         <asp:UpdatePanel ID="panelFiltroProducto" UpdateMode="Conditional" runat="server">
